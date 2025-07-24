@@ -1,0 +1,31 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Virtual environments
+.venv/
+fc_venv/
+
+# Environment variables
+.env
+
+# Python pickle or joblib files
+*.pkl
+
+# Torch model files
+*.pth
+
+# Log and output files
+*.txt
+
+# VSCode settings
+.vscode/
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Image files (if not needed in repo)
+*.png
