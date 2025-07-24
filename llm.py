@@ -13,38 +13,47 @@ if not HUGGINGFACEHUB_API_TOKEN:
     raise ValueError("HF_TOKEN environment variable not set. Cannot initialize HuggingFaceEndpoint.")
 
 prompt_template = PromptTemplate(
-    input_variables=["age", "gender", "height", "weight"],
+    input_variables=["age", "gender", "height", "weight", "bmi", "occasion"],
     template=(
-        "You are a fashion recommendation expert.\n\n"
+        "You are a highly creative and detail-oriented fashion recommendation expert.\n\n"
         "Given the following user attributes:\n"
         "- Age: {age}\n"
         "- Gender: {gender}\n"
         "- Height: {height} cm\n"
-        "- Weight: {weight} kg\n\n"
-        "Suggest **3 distinct clothing styles** that would look great on this user.\n"
-        "For each style, describe the:\n"
+        "- Weight: {weight} kg\n"
+        "- BMI: {bmi:.2f}\n"
+        "- Occasion: {occasion}\n\n"
+        "Your task is to suggest **3 distinct, highly relevant, and creative clothing styles** that would look great on this user specifically for the given occasion.\n"
+        "- If the occasion is themed (e.g., anime, sports, cultural, fandom, etc.), incorporate references, colors, or accessories that fit the theme.\n"
+        "- Explicitly reference the occasion in each style name and description.\n"
+        "- Be as specific as possible with garment types, color palettes, fits, fabrics, and accessories.\n"
+        "- If the occasion is related to pop culture, fandom, or a specific character, use creative cues, color schemes, or accessories inspired by that theme.\n"
+        "- Make sure each style is unique and tailored to the user's body type and the occasion.\n"
+        "- **Make sure each style is appropriate for the user's specified gender. If the occasion is themed, adapt the style to fit the gender while still referencing the theme.**\n\n"
+        "For each style, provide:\n"
+        "  - Style Name (should reference the occasion or theme)\n"
         "  - Garment Type\n"
         "  - Color Palette\n"
         "  - Fit\n"
         "  - Fabric\n"
-        "  - Accessories\n"
-        "  - A suggested Product Name (e.g., 'blue relaxed-fit cotton t-shirt')\n\n"
+        "  - Accessories (be creative and occasion-specific)\n"
+        "  - A suggested Product Name (e.g., 'orange ninja-inspired hoodie with leaf village headband')\n\n"
         "Format your suggestions as a numbered list of styles. Do not use JSON.\n"
         "Example:\n"
-        "1. Style Name: Casual Comfort\n"
-        "   - Garment Type: T-shirt and Jeans\n"
-        "   - Color Palette: Earthy tones (e.g., olive green, beige, denim blue)\n"
-        "   - Fit: Relaxed-fit t-shirt, straight-leg jeans\n"
-        "   - Fabric: Soft cotton t-shirt, durable denim jeans\n"
-        "   - Accessories: Canvas sneakers, simple watch\n"
-        "   - Product Name: Olive green relaxed-fit cotton t-shirt with classic blue straight-leg jeans\n\n"
-        "2. Style Name: Smart Everyday\n"
-        "   - Garment Type: Polo shirt and Chinos\n"
-        "   - Color Palette: Neutrals with a pop of color (e.g., navy, grey, burgundy)\n"
-        "   - Fit: Slim-fit polo, tapered chinos\n"
-        "   - Fabric: Piqué cotton polo, stretch cotton chinos\n"
-        "   - Accessories: Leather loafers, minimalist belt\n"
-        "   - Product Name: Navy slim-fit pique polo shirt with grey tapered chinos\n"
+        "1. Style Name: Anime Hero Streetwear (for an anime fan party, male)\n"
+        "   - Garment Type: Orange hoodie, navy joggers\n"
+        "   - Color Palette: Orange, navy blue, white\n"
+        "   - Fit: Relaxed-fit hoodie, tapered joggers\n"
+        "   - Fabric: Soft fleece hoodie, stretch cotton joggers\n"
+        "   - Accessories: Leaf village headband, ninja sandals\n"
+        "   - Product Name: Orange ninja-inspired hoodie with navy joggers and cosplay headband\n\n"
+        "2. Style Name: Elegant Gala Attire (for a formal evening event, female)\n"
+        "   - Garment Type: Black evening gown, silver shawl\n"
+        "   - Color Palette: Black, silver, white\n"
+        "   - Fit: Fitted bodice, flowing skirt\n"
+        "   - Fabric: Silk gown, satin shawl\n"
+        "   - Accessories: Silver clutch, pearl earrings\n"
+        "   - Product Name: Classic black silk gown with silver accessories\n"
     )
 )
 
@@ -54,7 +63,7 @@ try:
         task="text-generation",
         huggingfacehub_api_token=HUGGINGFACEHUB_API_TOKEN,
         max_new_tokens=512,
-        temperature=0.0, # Set to 0.0 for deterministic output
+        temperature=0.0, 
         repetition_penalty=1.1
     )
     chat_model = ChatHuggingFace(llm=llm)
@@ -65,13 +74,15 @@ except Exception as e:
 
 chain = prompt_template | chat_model
 
-def run_fashion_llm(age: int, gender: str, height: int = 170, weight: int = 65):
+def run_fashion_llm(age: int, gender: str, height: float, weight: float, bmi: float, occasion: str):
     try:
         raw_llm_response = chain.invoke({
             "age": age,
             "gender": gender,
             "height": height,
-            "weight": weight
+            "weight": weight,
+            "bmi": bmi,
+            "occasion": occasion
         })
         result_text = raw_llm_response.content if hasattr(raw_llm_response, 'content') else str(raw_llm_response)
         return result_text

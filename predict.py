@@ -11,7 +11,8 @@ import json
 import re
 
 from llm import run_fashion_llm
-from extract_info import parse_llm_recommendations
+from extract_info import parse_llm_recommendations, save_recommendations_to_json
+import subprocess
 
 class AgeGenderModel(nn.Module):
     def __init__(self):
@@ -69,6 +70,23 @@ if not cap.isOpened():
 
 print("Press SPACE to capture and run prediction + LLM, ESC to exit.")
 
+# Prompt user for height, weight, and occasion
+height = None
+weight = None
+occasion = None
+while height is None:
+    try:
+        height = float(input("Enter your height in cm: "))
+    except ValueError:
+        print("Please enter a valid number for height.")
+while weight is None:
+    try:
+        weight = float(input("Enter your weight in kg: "))
+    except ValueError:
+        print("Please enter a valid number for weight.")
+occasion = input("Enter the occasion (e.g., casual, formal, party): ")
+
+
 while True:
     ret, frame = cap.read()
     if not ret:
@@ -93,8 +111,16 @@ while True:
         print("\n=== PREDICTION RESULT ===")
         print(f"Gender: {gender} (Confidence: {gender_prob.item():.2f})")
         print(f"Age: {age} years")
+        print(f"Height: {height} cm")
+        print(f"Weight: {weight} kg")
+        print(f"Occasion: {occasion}")
 
-        llm_response_text = run_fashion_llm(age=age, gender=gender, height=170, weight=65)
+        # Calculate BMI
+        height_m = height / 100.0
+        bmi = weight / (height_m ** 2)
+        print(f"BMI: {bmi:.2f}")
+
+        llm_response_text = run_fashion_llm(age=age, gender=gender, height=height, weight=weight, bmi=bmi, occasion=occasion)
 
         
 
@@ -110,6 +136,12 @@ while True:
                     print(f"\n--- Recommendation {i+1} ---")
                     for key, value in rec.items():
                         print(f"{key}: {value}")
+                # Save to JSON for web_scrapping.py
+                save_recommendations_to_json(parsed_recommendations, 'llm_recommendations.json')
+                print("\nRecommendations saved to llm_recommendations.json.")
+                # Call web_scrapping.py
+                print("\nStarting web scraping for recommendations...")
+                subprocess.run(["python", "web_scrapping.py"])
             else:
                 print("\nNo structured recommendations could be parsed from LLM output.")
 
