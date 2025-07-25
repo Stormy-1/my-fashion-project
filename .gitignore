@@ -15,7 +15,7 @@ fc_venv/
 *.pkl
 
 # Torch model files
-*.pth
+
 
 # Log and output files
 *.txt
