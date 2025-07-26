@@ -43,6 +43,12 @@ def save_recommendations_to_json(recommendations, output_file):
     with open(output_file, 'w', encoding='utf-8') as f:
         json.dump(recommendations, f, indent=2, ensure_ascii=False)
 
+def save_facial_features_to_json(facial_features_dict, output_file):
+    """Save the facial features dictionary to a JSON file for LLM input."""
+    import json
+    with open(output_file, 'w', encoding='utf-8') as f:
+        json.dump(facial_features_dict, f, indent=2, ensure_ascii=False)
+
 # Example usage for integration with web_scrapping.py
 if __name__ == "__main__":
     # Example LLM output (replace with actual output)
@@ -50,4 +56,3 @@ if __name__ == "__main__":
     1. Style Name: Urban Explorer\n- Garment Type: Jacket\n- Color Palette: Olive Green\n- Fit: Regular\n- Fabric: Cotton\n- Accessories: Sunglasses, Backpack\n- Product Name: Explorer Cotton Jacket\n\n2. Style Name: Minimalist Chic\n- Garment Type: T-shirt\n- Color Palette: White, Black\n- Fit: Slim\n- Fabric: Linen\n- Accessories: Watch, Leather Belt\n- Product Name: Chic Linen Tee\n\n3. Style Name: Sporty Casual\n- Garment Type: Hoodie\n- Color Palette: Grey\n- Fit: Loose\n- Fabric: Fleece\n- Accessories: Cap, Sneakers\n- Product Name: Sporty Fleece Hoodie\n    """
     recs = parse_llm_recommendations(llm_output, max_recommendations=2)
     save_recommendations_to_json(recs, 'llm_recommendations.json')
-

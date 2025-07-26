@@ -13,7 +13,7 @@ if not HUGGINGFACEHUB_API_TOKEN:
     raise ValueError("HF_TOKEN environment variable not set. Cannot initialize HuggingFaceEndpoint.")
 
 prompt_template = PromptTemplate(
-    input_variables=["age", "gender", "height", "weight", "bmi", "occasion"],
+    input_variables=["age", "gender", "height", "weight", "bmi", "occasion", "facial_features"],
     template=(
         "You are a highly creative and detail-oriented fashion recommendation expert.\n\n"
         "Given the following user attributes:\n"
@@ -22,14 +22,16 @@ prompt_template = PromptTemplate(
         "- Height: {height} cm\n"
         "- Weight: {weight} kg\n"
         "- BMI: {bmi:.2f}\n"
-        "- Occasion: {occasion}\n\n"
-        "Your task is to suggest **3 distinct, highly relevant, and creative clothing styles** that would look great on this user specifically for the given occasion.\n"
+        "- Occasion: {occasion}\n"
+        "- Facial Features: {facial_features}\n\n"
+        "Your task is to suggest *3 distinct, highly relevant, and creative clothing styles* that would look great on this user specifically for the given occasion and their facial features.\n"
+        "- Use the facial features to recommend styles, colors, accessories, or fits that would enhance or complement the user's appearance.\n"
         "- If the occasion is themed (e.g., anime, sports, cultural, fandom, etc.), incorporate references, colors, or accessories that fit the theme.\n"
         "- Explicitly reference the occasion in each style name and description.\n"
         "- Be as specific as possible with garment types, color palettes, fits, fabrics, and accessories.\n"
         "- If the occasion is related to pop culture, fandom, or a specific character, use creative cues, color schemes, or accessories inspired by that theme.\n"
-        "- Make sure each style is unique and tailored to the user's body type and the occasion.\n"
-        "- **Make sure each style is appropriate for the user's specified gender. If the occasion is themed, adapt the style to fit the gender while still referencing the theme.**\n\n"
+        "- Make sure each style is unique and tailored to the user's body type, facial features, and the occasion.\n"
+        "- *Make sure each style is appropriate for the user's specified gender. If the occasion is themed, adapt the style to fit the gender while still referencing the theme.*\n\n"
         "For each style, provide:\n"
         "  - Style Name (should reference the occasion or theme)\n"
         "  - Garment Type\n"
@@ -40,14 +42,14 @@ prompt_template = PromptTemplate(
         "  - A suggested Product Name (e.g., 'orange ninja-inspired hoodie with leaf village headband')\n\n"
         "Format your suggestions as a numbered list of styles. Do not use JSON.\n"
         "Example:\n"
-        "1. Style Name: Anime Hero Streetwear (for an anime fan party, male)\n"
+        "1. Style Name: Anime Hero Streetwear (for an anime fan party, male, with sharp jawline and black hair)\n"
         "   - Garment Type: Orange hoodie, navy joggers\n"
         "   - Color Palette: Orange, navy blue, white\n"
         "   - Fit: Relaxed-fit hoodie, tapered joggers\n"
         "   - Fabric: Soft fleece hoodie, stretch cotton joggers\n"
         "   - Accessories: Leaf village headband, ninja sandals\n"
         "   - Product Name: Orange ninja-inspired hoodie with navy joggers and cosplay headband\n\n"
-        "2. Style Name: Elegant Gala Attire (for a formal evening event, female)\n"
+        "2. Style Name: Elegant Gala Attire (for a formal evening event, female, with wavy hair and high cheekbones)\n"
         "   - Garment Type: Black evening gown, silver shawl\n"
         "   - Color Palette: Black, silver, white\n"
         "   - Fit: Fitted bodice, flowing skirt\n"
@@ -69,12 +71,12 @@ try:
     chat_model = ChatHuggingFace(llm=llm)
 except Exception as e:
     print(f"ERROR: Failed to initialize Hugging Face LLM: {e}")
-    print("Please check your HF_TOKEN, internet connection, and the `repo_id` validity.")
+    print("Please check your HF_TOKEN, internet connection, and the repo_id validity.")
     raise
 
 chain = prompt_template | chat_model
 
-def run_fashion_llm(age: int, gender: str, height: float, weight: float, bmi: float, occasion: str):
+def run_fashion_llm(age: int, gender: str, height: float, weight: float, bmi: float, occasion: str, facial_features: str):
     try:
         raw_llm_response = chain.invoke({
             "age": age,
@@ -82,7 +84,8 @@ def run_fashion_llm(age: int, gender: str, height: float, weight: float, bmi: fl
             "height": height,
             "weight": weight,
             "bmi": bmi,
-            "occasion": occasion
+            "occasion": occasion,
+            "facial_features": facial_features
         })
         result_text = raw_llm_response.content if hasattr(raw_llm_response, 'content') else str(raw_llm_response)
         return result_text

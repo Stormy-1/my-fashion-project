@@ -11,12 +11,16 @@ import json
 import re
 
 from llm import run_fashion_llm
-from extract_info import parse_llm_recommendations, save_recommendations_to_json
+from extract_info import parse_llm_recommendations, save_recommendations_to_json, save_facial_features_to_json
 import subprocess
+from ml import predict_single_image
+
+# Path to the trained facial feature model
+facial_model_path = 'celeba_imbalance_aware_classifier.pth'
 
 class AgeGenderModel(nn.Module):
-    def __init__(self):
-        super().__init__()
+    def _init_(self):
+        super()._init_()
         self.backbone = timm.create_model('efficientnet_b4', pretrained=True, num_classes=0, global_pool='avg')
         self.gender_head = nn.Sequential(
             nn.Linear(self.backbone.num_features, 128),
@@ -120,9 +124,25 @@ while True:
         bmi = weight / (height_m ** 2)
         print(f"BMI: {bmi:.2f}")
 
-        llm_response_text = run_fashion_llm(age=age, gender=gender, height=height, weight=weight, bmi=bmi, occasion=occasion)
+        # --- Facial Feature Extraction ---
+        print("\nExtracting facial features...")
+        facial_features_dict = predict_single_image(facial_model_path, pil_img, threshold=0.5, verbose=False)
+        print("Facial features:", facial_features_dict)
+        # Save facial features to JSON
+        save_facial_features_to_json(facial_features_dict, 'facial_features.json')
+        # Convert facial features to a string summary for LLM
+        facial_features_str = ', '.join([f"{k}: {v:.2f}" for k, v in facial_features_dict.items()])
 
-        
+        llm_response_text = run_fashion_llm(
+            age=age,
+            gender=gender,
+            height=height,
+            weight=weight,
+            bmi=bmi,
+            occasion=occasion,
+            facial_features=facial_features_str
+        )
+
 
         if "Error generating recommendations" in llm_response_text:
             print("\nError from LLM, skipping parsing.")

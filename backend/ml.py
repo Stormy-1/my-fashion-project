@@ -54,7 +54,7 @@ def clear_gpu_cache():
 class CelebAImbalanceHandler:
     """Specialized class to handle imbalanced CelebA facial attribute dataset"""
     
-    def __init__(self, attr_data, selected_attrs):
+    def _init_(self, attr_data, selected_attrs):
         self.attr_data = attr_data
         self.selected_attrs = selected_attrs
         self.class_weights = {}
@@ -97,7 +97,7 @@ class CelebAImbalanceHandler:
             print(f"  Minority Class: {minority_class} ({minority_percentage:.1f}%)")
             
             if imbalance_ratio > 1.5:
-                print(f"  ⚠️  IMBALANCED (ratio > 1.5)")
+                print(f"  ⚠  IMBALANCED (ratio > 1.5)")
             else:
                 print(f"  ✅ BALANCED")
         
@@ -247,8 +247,8 @@ class CelebAImbalanceHandler:
 class FocalLoss(nn.Module):
     """Focal Loss for addressing class imbalance in multi-label classification"""
     
-    def __init__(self, alpha=1, gamma=2, reduction='mean'):
-        super(FocalLoss, self).__init__()
+    def _init_(self, alpha=1, gamma=2, reduction='mean'):
+        super(FocalLoss, self)._init_()
         self.alpha = alpha
         self.gamma = gamma
         self.reduction = reduction
@@ -271,8 +271,8 @@ class FocalLoss(nn.Module):
 class WeightedBCELoss(nn.Module):
     """Weighted Binary Cross Entropy Loss for multi-label classification"""
     
-    def __init__(self, class_weights=None):
-        super(WeightedBCELoss, self).__init__()
+    def _init_(self, class_weights=None):
+        super(WeightedBCELoss, self)._init_()
         self.class_weights = class_weights
     
     def forward(self, inputs, targets):
@@ -290,7 +290,7 @@ class WeightedBCELoss(nn.Module):
 class CelebADataset(Dataset):
     """Custom Dataset class for CelebA with improved data handling and GPU optimization"""
     
-    def __init__(self, img_dir, attr_file, transform=None, selected_attrs=None, pin_memory=True):
+    def _init_(self, img_dir, attr_file, transform=None, selected_attrs=None, pin_memory=True):
         self.img_dir = img_dir
         self.transform = transform
         self.pin_memory = pin_memory
@@ -351,10 +351,10 @@ class CelebADataset(Dataset):
         self.img_names = list(self.attr_data.index)
         print(f"Dataset ready with {len(self.img_names)} images and {len(self.selected_attrs)} attributes")
         
-    def __len__(self):
+    def _len_(self):
         return len(self.img_names)
     
-    def __getitem__(self, idx):
+    def _getitem_(self, idx):
         img_name = self.img_names[idx]
         img_path = os.path.join(self.img_dir, img_name)
         
@@ -378,8 +378,8 @@ class CelebADataset(Dataset):
 class FacialFeatureClassifier(nn.Module):
     """CNN Model for Multi-label Classification"""
     
-    def __init__(self, num_attributes):
-        super(FacialFeatureClassifier, self).__init__()
+    def _init_(self, num_attributes):
+        super(FacialFeatureClassifier, self)._init_()
         
         self.features = nn.Sequential(
             # Block 1
@@ -443,7 +443,7 @@ class FacialFeatureClassifier(nn.Module):
 class FacialFeaturePredictor:
     """Class for making predictions on single images with trained CelebA model"""
     
-    def __init__(self, model_path, device=None):
+    def _init_(self, model_path, device=None):
         """
         Initialize predictor with trained model
         
@@ -965,7 +965,7 @@ def print_balancing_recommendations(imbalance_info):
             balanced_attrs.append(attr)
     
     print(f"✅ Balanced attributes ({len(balanced_attrs)}): {balanced_attrs}")
-    print(f"⚠️  Moderately imbalanced ({len(moderate_imbalance)}): {moderate_imbalance}")
+    print(f"⚠  Moderately imbalanced ({len(moderate_imbalance)}): {moderate_imbalance}")
     print(f"🚨 Severely imbalanced ({len(severe_imbalance)}): {severe_imbalance}")
     
     print("\n📋 RECOMMENDED STRATEGIES:")
@@ -1145,7 +1145,7 @@ def main_with_imbalance_handling():
     NUM_EPOCHS = 15
     print(f'\n🚀 Starting training with imbalance-aware configuration...')
     print(f'📊 Model: {sum(p.numel() for p in model.parameters())} parameters')
-    print(f'🎯 Loss: {type(criterion).__name__}')
+    print(f'🎯 Loss: {type(criterion)._name_}')
     print(f'📈 Epochs: {NUM_EPOCHS}')
     
     # Train the model
@@ -1249,7 +1249,7 @@ def main_with_imbalance_handling():
         Overall Test Accuracy: {overall_acc:.4f}
         Overall Test F1-Score: {overall_f1:.4f}
         
-        Loss Function: {type(criterion).__name__}
+        Loss Function: {type(criterion)._name_}
         Weighted Sampling: {imbalance_components['recommendations']['use_weighted_sampler']}
         """
         axes[1, 2].text(0.1, 0.5, summary_text, fontsize=12, verticalalignment='center')
