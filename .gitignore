@@ -7,6 +7,8 @@ __pycache__/
 # Virtual environments
 .venv/
 fc_venv/
+venv/
+backend/venv/
 
 # Environment variables
 .env
@@ -15,6 +17,14 @@ fc_venv/
 *.pkl
 
 # Torch model files
+*.pth
+*.pt
+*.model
+
+# Large library files
+*.dll
+*.lib
+*.so
 
 
 # Log and output files
