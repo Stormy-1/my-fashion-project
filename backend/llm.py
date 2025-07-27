@@ -96,9 +96,9 @@ if __name__ == "__main__":
     print("--- Running llm.py in standalone test mode ---")
 
     print("\n[Scenario 1: Male, 30 years old]")
-    test_result_1 = run_fashion_llm(age=30, gender="Male")
+    test_result_1 = run_fashion_llm(age=30, gender="Male", height=175, weight=70, bmi=22.9, occasion="casual", facial_features="test")
     print(test_result_1)
 
     print("\n[Scenario 2: Female, 25 years old]")
-    test_result_2 = run_fashion_llm(age=25, gender="Female", height=165, weight=55)
+    test_result_2 = run_fashion_llm(age=25, gender="Female", height=165, weight=55, bmi=20.2, occasion="formal", facial_features="test")
     print(test_result_2)

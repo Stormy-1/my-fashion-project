@@ -8,7 +8,14 @@ def parse_llm_recommendations(text_output, max_recommendations=2):
     Limits the number of recommendations to max_recommendations.
     """
     recommendations = []
-    style_blocks = re.split(r'\n\s*\d+\.\s*Style Name:', text_output, flags=re.DOTALL)
+    
+    # Clean the text output by removing model tokens
+    cleaned_output = text_output.strip()
+    cleaned_output = re.sub(r'<\|assistant\|>', '', cleaned_output)
+    cleaned_output = re.sub(r'<\|user\|>', '', cleaned_output)
+    cleaned_output = re.sub(r'<\|system\|>', '', cleaned_output)
+    
+    style_blocks = re.split(r'\n\s*\d+\.\s*Style Name:', cleaned_output, flags=re.DOTALL)
 
     for block in style_blocks:
         if not block.strip():
@@ -17,7 +24,13 @@ def parse_llm_recommendations(text_output, max_recommendations=2):
         first_line = block.strip().split('\n')[0]
         style_name_match = re.match(r'(?:Style Name:\s*)?(.+)', first_line)
         if style_name_match:
-            style_data['Style Name'] = style_name_match.group(1).strip()
+            style_name = style_name_match.group(1).strip()
+            # Clean any remaining model tokens from style name
+            style_name = re.sub(r'<\|[^|]+\|>', '', style_name).strip()
+            # If style name is empty or too short after cleaning, use a default
+            if not style_name or len(style_name) < 3:
+                style_name = "Casual Style Recommendation"
+            style_data['Style Name'] = style_name
         patterns = {
             'Garment Type': r'- Garment Type: (.+)',
             'Color Palette': r'- Color Palette: (.+)',
@@ -29,7 +42,10 @@ def parse_llm_recommendations(text_output, max_recommendations=2):
         for key, pattern in patterns.items():
             match = re.search(pattern, block)
             if match:
-                style_data[key] = match.group(1).strip()
+                value = match.group(1).strip()
+                # Clean any model tokens from values
+                value = re.sub(r'<\|[^|]+\|>', '', value).strip()
+                style_data[key] = value if value else None
             else:
                 style_data[key] = None
         if style_data and style_data.get('Style Name'):
