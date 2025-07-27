@@ -28,7 +28,12 @@ backend/venv/
 
 
 # Log and output files
-*.txt
+*.log
+*.out
+*.err
+
+# Allow requirements.txt and other important txt files
+# *.txt removed to allow requirements.txt
 
 # VSCode settings
 .vscode/

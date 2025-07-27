@@ -81,6 +81,10 @@ const Recommendations = () => {
     navigate('/recommend');
   };
 
+  const goToMainPage = () => {
+    navigate('/');
+  };
+
   const tryAgain = () => {
     navigate('/recommend');
   };
@@ -198,7 +202,16 @@ const Recommendations = () => {
         </div>
 
         {/* Action Buttons */}
-        <div className="text-center">
+        <div className="text-center space-x-4">
+          <Button 
+            size="lg" 
+            variant="outline"
+            onClick={goToMainPage}
+            className="px-8 py-3"
+          >
+            <ArrowLeft className="w-5 h-5 mr-2" />
+            Go Back to Main Page
+          </Button>
           <Button 
             size="lg" 
             variant="outline"
