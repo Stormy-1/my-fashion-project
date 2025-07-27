@@ -5,6 +5,7 @@ import uuid
 import json
 import cv2
 import numpy as np
+import base64
 from werkzeug.utils import secure_filename
 from predict import process_image_for_recommendations
 import traceback
@@ -276,6 +277,16 @@ def camera_capture():
         cv2.imwrite(temp_filepath, captured_frame)
         print(f"Captured image saved to: {temp_filepath}")
         
+        # Encode captured image as base64 for frontend display
+        captured_image_base64 = None
+        try:
+            # Encode the captured frame directly to base64
+            _, buffer = cv2.imencode('.jpg', captured_frame)
+            captured_image_base64 = base64.b64encode(buffer).decode('utf-8')
+            print("Captured image encoded as base64 for frontend")
+        except Exception as e:
+            print(f"Warning: Could not encode captured image as base64: {e}")
+        
         # Process the captured image using the existing pipeline
         recommendations = process_image_for_recommendations(
             image_path=temp_filepath,
@@ -318,6 +329,7 @@ def camera_capture():
                 'occasion': occasion,
                 'bmi': round(weight / ((height/100) ** 2), 2)
             },
+            'captured_image': captured_image_base64,  # Add captured image as base64
             'facial_features': facial_features,
             'llm_recommendations': llm_recommendations,
             'scraped_products': recommendations if recommendations else [],

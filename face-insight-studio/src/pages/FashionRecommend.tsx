@@ -196,10 +196,18 @@ const FashionRecommend = () => {
         }
         
         console.log('Processed camera recommendations:', rec);
-        
-        // Set a placeholder image to indicate camera was used
+      
+      // Use the captured image from backend if available, otherwise use placeholder
+      if (data.captured_image) {
+        const capturedImageDataUrl = `data:image/jpeg;base64,${data.captured_image}`;
+        setUploadedImage(capturedImageDataUrl);
+        console.log('Using captured image from backend');
+      } else {
+        // Fallback to placeholder if no captured image
         const cameraPlaceholder = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgdmlld0JveD0iMCAwIDIwMCAyMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIyMDAiIGhlaWdodD0iMjAwIiBmaWxsPSIjZjNmNGY2Ii8+CjxwYXRoIGQ9Ik0xMDAgNTBMMTMwIDgwSDExNVY5MEgxMzVWMTUwSDY1VjkwSDg1VjgwSDcwTDEwMCA1MFoiIGZpbGw9IiM5Y2EzYWYiLz4KPHN2Zz4K';
         setUploadedImage(cameraPlaceholder);
+        console.log('Using placeholder image (no captured image from backend)');
+      }
         
         setRecommendations(rec);
         setShowRecommendationsButton(true);
