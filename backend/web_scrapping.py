@@ -11,6 +11,7 @@ import os
 
 def setup_driver():
     chrome_options = Options()
+    chrome_options.add_argument("--headless")  # Enable headless mode
     chrome_options.add_argument("--no-sandbox")
     chrome_options.add_argument("--disable-dev-shm-usage")
     chrome_options.add_argument("--disable-blink-features=AutomationControlled")
@@ -106,7 +107,20 @@ def scrape_product_data(driver, product_container, index):
             price = f"₹{price}"
 
         brand = safe_get_text(product_container, ".//h2//span", "N/A")
-        description = safe_get_text(product_container, ".//h2//span", "N/A")
+        
+        # Product description with multiple XPath patterns
+        desc_xpaths = [
+            ".//h2[contains(@class, 'a-size-mini')]//span[@class='a-size-base-plus']",
+            ".//a[contains(@class, 'a-link-normal')]//h2//span",
+            ".//span[@class='a-size-base-plus']"
+        ]
+        
+        description = "N/A"
+        for xpath in desc_xpaths:
+            desc_text = safe_get_text(product_container, xpath, "N/A")
+            if desc_text != "N/A" and desc_text.strip():
+                description = desc_text
+                break
         image_link = safe_get_attribute(product_container, ".//img[contains(@class, 's-image')]", "src", "N/A")
         product_link = safe_get_attribute(product_container, ".//a[contains(@class, 'a-link-normal')]", "href", "N/A")
         if product_link != "N/A" and not product_link.startswith("http"):
