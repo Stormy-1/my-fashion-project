@@ -1,0 +1,160 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+All colors MUST be HSL.
+*/
+
+@layer base {
+  :root {
+    /* Soft fashion-inspired color palette */
+    --background: 350 20% 98%;
+    --foreground: 340 15% 15%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 340 15% 15%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 340 15% 15%;
+
+    --primary: 310 50% 65%;
+    --primary-foreground: 0 0% 98%;
+    --primary-glow: 310 50% 75%;
+
+    --secondary: 340 30% 92%;
+    --secondary-foreground: 340 15% 25%;
+
+    --muted: 340 20% 95%;
+    --muted-foreground: 340 10% 50%;
+
+    --accent: 200 40% 70%;
+    --accent-foreground: 340 15% 15%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 240 12% 95%;
+
+    --border: 340 20% 88%;
+    --input: 340 20% 88%;
+    --ring: 310 50% 65%;
+
+    --radius: 0.75rem;
+
+    /* Custom gradient variables */
+    --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--accent)));
+    --gradient-subtle: linear-gradient(135deg, hsl(var(--card)), hsl(var(--muted)));
+    --gradient-hero: linear-gradient(135deg, hsl(310 50% 65%), hsl(200 40% 70%), hsl(50 60% 85%));
+    
+    /* Shadows with primary color glow */
+    --shadow-elegant: 0 10px 30px -10px hsl(var(--primary) / 0.3);
+    --shadow-glow: 0 0 40px hsl(var(--primary-glow) / 0.4);
+    --shadow-card: 0 8px 25px -8px hsl(240 8% 4% / 0.6);
+
+    /* Animation timing */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+    --sidebar-background: 0 0% 98%;
+
+    --sidebar-foreground: 240 5.3% 26.1%;
+
+    --sidebar-primary: 240 5.9% 10%;
+
+    --sidebar-primary-foreground: 0 0% 98%;
+
+    --sidebar-accent: 240 4.8% 95.9%;
+
+    --sidebar-accent-foreground: 240 5.9% 10%;
+
+    --sidebar-border: 220 13% 91%;
+
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    --background: 340 15% 8%;
+    --foreground: 340 10% 95%;
+
+    --card: 340 15% 10%;
+    --card-foreground: 340 10% 95%;
+
+    --popover: 340 15% 10%;
+    --popover-foreground: 340 10% 95%;
+
+    --primary: 310 50% 65%;
+    --primary-foreground: 340 15% 8%;
+    --primary-glow: 310 50% 75%;
+
+    --secondary: 340 15% 15%;
+    --secondary-foreground: 340 10% 85%;
+
+    --muted: 340 15% 18%;
+    --muted-foreground: 340 8% 60%;
+
+    --accent: 200 40% 70%;
+    --accent-foreground: 340 15% 8%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 240 12% 98%;
+
+    --border: 240 8% 90%;
+    --input: 240 8% 90%;
+    --ring: 264 83% 58%;
+
+    --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--accent)));
+    --gradient-subtle: linear-gradient(135deg, hsl(var(--card)), hsl(var(--muted)));
+    --gradient-hero: linear-gradient(135deg, hsl(264 83% 58%), hsl(216 92% 65%), hsl(280 100% 70%));
+    
+    --shadow-elegant: 0 10px 30px -10px hsl(var(--primary) / 0.2);
+    --shadow-glow: 0 0 40px hsl(var(--primary-glow) / 0.3);
+    --shadow-card: 0 8px 25px -8px hsl(240 8% 20% / 0.15);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-inter antialiased;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer components {
+  .hero-gradient {
+    background: var(--gradient-hero);
+  }
+  
+  .card-glass {
+    @apply bg-card/80 backdrop-blur-sm border border-border/50;
+    box-shadow: var(--shadow-card);
+  }
+  
+  .glow-effect {
+    box-shadow: var(--shadow-glow);
+  }
+  
+  .hover-lift {
+    @apply transition-transform duration-300 hover:-translate-y-1;
+  }
+  
+  .fade-in {
+    @apply opacity-0 translate-y-4 transition-all duration-700 ease-out;
+  }
+  
+  .fade-in.visible {
+    @apply opacity-100 translate-y-0;
+  }
+  
+  .text-gradient {
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+}
