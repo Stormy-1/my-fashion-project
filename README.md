@@ -317,7 +317,7 @@ The system requires pre-trained models:
 
 ## 📞 Support
 
-For support, email [neelshroff03@gmail.com] or open an issue on GitHub.
+For support, email [neelshroff03@gmail.com  mohilmandpe33@gmail.com] or open an issue on GitHub.
 
 ---
 
