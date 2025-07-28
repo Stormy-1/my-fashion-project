@@ -10,8 +10,7 @@ import re
 import os
 
 def setup_driver():
-    chrome_options = Options()
-    chrome_options.add_argument("--headless")  # Enable headless mode
+    chrome_options = Options() # Enable headless mode
     chrome_options.add_argument("--no-sandbox")
     chrome_options.add_argument("--disable-dev-shm-usage")
     chrome_options.add_argument("--disable-blink-features=AutomationControlled")
@@ -193,29 +192,33 @@ def scrape_multi_garment(garments, output_file, max_products=7):
         driver.quit()
         print("[CLOSED] Browser closed")
 
-def llm_recs_to_garment_inputs(llm_recs):
-    """Convert LLM recommendations to garment input format for scraping."""
-    garments = []
+def llm_recs_to_garment_inputs(llm_recs, occasion="casual"):
+    """
+    Convert LLM recommendations to garment input format for scraping.
+    Now works with the simplified output format (Product Name, Color Palette, Fit)
+    """
+    garment_inputs = []
+    
     for rec in llm_recs:
-        # Compose a search hint from Product Name, Garment Type, Color Palette, Occasion if present
-        hint_parts = []
-        if rec.get("Product Name"): hint_parts.append(rec["Product Name"])
-        if rec.get("Garment Type"): hint_parts.append(rec["Garment Type"])
-        if rec.get("Color Palette"): hint_parts.append(rec["Color Palette"])
-        if rec.get("Occasion"): hint_parts.append(rec["Occasion"])
-        product_hint = " ".join(hint_parts)
-        garments.append({
-            "product_hint": product_hint,
-            "garment": rec.get("Garment Type", ""),
-            "color": rec.get("Color Palette", ""),
-            "occasion": rec.get("Occasion", ""),
-            "fit": rec.get("Fit", ""),
-            "fabric": rec.get("Fabric", ""),
-            "accessories": rec.get("Accessories", "")
-        })
-    return garments
+        # Extract color from color palette (take first color mentioned)
+        color = "N/A"
+        if 'Color Palette' in rec:
+            # Get the first color mentioned in the palette
+            colors = [c.strip() for c in rec['Color Palette'].split(',')]
+            if colors:
+                color = colors[0].split()[0]  # Take first word of first color
+        
+        garment_input = {
+            "product_hint": rec.get('Product Name', ''),
+            "color": color,
+            "fit": rec.get('Fit', ''),
+            "occasion": occasion  # Use the provided occasion
+        }
+        garment_inputs.append(garment_input)
+    
+    return garment_inputs
 
-def scrape_from_llm_recommendations(llm_json_file, output_file, max_products=7):
+def scrape_from_llm_recommendations(llm_json_file, output_file, max_products=7, occasion="casual"):
     # Read LLM recommendations
     try:
         with open(llm_json_file, 'r', encoding='utf-8') as f:
@@ -223,11 +226,15 @@ def scrape_from_llm_recommendations(llm_json_file, output_file, max_products=7):
     except Exception as e:
         print(f"Error reading {llm_json_file}: {e}")
         return
-    garments = llm_recs_to_garment_inputs(llm_recs)
-    if not garments:
+
+    # Convert to garment inputs with the provided occasion
+    garment_inputs = llm_recs_to_garment_inputs(llm_recs, occasion)
+    
+    if not garment_inputs:
         print("No valid garments to scrape.")
         return
-    scrape_multi_garment(garments, output_file, max_products=max_products)
+        
+    scrape_multi_garment(garment_inputs, output_file, max_products=max_products)
 
 def create_sample_scraped_data():
     """Create sample scraped data for testing when real scraping fails"""
@@ -264,61 +271,6 @@ def create_sample_scraped_data():
             "product_link": "https://www.amazon.in/dp/B08XXXX123",
             "search_parameters": {"garment": "jeans", "color": "blue", "occasion": "casual"},
             "product_index": 3
-        },
-        {
-            "brand": "Levi's",
-            "description": "Men's Classic Fit Cotton Polo T-Shirt - Black",
-            "price": "₹1,199",
-            "rating": "4.3 out of 5 stars",
-            "number_of_reviews": "967",
-            "image_link": "https://m.media-amazon.com/images/I/61ABC123DEF._UX679_.jpg",
-            "product_link": "https://www.amazon.in/dp/B07ABC123",
-            "search_parameters": {"garment": "polo", "color": "black", "occasion": "casual"},
-            "product_index": 4
-        },
-        {
-            "brand": "H&M",
-            "description": "Men's Casual Cotton Chinos - Khaki",
-            "price": "₹999",
-            "rating": "4.0 out of 5 stars",
-            "number_of_reviews": "543",
-            "image_link": "https://m.media-amazon.com/images/I/61XYZ789ABC._UX679_.jpg",
-            "product_link": "https://www.amazon.in/dp/B08XYZ789",
-            "search_parameters": {"garment": "chinos", "color": "khaki", "occasion": "casual"},
-            "product_index": 5
-        },
-        {
-            "brand": "Zara",
-            "description": "Men's Casual Sneakers - White Leather",
-            "price": "₹2,499",
-            "rating": "4.4 out of 5 stars",
-            "number_of_reviews": "1,876",
-            "image_link": "https://m.media-amazon.com/images/I/71DEF456GHI._UX679_.jpg",
-            "product_link": "https://www.amazon.in/dp/B09DEF456",
-            "search_parameters": {"garment": "sneakers", "color": "white", "occasion": "casual"},
-            "product_index": 6
-        },
-        {
-            "brand": "Allen Solly",
-            "description": "Men's Formal Cotton Shirt - Light Blue",
-            "price": "₹1,399",
-            "rating": "4.2 out of 5 stars",
-            "number_of_reviews": "734",
-            "image_link": "https://m.media-amazon.com/images/I/61GHI789JKL._UX679_.jpg",
-            "product_link": "https://www.amazon.in/dp/B08GHI789",
-            "search_parameters": {"garment": "formal shirt", "color": "light blue", "occasion": "formal"},
-            "product_index": 7
-        },
-        {
-            "brand": "Van Heusen",
-            "description": "Men's Casual Blazer - Navy Blue",
-            "price": "₹3,299",
-            "rating": "4.6 out of 5 stars",
-            "number_of_reviews": "412",
-            "image_link": "https://m.media-amazon.com/images/I/71JKL012MNO._UX679_.jpg",
-            "product_link": "https://www.amazon.in/dp/B09JKL012",
-            "search_parameters": {"garment": "blazer", "color": "navy", "occasion": "formal"},
-            "product_index": 8
         }
     ]
     return sample_products
@@ -327,4 +279,5 @@ def create_sample_scraped_data():
 if __name__ == "__main__":
     input_file = "llm_recommendations.json"
     output_file = "multi_scraped_output.json"
-    scrape_from_llm_recommendations(input_file, output_file, max_products=7)
+    occasion = "diwali"  # You can get this from user input or command line args
+    scrape_from_llm_recommendations(input_file, output_file, max_products=7, occasion=occasion)

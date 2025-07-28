@@ -9,11 +9,12 @@ import numpy as np
 import os
 import json
 import re
+import subprocess
 
 from llm import run_fashion_llm
 from extract_info import parse_llm_recommendations, save_recommendations_to_json, save_facial_features_to_json
-import subprocess
 from ml import predict_single_image
+from web_scrapping import scrape_from_llm_recommendations
 
 # Path to the trained facial feature model
 facial_model_path = 'celeba_imbalance_aware_classifier.pth'
@@ -149,7 +150,7 @@ while True:
         # --- Facial Feature Extraction ---
         print("\n=== EXTRACTING FACIAL FEATURES ===")
         try:
-            facial_features_dict = predict_single_image(facial_model_path, pil_img, threshold=0.5, verbose=False)
+            facial_features_dict = predict_single_image(facial_model_path, pil_img, threshold=0.3, verbose=False)
             print("Facial features extracted successfully:")
             for feature, value in facial_features_dict.items():
                 print(f"  {feature}: {value:.3f}")
@@ -158,12 +159,9 @@ while True:
             save_facial_features_to_json(facial_features_dict, 'facial_features.json')
             print("Facial features saved to facial_features.json")
             
-            # Convert facial features to a string summary for LLM
-            facial_features_str = ', '.join([f"{k}: {v:.2f}" for k, v in facial_features_dict.items()])
-            
         except Exception as e:
             print(f"Error extracting facial features: {e}")
-            facial_features_str = "No facial features extracted"
+            facial_features_dict = {}
 
         # --- LLM Fashion Recommendations ---
         print("\n=== GENERATING FASHION RECOMMENDATIONS ===")
@@ -175,16 +173,16 @@ while True:
                 weight=weight,
                 bmi=bmi,
                 occasion=occasion,
-                facial_features=facial_features_str
+                facial_features=facial_features_dict
             )
             
             print("LLM Response received!")
-            print("Response preview:", llm_response_text[:200] + "..." if len(llm_response_text) > 200 else llm_response_text)
-
-            if "Error generating recommendations" in llm_response_text:
-                print("\nError from LLM, skipping parsing.")
+            
+            if llm_response_text is None:
+                print("Error: LLM returned None response")
                 parsed_recommendations = []
             else:
+                print("Response preview:", llm_response_text[:200] + "..." if len(llm_response_text) > 200 else llm_response_text)
                 # Parse recommendations
                 parsed_recommendations = parse_llm_recommendations(llm_response_text)
 
@@ -199,20 +197,17 @@ while True:
                     save_recommendations_to_json(parsed_recommendations, 'llm_recommendations.json')
                     print("\nRecommendations saved to llm_recommendations.json.")
                     
-                    # Call web_scrapping.py
+                    # Call web scraping directly with the actual occasion
                     print("\n=== STARTING WEB SCRAPING ===")
                     try:
-                        result = subprocess.run(["python", "web_scrapping.py"], 
-                                              capture_output=True, text=True, timeout=60)
-                        if result.returncode == 0:
-                            print("Web scraping completed successfully!")
-                            print("Check multi_scraped_output.json for results.")
-                        else:
-                            print(f"Web scraping failed with return code: {result.returncode}")
-                            print("STDOUT:", result.stdout)
-                            print("STDERR:", result.stderr)
-                    except subprocess.TimeoutExpired:
-                        print("Web scraping timed out after 60 seconds")
+                        scrape_from_llm_recommendations(
+                            'llm_recommendations.json', 
+                            'multi_scraped_output.json', 
+                            max_products=7, 
+                            occasion=occasion  # Pass the actual occasion from user input
+                        )
+                        print("Web scraping completed successfully!")
+                        print("Check multi_scraped_output.json for results.")
                     except Exception as e:
                         print(f"Error running web scraping: {e}")
                         

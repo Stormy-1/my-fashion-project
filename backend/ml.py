@@ -606,6 +606,67 @@ class FacialFeaturePredictor:
             print(f"Error during prediction: {e}")
             raise
 
+def apply_custom_facial_feature_threshold(probabilities, threshold=0.3):
+    """
+    Apply custom thresholding logic for facial features:
+    - For single features: use threshold (default 0.3)
+    - For categorical features: select only the highest value in each category
+    
+    Args:
+        probabilities (dict): Raw probabilities from model
+        threshold (float): Threshold for single features (default: 0.3)
+        
+    Returns:
+        dict: Processed probabilities with custom thresholding applied
+    """
+    # Define categorical feature groups
+    hair_color_features = ['Black_Hair', 'Blond_Hair', 'Brown_Hair']
+    eyebrow_features = ['Bushy_Eyebrows', 'Arched_Eyebrows']
+    hair_texture_features = ['Straight_Hair', 'Wavy_Hair']
+    
+    # Group all categorical features
+    categorical_groups = [
+        hair_color_features,
+        eyebrow_features, 
+        hair_texture_features
+    ]
+    
+    # Get all categorical feature names
+    all_categorical_features = set()
+    for group in categorical_groups:
+        all_categorical_features.update(group)
+    
+    # Process probabilities
+    processed_probabilities = {}
+    
+    # Process categorical features (select highest in each group)
+    for group in categorical_groups:
+        group_probs = {}
+        for feature in group:
+            if feature in probabilities:
+                group_probs[feature] = probabilities[feature]
+        
+        if group_probs:
+            # Find the feature with highest probability in this group
+            max_feature = max(group_probs, key=group_probs.get)
+            max_prob = group_probs[max_feature]
+            
+            # Set the highest feature to its probability, others to 0
+            for feature in group:
+                if feature in probabilities:
+                    if feature == max_feature:
+                        processed_probabilities[feature] = max_prob
+                    else:
+                        processed_probabilities[feature] = 0.0
+    
+    # Process single features (apply threshold)
+    for feature, prob in probabilities.items():
+        if feature not in all_categorical_features:
+            # Apply threshold: above threshold = keep probability, below = 0
+            processed_probabilities[feature] = prob if prob > threshold else 0.0
+    
+    return processed_probabilities
+
 # Standalone prediction functions
 def load_trained_model(model_path, device=None):
     """
@@ -620,18 +681,18 @@ def load_trained_model(model_path, device=None):
     """
     return FacialFeaturePredictor(model_path, device)
 
-def predict_single_image(model_path, image_path, threshold=0.5, verbose=False):
+def predict_single_image(model_path, image_path, threshold=0.3, verbose=False):
     """
     Quick function to predict on single image without printing status messages
     
     Args:
         model_path (str): Path to trained model
         image_path (str): Path to image or PIL Image
-        threshold (float): Classification threshold (default: 0.5)
+        threshold (float): Classification threshold for single features (default: 0.3)
         verbose (bool): Whether to print status messages (default: False)
         
     Returns:
-        dict: Probabilities of selected facial attributes
+        dict: Processed probabilities of selected facial attributes with custom thresholding
     """
     # Define the specific attributes to return (in order)
     selected_attrs = [
@@ -643,11 +704,11 @@ def predict_single_image(model_path, image_path, threshold=0.5, verbose=False):
 
     if verbose:
         predictor = FacialFeaturePredictor(model_path)
-        results = predictor.predict(image_path, threshold=threshold)
+        results = predictor.predict(image_path, threshold=0.5)  # Use 0.5 for raw prediction
     else:
         with redirect_stdout(io.StringIO()), redirect_stderr(io.StringIO()):
             predictor = FacialFeaturePredictor(model_path)
-            results = predictor.predict(image_path, threshold=threshold)
+            results = predictor.predict(image_path, threshold=0.5)  # Use 0.5 for raw prediction
 
     # Extract probabilities only for selected attributes
     probabilities = results['probabilities']
@@ -656,5 +717,8 @@ def predict_single_image(model_path, image_path, threshold=0.5, verbose=False):
     for attr in selected_attrs:
         if attr in probabilities:
             selected_probabilities[attr] = float(probabilities[attr])
+    
+    # Apply custom thresholding logic
+    processed_probabilities = apply_custom_facial_feature_threshold(selected_probabilities, threshold)
             
-    return selected_probabilities
+    return processed_probabilities
