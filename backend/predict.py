@@ -108,7 +108,7 @@ def process_image_for_recommendations(image_path, height, weight, occasion):
         print("Facial features:", facial_features_dict)
         # Save facial features to JSON
         save_facial_features_to_json(facial_features_dict, 'facial_features.json')
-        # Convert facial features to a string summary for LLM
+        # Convert facial features to a string summary for display only
         facial_features_str = ', '.join([f"{k}: {v:.2f}" for k, v in facial_features_dict.items()])
 
         print(f"\n=== CALLING LLM ===")
@@ -122,14 +122,14 @@ def process_image_for_recommendations(image_path, height, weight, occasion):
             weight=weight,
             bmi=bmi,
             occasion=occasion,
-            facial_features=facial_features_str
+            facial_features=facial_features_dict  # ✅ Pass dictionary like manual_test.py
         )
 
         print(f"\n=== LLM RESPONSE ===")
         print(llm_response_text)
         print("=" * 50)
 
-        if "Error generating recommendations" in llm_response_text:
+        if llm_response_text is None or "Error generating recommendations" in llm_response_text:
             print("\nError from LLM, skipping parsing.")
             parsed_recommendations = []
         else:

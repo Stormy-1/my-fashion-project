@@ -33,6 +33,7 @@ prompt_template = PromptTemplate(
         "   Product Name: [specific product name]\n"
         "   Color Palette: [2-3 colors]\n"
         "   Fit: [recommended fit and size, e.g., Relaxed Fit - XL]\n"
+        "   Gender: [gender, e.g., Male or Female]\n"
         "3. Do NOT include any other text, explanations, or conversation\n"
         "4. Focus on {occasion}-appropriate outfits\n"
         "5. Recommendations MUST strongly reflect:\n"
@@ -43,14 +44,16 @@ prompt_template = PromptTemplate(
         "Example output:\n"
         "1. Product Name: Slim Fit Cotton Kurta with Churidar\n"
         "   Color Palette: Cream, Gold, Maroon\n"
-        "   Fit: Regular Fit {gender} - M\n\n"
+        "   Fit: Regular Fit - M\n\n"
+        "   Gender: Male\n\n"
         "2. Product Name: Embroidered Silk Sherwani\n"
         "   Color Palette: Ivory, Gold\n"
-        "   Fit: Tailored Fit {gender} - L\n\n"
+        "   Fit: Tailored Fit  - L\n\n"
+        "   Gender: Female\n\n"
         "3. Product Name: Linen Kurta with Dhoti Pants\n"
         "   Color Palette: Beige, Brown, White\n"
-        "   Fit: Relaxed Fit for {gender} - XL\n\n"
-
+        "   Fit: Relaxed Fit - XL\n\n"
+        "   Gender: Male\n\n"
         "Now provide 3 recommendations for {occasion}:"
     )
 )

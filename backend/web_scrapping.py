@@ -36,8 +36,51 @@ def read_multi_input(file_path):
         return []
 
 def build_amazon_url(params):
-    search_query = params.get("product_hint") or params.get("garment") or ""
+    """Build Amazon search URL using all available product details"""
+    # Start with the main product name
+    search_terms = []
+    
+    # Add product name/hint
+    product_name = params.get("product_hint") or params.get("garment") or ""
+    if product_name:
+        search_terms.append(product_name)
+    
+    # Add gender for more targeted results
+    gender = params.get("gender", "")
+    if gender and gender.lower() in ['male', 'female', 'men', 'women']:
+        if gender.lower() in ['male', 'men']:
+            search_terms.append("men")
+        elif gender.lower() in ['female', 'women']:
+            search_terms.append("women")
+    
+    # Add fit information
+    fit = params.get("fit", "")
+    if fit:
+        # Extract size if present (e.g., "Relaxed Fit - M" -> "M")
+        if " - " in fit:
+            fit_parts = fit.split(" - ")
+            fit_type = fit_parts[0].strip()
+            size = fit_parts[1].strip() if len(fit_parts) > 1 else ""
+            if fit_type:
+                search_terms.append(fit_type.lower())
+            if size and len(size) <= 3:  # Add size if it's reasonable (S, M, L, XL, etc.)
+                search_terms.append(size)
+        else:
+            search_terms.append(fit.lower())
+    
+    # Add primary color from color palette
+    color = params.get("color", "")
+    if color and color != "N/A":
+        # Take the first color if multiple colors are mentioned
+        primary_color = color.split(',')[0].strip().split()[0]  # Get first word of first color
+        if primary_color.lower() not in ['n/a', 'na', 'none']:
+            search_terms.append(primary_color.lower())
+    
+    # Join all terms and format for URL
+    search_query = " ".join(search_terms)
     search_query = re.sub(r'\s+', '+', search_query.strip())
+    
+    print(f"Built search URL for: {search_terms} -> {search_query}")
     return f"https://www.amazon.in/s?k={search_query}"
 
 def safe_get_text(element, xpath, default="N/A"):
@@ -195,25 +238,32 @@ def scrape_multi_garment(garments, output_file, max_products=7):
 def llm_recs_to_garment_inputs(llm_recs, occasion="casual"):
     """
     Convert LLM recommendations to garment input format for scraping.
-    Now works with the simplified output format (Product Name, Color Palette, Fit)
+    Extracts all LLM fields: Product Name, Color Palette, Fit, Gender for URL construction
     """
     garment_inputs = []
     
     for rec in llm_recs:
-        # Extract color from color palette (take first color mentioned)
-        color = "N/A"
-        if 'Color Palette' in rec:
-            # Get the first color mentioned in the palette
-            colors = [c.strip() for c in rec['Color Palette'].split(',')]
-            if colors:
-                color = colors[0].split()[0]  # Take first word of first color
+        # Extract color from color palette (preserve full palette for URL building)
+        color_palette = rec.get('Color Palette', 'N/A')
+        
+        # Extract fit information (preserve full fit string including size)
+        fit_info = rec.get('Fit', '')
+        
+        # Extract gender information
+        gender_info = rec.get('Gender', '')
+        
+        # Extract product name
+        product_name = rec.get('Product Name', '')
         
         garment_input = {
-            "product_hint": rec.get('Product Name', ''),
-            "color": color,
-            "fit": rec.get('Fit', ''),
-            "occasion": occasion  # Use the provided occasion
+            "product_hint": product_name,
+            "color": color_palette,  # Pass full color palette to URL builder
+            "fit": fit_info,         # Pass full fit info to URL builder
+            "occasion": occasion,
+            "gender": gender_info,   # Pass gender to URL builder
         }
+        
+        print(f"Converted LLM rec to garment input: {garment_input}")
         garment_inputs.append(garment_input)
     
     return garment_inputs

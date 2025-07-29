@@ -14,13 +14,13 @@ def parse_llm_recommendations(text):
         recommendation = {}
 
         # Only these 3 fields
-        for field in ["Product Name", "Fit", "Color Palette"]:
+        for field in ["Product Name", "Fit", "Color Palette", "Gender"]:
             match = re.search(rf"{field}\s*:\s*(.+)", block)
             if match:
                 recommendation[field] = match.group(1).strip()
 
         # Only append if all 3 are present
-        if len(recommendation) == 3:
+        if len(recommendation) == 4:
             recommendations.append(recommendation)
 
     return recommendations
@@ -46,11 +46,13 @@ if __name__ == "__main__":
     Product Name: Chic Linen Tee
     Fit: Slim
     Color Palette: White, Black
+    Gender: Male
 
     --- Recommendation 2 ---
     Product Name: Relaxed Hoodie
     Fit: Loose
     Color Palette: Grey, Navy
+    Gender: Female
     """
 
     result = parse_llm_recommendations(gpt_output)
@@ -59,3 +61,4 @@ if __name__ == "__main__":
         print(f"Product Name: {rec['Product Name']}")
         print(f"Fit: {rec['Fit']}")
         print(f"Color Palette: {rec['Color Palette']}")
+        print(f"Gender: {rec['Gender']}")
