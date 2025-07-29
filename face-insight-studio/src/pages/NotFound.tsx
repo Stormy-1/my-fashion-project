@@ -1,5 +1,6 @@
 import { useLocation } from "react-router-dom";
 import { useEffect } from "react";
+import Navbar from '@/components/Navbar';
 
 const NotFound = () => {
   const location = useLocation();
@@ -12,7 +13,9 @@ const NotFound = () => {
   }, [location.pathname]);
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-background relative">
+    <>
+      <Navbar />
+      <div className="min-h-screen flex items-center justify-center bg-background relative">
       {/* Global background */}
       <div className="fixed inset-0 z-0">
         <img 
@@ -31,6 +34,7 @@ const NotFound = () => {
         </a>
       </div>
     </div>
+    </>
   );
 };
 

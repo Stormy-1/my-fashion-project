@@ -4,23 +4,33 @@ import json
 def parse_llm_recommendations(text):
     recommendations = []
     
-    blocks = re.split(r'---\s*Recommendation\s*\d+\s*---', text)
-
-    for block in blocks:
+    # Split by numbered recommendations (1., 2., 3., etc.)
+    blocks = re.split(r'\n?\d+\.\s*Product Name:', text)
+    
+    for i, block in enumerate(blocks):
+        if i == 0:  # Skip the first empty block before "1. Product Name:"
+            continue
+            
         block = block.strip()
         if not block:
             continue
 
         recommendation = {}
-
-        # Only these 3 fields
-        for field in ["Product Name", "Fit", "Color Palette", "Gender"]:
-            match = re.search(rf"{field}\s*:\s*(.+)", block)
+        
+        # Extract Product Name (it's the first part after the split)
+        product_name_match = re.match(r'^([^\n]+)', block)
+        if product_name_match:
+            recommendation["Product Name"] = product_name_match.group(1).strip()
+        
+        # Extract other fields
+        for field in ["Fit", "Color Palette", "Gender"]:
+            pattern = rf"{field}\s*:\s*([^\n]+)"
+            match = re.search(pattern, block, re.IGNORECASE)
             if match:
                 recommendation[field] = match.group(1).strip()
 
-        # Only append if all 3 are present
-        if len(recommendation) == 4:
+        # Only append if we have at least Product Name and 2 other fields
+        if len(recommendation) >= 3 and "Product Name" in recommendation:
             recommendations.append(recommendation)
 
     return recommendations

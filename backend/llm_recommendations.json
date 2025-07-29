@@ -1,8 +1,25 @@
 [
   {
-    "Product Name": "Slim Fit Shirt with Chinos",
-    "Fit": "Slim - 40R",
-    "Color Palette": "Light Blue, Grey",
+    "Product Name": "Khadi Cotton Kurta Pyjama",
+    "Fit": "Slim Fit - XL",
+    "Color Palette": "Mustard, Navy Blue",
+    "Gender": "Male"
+  },
+  {
+    "Product Name": "Half Sleeve Kurta with Churidar",
+    "Fit": "Regular Fit - XL",
+    "Color Palette": "Brown, Orange",
+    "Gender": "Male"
+  },
+  {
+    "Product Name": "Brocade Sherwani",
+    "Fit": "Tailored Fit - XL",
+    "Color Palette": "Blue, Red"
+  },
+  {
+    "Product Name": "Chanderi Cotton Kurta",
+    "Fit": "Regular Fit - XL",
+    "Color Palette": "Turquoise, Grey",
     "Gender": "Male"
   }
 ]

@@ -6,19 +6,27 @@ import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Label } from '@/components/ui/label';
-import { Upload, Camera, ShoppingBag, Star, Eye, RefreshCw, Loader2, StarHalf, ArrowLeft } from 'lucide-react';
+import { Upload, Camera, ShoppingBag, Star, Eye, RefreshCw, Loader2, StarHalf, ArrowLeft, Sparkles } from 'lucide-react';
+import Navbar from '@/components/Navbar';
+import { saveRecommendation } from '@/utils/recommendationStorage';
 
 const FashionRecommend = () => {
   const navigate = useNavigate();
   const [uploadedImage, setUploadedImage] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [recommendations, setRecommendations] = useState<any[]>([]);
+  const [textRecommendations, setTextRecommendations] = useState<any[]>([]);
   const [showRecommendationsButton, setShowRecommendationsButton] = useState(false);
 
   const [error, setError] = useState<string | null>(null);
-  const [height, setHeight] = useState<string>('170');
-  const [weight, setWeight] = useState<string>('70');
-  const [occasion, setOccasion] = useState<string>('casual');
+  const [height, setHeight] = useState<string>('');
+  const [weight, setWeight] = useState<string>('');
+  const [occasion, setOccasion] = useState<string>('');
+  const [formErrors, setFormErrors] = useState<{[key: string]: string}>({
+    height: '',
+    weight: '',
+    occasion: ''
+  });
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   // Helper function to render star rating
@@ -89,7 +97,40 @@ const FashionRecommend = () => {
     );
   };
 
+  const validateForm = () => {
+    const errors: {[key: string]: string} = {};
+    let isValid = true;
+    
+    if (!height.trim()) {
+      errors.height = 'Height is required';
+      isValid = false;
+    } else if (isNaN(Number(height)) || Number(height) < 100 || Number(height) > 250) {
+      errors.height = 'Please enter a valid height between 100-250cm';
+      isValid = false;
+    }
+    
+    if (!weight.trim()) {
+      errors.weight = 'Weight is required';
+      isValid = false;
+    } else if (isNaN(Number(weight)) || Number(weight) < 30 || Number(weight) > 200) {
+      errors.weight = 'Please enter a valid weight between 30-200kg';
+      isValid = false;
+    }
+    
+    if (!occasion.trim()) {
+      errors.occasion = 'Occasion is required';
+      isValid = false;
+    }
+    
+    setFormErrors(errors);
+    return isValid;
+  };
+
   const handleFileUpload = (file: File) => {
+    if (!validateForm()) {
+      return;
+    }
+    
     if (file && file.type.startsWith('image/')) {
       const reader = new FileReader();
       reader.onload = (e) => {
@@ -97,6 +138,8 @@ const FashionRecommend = () => {
         sendImageToBackend(file);
       };
       reader.readAsDataURL(file);
+    } else {
+      setError('Please select a valid image file');
     }
   };
 
@@ -144,6 +187,18 @@ const FashionRecommend = () => {
 
       console.log('Processed recommendations:', rec);
       setRecommendations(rec);
+      
+      // Handle LLM text recommendations
+      let llmRecs = [];
+      if (data.success && data.llm_recommendations) {
+        llmRecs = data.llm_recommendations;
+        setTextRecommendations(llmRecs);
+      }
+      
+      // Save recommendations to persistent storage
+      const userInputs = { height, weight, occasion };
+      saveRecommendation(rec, llmRecs, uploadedImage, userInputs);
+      
       setShowRecommendationsButton(true);
     } catch (err: any) {
       setError(err.message || 'An error occurred');
@@ -154,6 +209,10 @@ const FashionRecommend = () => {
 
   const handleCameraCapture = async () => {
     try {
+      if (!validateForm()) {
+        return;
+      }
+      
       setError(null);
       setIsLoading(true);
       
@@ -210,6 +269,19 @@ const FashionRecommend = () => {
       }
         
         setRecommendations(rec);
+        
+        // Handle LLM text recommendations
+        let llmRecs = [];
+        if (data.success && data.llm_recommendations) {
+          llmRecs = data.llm_recommendations;
+          setTextRecommendations(llmRecs);
+        }
+        
+        // Save recommendations to persistent storage
+        const userInputs = { height, weight, occasion };
+        const finalImage = data.captured_image ? `data:image/jpeg;base64,${data.captured_image}` : uploadedImage;
+        saveRecommendation(rec, llmRecs, finalImage, userInputs);
+        
         setShowRecommendationsButton(true);
         
       } else {
@@ -246,7 +318,9 @@ const FashionRecommend = () => {
   };
 
   return (
-    <section className="py-20 bg-gradient-subtle min-h-screen">
+    <>
+      <Navbar />
+      <section className="py-20 bg-gradient-subtle min-h-screen">
       <div className="container mx-auto px-4">
         {/* Header with Back Button */}
         <div className="flex justify-start mb-8">
@@ -260,18 +334,15 @@ const FashionRecommend = () => {
           </Button>
         </div>
         
-        <div className="text-center mb-16">
-          <Badge variant="secondary" className="mb-4 px-4 py-2 text-sm font-medium border border-accent/20 bg-accent/5">
-            <ShoppingBag className="w-4 h-4 mr-2" />
-            Fashion AI Recommendation
-          </Badge>
-          <h2 className="text-3xl md:text-5xl font-bold mb-6 text-gradient">
-            Get Your Style Recommendations
-          </h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Upload your photo or use your camera to get personalized fashion suggestions powered by AI.
-          </p>
-        </div>
+<div className="text-center mb-10 px-6">
+    <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-gradient leading-[1.3] mb-3 ">
+    <span className="text-gradient">Get Your Style Recommendations  </span>
+    </h1>
+    <p className="text-sm sm:text-base md:text-lg text-muted-foreground max-w-2xl mx-auto leading-normal break-words">
+    Upload your photo or use your camera to get personalized fashion suggestions powered by AI.
+    </p>
+</div>
+
         {(
           <div className="max-w-4xl mx-auto">
             <Card className="card-glass">
@@ -288,11 +359,21 @@ const FashionRecommend = () => {
                             id="height"
                             type="number"
                             value={height}
-                            onChange={(e) => setHeight(e.target.value)}
-                            placeholder="170"
+                            onChange={(e) => {
+                              setHeight(e.target.value);
+                              if (formErrors.height) {
+                                setFormErrors({...formErrors, height: ''});
+                              }
+                            }}
+                            placeholder="Enter your height in cm"
                             min="100"
                             max="250"
+                            className={formErrors.height ? 'border-red-500' : ''}
+                            required
                           />
+                          {formErrors.height && (
+                            <p className="text-sm text-red-500 mt-1">{formErrors.height}</p>
+                          )}
                         </div>
                         <div className="space-y-2">
                           <Label htmlFor="weight">Weight (kg)</Label>
@@ -300,27 +381,41 @@ const FashionRecommend = () => {
                             id="weight"
                             type="number"
                             value={weight}
-                            onChange={(e) => setWeight(e.target.value)}
-                            placeholder="70"
+                            onChange={(e) => {
+                              setWeight(e.target.value);
+                              if (formErrors.weight) {
+                                setFormErrors({...formErrors, weight: ''});
+                              }
+                            }}
+                            placeholder="Enter your weight in kg"
                             min="30"
                             max="200"
+                            className={formErrors.weight ? 'border-red-500' : ''}
+                            required
                           />
+                          {formErrors.weight && (
+                            <p className="text-sm text-red-500 mt-1">{formErrors.weight}</p>
+                          )}
                         </div>
                         <div className="space-y-2">
                           <Label htmlFor="occasion">Occasion</Label>
-                          <Select value={occasion} onValueChange={setOccasion}>
-                            <SelectTrigger>
-                              <SelectValue placeholder="Select occasion" />
-                            </SelectTrigger>
-                            <SelectContent>
-                              <SelectItem value="casual">Casual</SelectItem>
-                              <SelectItem value="formal">Formal</SelectItem>
-                              <SelectItem value="party">Party</SelectItem>
-                              <SelectItem value="business">Business</SelectItem>
-                              <SelectItem value="sports">Sports</SelectItem>
-                              <SelectItem value="wedding">Wedding</SelectItem>
-                            </SelectContent>
-                          </Select>
+                          <Input
+                            id="occasion"
+                            type="text"
+                            value={occasion}
+                            onChange={(e) => {
+                              setOccasion(e.target.value);
+                              if (formErrors.occasion) {
+                                setFormErrors({...formErrors, occasion: ''});
+                              }
+                            }}
+                            placeholder="e.g., Casual, Party, Wedding"
+                            className={formErrors.occasion ? 'border-red-500' : ''}
+                            required
+                          />
+                          {formErrors.occasion && (
+                            <p className="text-sm text-red-500 mt-1">{formErrors.occasion}</p>
+                          )}
                         </div>
                       </div>
                     </div>
@@ -418,6 +513,92 @@ const FashionRecommend = () => {
                         ✅ Your fashion recommendations are ready! ({recommendations.length} items found)
                       </p>
                     </div>
+                    
+                    {/* LLM Text Recommendations Section */}
+                    {textRecommendations && textRecommendations.length > 0 && (
+                      <div className="mb-8 max-w-3xl mx-auto">
+                        <div className="text-center mb-6">
+                          <div className="inline-flex items-center justify-center w-12 h-12 bg-gradient-to-br from-purple-500 to-blue-600 rounded-full mb-3">
+                            <Sparkles className="w-6 h-6 text-white" />
+                          </div>
+                          <h3 className="text-xl font-bold text-gray-800 mb-2">
+                            Personalized Style Recommendations
+                          </h3>
+                          <p className="text-gray-600 text-sm">
+                            Curated by AI based on your unique features
+                          </p>
+                        </div>
+                        
+                        <div className="grid gap-4">
+                          {textRecommendations.slice(0, 3).map((rec: any, index: number) => (
+                            <div key={index} className="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden hover:shadow-xl transition-shadow duration-300">
+                              <div className="p-6">
+                                <div className="mb-6">
+                                  <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3 mb-4">
+                                    <div className="flex-1 min-w-0">
+                                      <h4 className="text-lg sm:text-xl font-bold text-gray-900 leading-tight break-words">
+                                        <span>{rec['Product Name'] || rec.productName || `Style Recommendation ${index + 1}`}</span>
+                                      </h4>
+                                    </div>
+                                    <div className="flex-shrink-0">
+                                      <span className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-medium ${
+                                        index === 0 
+                                          ? 'bg-gradient-to-r from-amber-100 to-yellow-100 text-amber-800 border border-amber-200' 
+                                          : 'bg-gray-100 text-gray-700 border border-gray-200'
+                                      }`}>
+                                        {index === 0 ? '⭐ Top Pick' : `Option ${index + 1}`}
+                                      </span>
+                                    </div>
+                                  </div>
+                                </div>
+                                
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                                  {(rec.Fit || rec.fit) && (
+                                    <div className="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-lg p-2 border border-blue-100">
+                                      <div className="flex items-center">
+                                        <div className="w-6 h-6 bg-blue-500 rounded-lg flex items-center justify-center mr-2">
+                                          <span className="text-white text-xs font-bold">FIT</span>
+                                        </div>
+                                        <div>
+                                          <p className="text-xs text-blue-600 font-medium uppercase tracking-wide">Size & Fit</p>
+                                          <p className="text-blue-800 font-medium text-sm">
+                                            {rec.Fit || rec.fit}
+                                          </p>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  )}
+                                  
+                                  {(rec['Color Palette'] || rec.colorPalette) && (
+                                    <div className="bg-gradient-to-r from-purple-50 to-pink-50 rounded-lg p-2 border border-purple-100">
+                                      <div className="flex items-center">
+                                        <div className="w-6 h-6 bg-purple-500 rounded-lg flex items-center justify-center mr-2">
+                                          <span className="text-white text-xs font-bold">🎨</span>
+                                        </div>
+                                        <div>
+                                          <p className="text-xs text-purple-600 font-medium uppercase tracking-wide">Color Palette</p>
+                                          <p className="text-purple-800 font-medium text-sm">
+                                            {rec['Color Palette'] || rec.colorPalette}
+                                          </p>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  )}
+                                </div>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                        
+                        <div className="mt-6 text-center">
+                          <div className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-gray-50 to-gray-100 rounded-full border border-gray-200">
+                            <span className="text-sm text-gray-600">
+                              💡 Search for these styles online or explore our curated collection below
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    )}
                     <Button 
                       size="lg" 
                       onClick={viewRecommendations}
@@ -445,6 +626,7 @@ const FashionRecommend = () => {
         )}
       </div>
     </section>
+    </>
   );
 };
 

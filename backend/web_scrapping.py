@@ -184,53 +184,116 @@ def scrape_product_data(driver, product_container, index):
 
 def scrape_for_each_garment(driver, garment_data, max_products=7):
     url = build_amazon_url(garment_data)
-    print(f"\n[INFO] Searching for: {garment_data['product_hint']}")
+    product_hint = garment_data.get('product_hint', 'Unknown product')
+    print(f"\n[INFO] Searching for: {product_hint}")
     print(f"[URL] {url}")
 
-    driver.get(url)
-    time.sleep(3)
-    wait = WebDriverWait(driver, 10)
-    wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, "[data-component-type='s-search-result']")))
+    try:
+        driver.get(url)
+        time.sleep(3)
+        
+        # Wait for search results with increased timeout
+        wait = WebDriverWait(driver, 15)
+        wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, "[data-component-type='s-search-result']")))
 
-    product_containers = driver.find_elements(By.CSS_SELECTOR, "[data-component-type='s-search-result']")
-    print(f"[FOUND] {len(product_containers)} products")
+        product_containers = driver.find_elements(By.CSS_SELECTOR, "[data-component-type='s-search-result']")
+        print(f"[FOUND] {len(product_containers)} products for '{product_hint}'")
+        
+        if not product_containers:
+            print(f"[WARNING] No products found for '{product_hint}' - trying alternative search")
+            return []
 
-    results = []
-    for i, container in enumerate(product_containers[:max_products]):
-        product_data = scrape_product_data(driver, container, i + 1)
-        if product_data:
-            product_data['search_parameters'] = garment_data
-            product_data['product_index'] = i + 1
-            results.append(product_data)
-        time.sleep(1)
+        results = []
+        successful_products = 0
+        
+        for i, container in enumerate(product_containers[:max_products]):
+            try:
+                product_data = scrape_product_data(driver, container, i + 1)
+                if product_data:
+                    product_data['search_parameters'] = garment_data
+                    product_data['product_index'] = i + 1
+                    results.append(product_data)
+                    successful_products += 1
+                    print(f"[SCRAPED] Product {i + 1}: {product_data.get('description', 'Unknown')[:50]}...")
+                else:
+                    print(f"[SKIP] Product {i + 1}: Failed to extract data")
+                    
+                time.sleep(1)  # Rate limiting
+                
+            except Exception as e:
+                print(f"[ERROR] Failed to scrape product {i + 1}: {e}")
+                continue
 
-    return results
+        print(f"[RESULT] Successfully scraped {successful_products}/{min(len(product_containers), max_products)} products for '{product_hint}'")
+        return results
+        
+    except TimeoutException:
+        print(f"[TIMEOUT] No search results found for '{product_hint}' within timeout period")
+        return []
+    except Exception as e:
+        print(f"[ERROR] Failed to scrape '{product_hint}': {e}")
+        return []
 
 def scrape_multi_garment(garments, output_file, max_products=7):
     # If garments is a filename, load it; if it's a list, use as is
     if isinstance(garments, str):
         garments = read_multi_input(garments)
     if not garments:
+        print("[WARNING] No garments to scrape")
         return
 
+    print(f"\n[INFO] Starting scraping for {len(garments)} recommendations...")
     all_results = []
     driver = setup_driver()
+    successful_scrapes = 0
+    failed_scrapes = 0
 
     try:
-        for garment_data in garments:
-            garment_results = scrape_for_each_garment(driver, garment_data, max_products=max_products)
-            all_results.extend(garment_results)
+        for i, garment_data in enumerate(garments, 1):
+            print(f"\n[PROGRESS] Processing recommendation {i}/{len(garments)}")
+            print(f"[PRODUCT] {garment_data.get('product_hint', 'Unknown product')}")
+            
+            try:
+                garment_results = scrape_for_each_garment(driver, garment_data, max_products=max_products)
+                if garment_results:
+                    all_results.extend(garment_results)
+                    successful_scrapes += 1
+                    print(f"[SUCCESS] Found {len(garment_results)} products for recommendation {i}")
+                else:
+                    failed_scrapes += 1
+                    print(f"[WARNING] No products found for recommendation {i}")
+                    
+            except Exception as e:
+                failed_scrapes += 1
+                print(f"[ERROR] Failed to scrape recommendation {i}: {e}")
+                continue
 
+        # Save results even if some scraping failed
         with open(output_file, 'w', encoding='utf-8') as f:
             json.dump(all_results, f, indent=2, ensure_ascii=False)
 
-        print(f"\n[SUCCESS] Total {len(all_results)} products scraped across {len(garments)} garments")
-        print(f"[OUTPUT] Output saved to: {output_file}")
+        print(f"\n[SUMMARY] Scraping completed:")
+        print(f"[SUCCESS] {successful_scrapes}/{len(garments)} recommendations scraped successfully")
+        print(f"[TOTAL] {len(all_results)} products found across all recommendations")
+        print(f"[OUTPUT] Results saved to: {output_file}")
+        
+        if failed_scrapes > 0:
+            print(f"[WARNING] {failed_scrapes} recommendations failed to scrape")
 
     except TimeoutException:
         print("[ERROR] Timeout waiting for page elements")
+        # Save partial results
+        if all_results:
+            with open(output_file, 'w', encoding='utf-8') as f:
+                json.dump(all_results, f, indent=2, ensure_ascii=False)
+            print(f"[PARTIAL] Saved {len(all_results)} products from partial scraping")
     except Exception as e:
-        print(f"[ERROR] Error: {e}")
+        print(f"[ERROR] Critical error during scraping: {e}")
+        # Save partial results
+        if all_results:
+            with open(output_file, 'w', encoding='utf-8') as f:
+                json.dump(all_results, f, indent=2, ensure_ascii=False)
+            print(f"[PARTIAL] Saved {len(all_results)} products from partial scraping")
     finally:
         driver.quit()
         print("[CLOSED] Browser closed")
@@ -242,7 +305,13 @@ def llm_recs_to_garment_inputs(llm_recs, occasion="casual"):
     """
     garment_inputs = []
     
-    for rec in llm_recs:
+    if not llm_recs:
+        print("[WARNING] No LLM recommendations provided")
+        return garment_inputs
+    
+    print(f"\n[INFO] Converting {len(llm_recs)} LLM recommendations to garment inputs...")
+    
+    for i, rec in enumerate(llm_recs, 1):
         # Extract color from color palette (preserve full palette for URL building)
         color_palette = rec.get('Color Palette', 'N/A')
         
@@ -255,6 +324,11 @@ def llm_recs_to_garment_inputs(llm_recs, occasion="casual"):
         # Extract product name
         product_name = rec.get('Product Name', '')
         
+        # Validate that we have essential information
+        if not product_name:
+            print(f"[WARNING] Recommendation {i} missing product name, skipping")
+            continue
+            
         garment_input = {
             "product_hint": product_name,
             "color": color_palette,  # Pass full color palette to URL builder
@@ -263,27 +337,50 @@ def llm_recs_to_garment_inputs(llm_recs, occasion="casual"):
             "gender": gender_info,   # Pass gender to URL builder
         }
         
-        print(f"Converted LLM rec to garment input: {garment_input}")
+        print(f"[CONVERT] Rec {i}: '{product_name}' -> {garment_input}")
         garment_inputs.append(garment_input)
     
+    print(f"[SUCCESS] Converted {len(garment_inputs)} valid recommendations for scraping")
     return garment_inputs
 
 def scrape_from_llm_recommendations(llm_json_file, output_file, max_products=7, occasion="casual"):
+    print(f"\n[START] Starting web scraping from LLM recommendations...")
+    print(f"[INPUT] LLM file: {llm_json_file}")
+    print(f"[OUTPUT] Output file: {output_file}")
+    print(f"[CONFIG] Max products per recommendation: {max_products}, Occasion: {occasion}")
+    
     # Read LLM recommendations
     try:
         with open(llm_json_file, 'r', encoding='utf-8') as f:
             llm_recs = json.load(f)
+        print(f"[LOADED] Successfully loaded {len(llm_recs) if isinstance(llm_recs, list) else 1} recommendations")
+    except FileNotFoundError:
+        print(f"[ERROR] LLM recommendations file not found: {llm_json_file}")
+        return
+    except json.JSONDecodeError as e:
+        print(f"[ERROR] Invalid JSON format in {llm_json_file}: {e}")
+        return
     except Exception as e:
-        print(f"Error reading {llm_json_file}: {e}")
+        print(f"[ERROR] Error reading {llm_json_file}: {e}")
+        return
+
+    # Validate LLM recommendations
+    if not llm_recs:
+        print("[ERROR] No LLM recommendations found in file")
+        return
+    
+    if not isinstance(llm_recs, list):
+        print("[ERROR] LLM recommendations should be a list")
         return
 
     # Convert to garment inputs with the provided occasion
     garment_inputs = llm_recs_to_garment_inputs(llm_recs, occasion)
     
     if not garment_inputs:
-        print("No valid garments to scrape.")
+        print("[ERROR] No valid garments to scrape after conversion")
         return
         
+    print(f"\n[READY] Starting scraping for {len(garment_inputs)} valid recommendations...")
     scrape_multi_garment(garment_inputs, output_file, max_products=max_products)
 
 def create_sample_scraped_data():

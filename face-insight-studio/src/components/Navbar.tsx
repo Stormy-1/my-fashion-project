@@ -1,11 +1,15 @@
 import { useState, useEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Github, Menu, X } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import logo from '@/assets/logo-1.png';
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -17,14 +21,37 @@ const Navbar = () => {
 
   const navItems = [
     { href: '#home', label: 'Home' },
-    { href: '#contact', label: 'Contact' },
+    { href: '#architecture', label: 'Architecture' },
+    { href: '#contact', label: 'Contact Us' },
+    { href: '/recommendations', label: 'Previous Recommendations' },
   ];
 
-  const scrollToSection = (href: string) => {
-    const element = document.querySelector(href);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-      setIsMobileMenuOpen(false);
+  const handleNavigation = (href: string) => {
+    setIsMobileMenuOpen(false);
+    
+    // Check if it's a route navigation (starts with /)
+    if (href.startsWith('/')) {
+      navigate(href);
+      return;
+    }
+    
+    // Handle hash navigation for sections
+    // If we're already on the home page, just scroll to section
+    if (location.pathname === '/') {
+      const element = document.querySelector(href);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    } else {
+      // Navigate to home page with hash for the section
+      navigate(`/${href}`);
+      // Small delay to ensure page loads before scrolling
+      setTimeout(() => {
+        const element = document.querySelector(href);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 100);
     }
   };
 
@@ -36,12 +63,15 @@ const Navbar = () => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center space-x-2">
-            <div className="w-8 h-8 bg-gradient-primary rounded-lg flex items-center justify-center">
-              <span className="text-primary-foreground font-bold text-sm">FI</span>
-            </div>
-            <span className="text-xl font-semibold bg-gradient-primary bg-clip-text text-transparent">
-              Face Insight Studio
-            </span>
+            <img 
+              src={logo} 
+              alt="AesthetIQ Logo" 
+              className="h-8 w-auto rounded-lg"
+            />
+           <h1 className="text-xl md:text-xl lg:text-2xl font-bold  leading-tight py-10">
+            <span className="bg-gradient-to-r from-purple-800 to-blue-300 bg-clip-text text-transparent">Aesthet</span>
+            <span className="bg-gradient-to-r from-purple-800 to-pink-300 bg-clip-text text-transparent">IQ</span>
+          </h1>
           </div>
 
           {/* Desktop Navigation */}
@@ -49,7 +79,7 @@ const Navbar = () => {
             {navItems.map((item) => (
               <button
                 key={item.href}
-                onClick={() => scrollToSection(item.href)}
+                onClick={() => handleNavigation(item.href)}
                 className="text-muted-foreground hover:text-foreground transition-colors duration-200 text-sm font-medium"
               >
                 {item.label}
@@ -86,7 +116,7 @@ const Navbar = () => {
               {navItems.map((item) => (
                 <button
                   key={item.href}
-                  onClick={() => scrollToSection(item.href)}
+                  onClick={() => handleNavigation(item.href)}
                   className="text-left text-muted-foreground hover:text-foreground transition-colors duration-200 text-sm font-medium py-2"
                 >
                   {item.label}
@@ -97,7 +127,7 @@ const Navbar = () => {
                 size="sm"
                 className="w-fit border-primary/20 hover:border-primary hover:bg-primary/10"
                 onClick={() => {
-                  window.open('https://github.com', '_blank');
+                  window.open('https://github.com/MOHILMANDAPE15/Fashion-Recommendation-system', '_blank');
                   setIsMobileMenuOpen(false);
                 }}
               >

@@ -125,15 +125,11 @@ const DemoSection = () => {
   return (
     <section id="demo" className="py-20 bg-gradient-subtle">
       <div className="container mx-auto px-4">
-        <div className={`text-center mb-16 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-          <Badge variant="secondary" className="mb-4 px-4 py-2 text-sm font-medium border border-accent/20 bg-accent/5">
-            <ShoppingBag className="w-4 h-4 mr-2" />
-            Fashion AI Demo
-          </Badge>
-          <h2 className="text-3xl md:text-5xl font-bold mb-6 text-gradient">
+        <div className={`text-center mb-16 px-4 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+          <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold mb-6 text-gradient break-words leading-tight">
             Get Your Style Recommendations
           </h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+          <p className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed break-words">
             Upload your photo and let our AI suggest the perfect fashion items for you
           </p>
         </div>
