@@ -6,52 +6,52 @@
 # Note: Removed python version constraint as it's not a pip package
 
 # ===== Web Framework & API =====
-flask==2.3.3
-flask-cors==4.0.0
-werkzeug==2.3.7
-requests==2.31.0
+flask>=2.3.0
+flask-cors>=4.0.0
+werkzeug>=2.3.0
+requests>=2.31.0
 # Note: uuid is built-in Python module, not a pip package
 
 # ===== Deep Learning & Computer Vision =====
-torch>=1.9.0,<2.2.0  # PyTorch with version constraint for stability
-torchvision>=0.10.0,<0.18.0
-torchaudio>=0.9.0,<2.2.0
-timm==0.9.12
-opencv-python==4.8.1.78
-Pillow==10.0.1
-pytorch-lightning==2.0.9  # Required by celeb_face.py
+torch>=2.0.0  # PyTorch latest version for Python 3.13 compatibility
+torchvision>=0.15.0  # Compatible with latest PyTorch
+torchaudio>=2.0.0  # Compatible with latest PyTorch
+timm>=0.9.12
+opencv-python>=4.8.0
+Pillow>=10.0.0
+pytorch-lightning>=2.0.0  # Required by celeb_face.py
 
 # ===== Machine Learning & Data Processing =====
-numpy<2.0.0  # Fixed for OpenCV compatibility
-pandas==2.0.3
-scikit-learn==1.3.0
-joblib==1.3.2
-imbalanced-learn==0.11.0
-scipy==1.10.1  # Pinned for stability with scikit-learn 1.3.0
+numpy>=1.24.0,<2.0.0  # Fixed for OpenCV compatibility
+pandas>=2.0.0
+scikit-learn>=1.3.0
+joblib>=1.3.0
+imbalanced-learn>=0.11.0
+scipy>=1.10.0
 
 # ===== Data Visualization =====
-matplotlib==3.7.2
-seaborn==0.12.2
+matplotlib>=3.7.0
+seaborn>=0.12.0
 
 # ===== LLM & NLP =====
-transformers==4.36.2
-sentence-transformers==2.2.2
-langchain==0.1.0
-langchain-huggingface==0.0.3
-langchain-core==0.1.0
-huggingface-hub==0.16.4
+transformers>=4.36.0
+sentence-transformers>=2.2.0
+langchain>=0.1.0
+langchain-huggingface>=0.0.3
+langchain-core>=0.1.0
+huggingface-hub>=0.16.0
 # Note: openai removed as not used in codebase
 
 # ===== Web Scraping =====
-selenium==4.15.2
-webdriver-manager==4.0.1
-beautifulsoup4==4.12.2
-lxml==4.9.3  # HTML/XML parser for BeautifulSoup
+selenium>=4.15.0
+webdriver-manager>=4.0.0
+beautifulsoup4>=4.12.0
+lxml>=4.9.0  # HTML/XML parser for BeautifulSoup
 
 # ===== Utilities =====
-python-dotenv==1.0.0
-tqdm==4.66.1
-psutil==5.9.5
+python-dotenv>=1.0.0
+tqdm>=4.66.0
+psutil>=5.9.0
 setuptools>=65.0.0  # Required for distutils compatibility
 # Note: python-magic removed as not used in codebase
 
@@ -61,15 +61,15 @@ setuptools>=65.0.0  # Required for distutils compatibility
 # - uuid (built-in since Python 3.7)
 
 # ===== Development & Testing =====
-pytest==7.4.3
-pytest-cov==4.1.0
-black==23.11.0
-isort==5.12.0
-flake8==6.1.0
-mypy==1.6.1
+pytest>=7.4.0
+pytest-cov>=4.1.0
+black>=23.11.0
+isort>=5.12.0
+flake8>=6.1.0
+mypy>=1.6.0
 
 # ===== Production Server (for deployment) =====
-gunicorn==21.2.0  # WSGI server for production deployment
+gunicorn>=21.2.0  # WSGI server for production deployment
 
 # ===== System Dependencies =====
 # Note: These may need to be installed via system package manager
