@@ -152,7 +152,7 @@ const FashionRecommend = () => {
       formData.append('height', height);
       formData.append('weight', weight);
       formData.append('occasion', occasion);
-      const response = await fetch('http://localhost:5000/api/recommend', {
+      const response = await fetch('https://fashion-recommendation-system-2-2pyh.onrender.com/api/recommend', {
         method: 'POST',
         body: formData,
       });
@@ -225,7 +225,7 @@ const FashionRecommend = () => {
       formData.append('occasion', occasion);
       
       // Call backend camera capture endpoint
-      const response = await fetch('http://localhost:5000/api/camera-capture', {
+      const response = await fetch('https://fashion-recommendation-system-2-2pyh.onrender.com/api/camera-capture', {
         method: 'POST',
         body: formData,
       });

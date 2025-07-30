@@ -50,7 +50,7 @@ const DemoSection = () => {
     try {
       const formData = new FormData();
       formData.append('image', file);
-      const response = await fetch('http://localhost:5000/api/recommend', {
+      const response = await fetch('https://fashion-recommendation-system-2-2pyh.onrender.com/api/recommend', {
         method: 'POST',
         body: formData,
       });
