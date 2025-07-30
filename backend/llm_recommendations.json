@@ -1,19 +1,18 @@
 [
   {
-    "Product Name": "Slim Fit Solid Color Suit with Trousers",
-    "Fit": "Regular Fit - 42 (size XL)",
-    "Color Palette": "Navy Blue, Grey",
-    "Gender": "Male"
+    "Product Name": "Unstitched Straight Leg Palazzos with Customised Kurta",
+    "Fit": "Relaxed Fit - XS",
+    "Color Palette": "Turquoise, Peach, White",
+    "Gender": "Female"
   },
   {
-    "Product Name": "Bold Striped Sherwani with Pants",
-    "Fit": "Tailored Fit - 42 (size XL)",
-    "Color Palette": "Maroon, White",
-    "Gender": "Male"
+    "Product Name": "Lehenga Choli with Harem Pants",
+    "Fit": "Tailored Fit - S",
+    "Color Palette": "Crimson, Gold"
   },
   {
-    "Product Name": "Crisp Cotton Kurta with Churidar",
-    "Fit": "Tailored Fit - XL",
-    "Color Palette": "Burgundy, Beige"
+    "Product Name": "FlaredMaxi Dress",
+    "Fit": "Comfort Fit - L",
+    "Color Palette": "Ivory, Maroon"
   }
 ]

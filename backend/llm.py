@@ -45,15 +45,15 @@ prompt_template = PromptTemplate(
         "1. Product Name: Slim Fit Cotton Kurta with Churidar\n"
         "   Color Palette: Cream, Gold, Maroon\n"
         "   Fit: Regular Fit - M\n\n"
-        "   Gender: Male\n\n"
+        "   Gender: MALE\n\n"
         "2. Product Name: Embroidered Silk Sherwani\n"
         "   Color Palette: Ivory, Gold\n"
         "   Fit: Tailored Fit  - L\n\n"
-        "   Gender: Female\n\n"
+        "   Gender: MALE\n\n"
         "3. Product Name: Linen Kurta with Dhoti Pants\n"
         "   Color Palette: Beige, Brown, White\n"
         "   Fit: Relaxed Fit - XL\n\n"
-        "   Gender: Male\n\n"
+        "   Gender: MALE\n\n"
         "Now provide 3 recommendations for {occasion}:"
     )
 )

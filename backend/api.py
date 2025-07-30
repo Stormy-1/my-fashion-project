@@ -10,6 +10,19 @@ from werkzeug.utils import secure_filename
 import traceback
 import gc  # For garbage collection
 
+# Import the prediction function globally
+process_image_for_recommendations = None
+try:
+    from predict import process_image_for_recommendations
+    print("Successfully imported process_image_for_recommendations")
+except ImportError as e:
+    print(f"Warning: Could not import prediction module: {e}")
+    print("This might be due to missing dependencies or the predict.py file not being found")
+except Exception as e:
+    print(f"Unexpected error importing prediction module: {e}")
+    import traceback
+    traceback.print_exc()
+
 # Lazy import to reduce memory usage at startup
 def get_prediction_module():
     """Lazy import of prediction module to reduce memory usage"""
@@ -308,7 +321,14 @@ def camera_capture():
             print(f"Warning: Could not encode captured image as base64: {e}")
         
         # Process the captured image using the existing pipeline
-        recommendations = process_image_for_recommendations(
+        process_func = get_prediction_module()
+        if process_func is None:
+            return jsonify({
+                'error': 'Prediction module not available',
+                'success': False
+            }), 500
+        
+        recommendations = process_func(
             image_path=temp_filepath,
             height=height,
             weight=weight,

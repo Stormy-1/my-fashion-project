@@ -43,9 +43,9 @@ const FloatingFashionElements: React.FC = () => {
       const isLeft = fixedPositions[index].x < 50;
       const isMiddle = index === 2 || index === 3;
       if (isLeft) {
-        return isMiddle ? '#87CEEB' : '#FF69B4'; // blue middle, others pink
+        return isMiddle ? '#039BE5' : '#7B1FA2'; // blue middle, others pink
       } else {
-        return isMiddle ? '#FF69B4' : '#87CEEB'; // pink middle, others blue
+        return isMiddle ? '#9932CC' : '#039BE5'; // pink middle, others blue
       }
     };
   
@@ -91,19 +91,19 @@ const FloatingFashionElements: React.FC = () => {
           ${elements.map(el => `
             @keyframes floatUp-${el.id} {
               0%, 100% {
-                transform: translate(-50%, -50%) translateY(0px);
+                transform: translate(-60%, -60%) translateY(0px);
               }
               50% {
-                transform: translate(-50%, -50%) translateY(-20px);
+                transform: translate(-60%, -60%) translateY(-20px);
               }
             }
 
             @keyframes floatDown-${el.id} {
               0%, 100% {
-                transform: translate(-50%, -50%) translateY(0px);
+                transform: translate(-60%, -60%) translateY(0px);
               }
               50% {
-                transform: translate(-50%, -50%) translateY(20px);
+                transform: translate(-60%, -60%) translateY(20px);
               }
             }
           `).join('\n')}
