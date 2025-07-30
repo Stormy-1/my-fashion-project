@@ -31,7 +31,7 @@ const Footer = () => {
                 alt="AesthetIQ Logo" 
                 className="h-10 w-auto rounded-lg"
               />
-              <h1 className="text-xl md:text-xl lg:text-xl font-bold  leading-tight py-10">
+              <h1 className="text-xl md:text-xl lg:text-xl font-bold  leading-tight ">
             <span className="bg-gradient-to-r from-purple-800 to-blue-300 bg-clip-text text-transparent">Aesthet</span>
             <span className="bg-gradient-to-r from-purple-800 to-pink-300 bg-clip-text text-transparent">IQ</span>
           </h1>

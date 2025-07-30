@@ -1,25 +1,19 @@
 [
   {
-    "Product Name": "Khadi Cotton Kurta Pyjama",
+    "Product Name": "Solid Fit Cotton Kurta Pyjama",
     "Fit": "Slim Fit - XL",
-    "Color Palette": "Mustard, Navy Blue",
+    "Color Palette": "Navy, Maroon, Beige",
     "Gender": "Male"
   },
   {
-    "Product Name": "Half Sleeve Kurta with Churidar",
-    "Fit": "Regular Fit - XL",
-    "Color Palette": "Brown, Orange",
+    "Product Name": "Patterned Sherwani",
+    "Fit": "Tailored Fit - M",
+    "Color Palette": "Red, Gold",
     "Gender": "Male"
   },
   {
-    "Product Name": "Brocade Sherwani",
-    "Fit": "Tailored Fit - XL",
-    "Color Palette": "Blue, Red"
-  },
-  {
-    "Product Name": "Chanderi Cotton Kurta",
-    "Fit": "Regular Fit - XL",
-    "Color Palette": "Turquoise, Grey",
-    "Gender": "Male"
+    "Product Name": "Linen Kurta with Churidar",
+    "Fit": "Comfort Fit - XL",
+    "Color Palette": "Grey, White"
   }
 ]

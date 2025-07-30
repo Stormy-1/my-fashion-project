@@ -41,6 +41,3 @@ backend/venv/
 # System files
 .DS_Store
 Thumbs.db
-
-# Image files (if not needed in repo)
-*.png
