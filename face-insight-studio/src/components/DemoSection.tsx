@@ -1,8 +1,11 @@
-import { useEffect, useState, useRef } from 'react';
-import { Card, CardContent } from '@/components/ui/card';
+import React, { useState, useEffect, useRef } from 'react';
 import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Upload, Loader2, Star } from 'lucide-react';
+import { Alert, AlertDescription } from '@/components/ui/alert';
+import { API_URLS } from '@/config/api';
 import { Badge } from '@/components/ui/badge';
-import { Upload, Camera, ShoppingBag, Star, Eye, RefreshCw, Loader2 } from 'lucide-react';
+import { Camera, ShoppingBag, Eye, RefreshCw } from 'lucide-react';
 
 const DemoSection = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -50,7 +53,7 @@ const DemoSection = () => {
     try {
       const formData = new FormData();
       formData.append('image', file);
-      const response = await fetch('https://fashion-recommendation-system-2-2pyh.onrender.com/api/recommend', {
+      const response = await fetch(API_URLS.recommend, {
         method: 'POST',
         body: formData,
       });

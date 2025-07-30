@@ -9,6 +9,7 @@ import { Label } from '@/components/ui/label';
 import { Upload, Camera, ShoppingBag, Star, Eye, RefreshCw, Loader2, StarHalf, ArrowLeft, Sparkles } from 'lucide-react';
 import Navbar from '@/components/Navbar';
 import { saveRecommendation } from '@/utils/recommendationStorage';
+import { API_URLS } from '@/config/api';
 
 const FashionRecommend = () => {
   const navigate = useNavigate();
@@ -152,7 +153,7 @@ const FashionRecommend = () => {
       formData.append('height', height);
       formData.append('weight', weight);
       formData.append('occasion', occasion);
-      const response = await fetch('https://fashion-recommendation-system-2-2pyh.onrender.com/api/recommend', {
+      const response = await fetch(API_URLS.recommend, {
         method: 'POST',
         body: formData,
       });
@@ -225,7 +226,7 @@ const FashionRecommend = () => {
       formData.append('occasion', occasion);
       
       // Call backend camera capture endpoint
-      const response = await fetch('https://fashion-recommendation-system-2-2pyh.onrender.com/api/camera-capture', {
+      const response = await fetch(API_URLS.cameraCapture, {
         method: 'POST',
         body: formData,
       });

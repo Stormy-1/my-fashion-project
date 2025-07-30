@@ -21,7 +21,15 @@ def get_prediction_module():
         return None
 
 app = Flask(__name__)
-CORS(app)  # Enable CORS for all routes
+
+# Configure CORS to allow both localhost and deployed frontend
+CORS(app, origins=[
+    "http://localhost:5173",  # Vite dev server
+    "http://localhost:3000",  # React dev server
+    "http://127.0.0.1:5173", # Alternative localhost
+    "https://fashion-recommendation-system-3.onrender.com",  # Your deployed frontend
+    "https://*.onrender.com"  # Any Render subdomain
+], supports_credentials=True)
 
 # Configuration
 UPLOAD_FOLDER = 'uploads'
