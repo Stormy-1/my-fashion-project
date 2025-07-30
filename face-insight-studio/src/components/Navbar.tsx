@@ -8,6 +8,7 @@ import logo from '@/assets/logo-1.png';
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -69,8 +70,16 @@ const Navbar = () => {
               className="h-8 w-auto rounded-lg"
             />
            <h1 className="text-xl md:text-xl lg:text-2xl font-bold  leading-tight py-10">
-            <span className="bg-gradient-to-r from-purple-800 to-blue-300 bg-clip-text text-transparent">Aesthet</span>
-            <span className="bg-gradient-to-r from-purple-800 to-pink-300 bg-clip-text text-transparent">IQ</span>
+           <span
+              className={`bg-gradient-to-r from-purple-800 to-blue-300 bg-clip-text text-transparent ${isVisible ? 'animate-slide-in-left' : 'opacity-0'}`}
+            >
+              Aesthet
+            </span>
+            <span
+              className={`bg-gradient-to-r from-purple-800 to-pink-300 bg-clip-text text-transparent ${isVisible ? 'animate-slide-in-left' : 'opacity-0'}`}
+            >
+              IQ
+            </span>
           </h1>
           </div>
 

@@ -1,0 +1,21 @@
+/* HeroSection.css */
+
+.hero-slide-right {
+  opacity: 0;
+  transform: translateX(60px);
+  transition: opacity 0.8s cubic-bezier(0.4,0,0.2,1), transform 0.8s cubic-bezier(0.4,0,0.2,1);
+}
+.hero-slide-in-right {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.hero-slide-left {
+  opacity: 0;
+  transform: translateX(-60px);
+  transition: opacity 0.8s cubic-bezier(0.4,0,0.2,1), transform 0.8s cubic-bezier(0.4,0,0.2,1);
+}
+.hero-slide-in-left {
+  opacity: 1;
+  transform: translateX(0);
+} 

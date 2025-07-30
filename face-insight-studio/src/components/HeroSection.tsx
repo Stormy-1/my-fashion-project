@@ -27,9 +27,17 @@ const HeroSection = () => {
         <div className={`transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
 
 
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold  leading-tight py-10">
-            <span className="bg-gradient-to-r from-purple-800 to-blue-300 bg-clip-text text-transparent">Aesthet</span>
-            <span className="bg-gradient-to-r from-purple-800 to-pink-300 bg-clip-text text-transparent">IQ</span>
+          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold leading-tight py-10 flex justify-center items-center gap-2">
+            <span
+              className={`bg-gradient-to-r from-purple-800 to-blue-300 bg-clip-text text-transparent ${isVisible ? 'animate-slide-in-right' : 'opacity-0'}`}
+            >
+              Aesthet
+            </span>
+            <span
+              className={`bg-gradient-to-r from-purple-800 to-pink-300 bg-clip-text text-transparent ${isVisible ? 'animate-slide-in-left' : 'opacity-0'}`}
+            >
+              IQ
+            </span>
           </h1>
           
           <p className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-3xl mx-auto leading-relaxed">
