@@ -7,8 +7,18 @@ import cv2
 import numpy as np
 import base64
 from werkzeug.utils import secure_filename
-from predict import process_image_for_recommendations
 import traceback
+import gc  # For garbage collection
+
+# Lazy import to reduce memory usage at startup
+def get_prediction_module():
+    """Lazy import of prediction module to reduce memory usage"""
+    try:
+        from predict import process_image_for_recommendations
+        return process_image_for_recommendations
+    except ImportError as e:
+        print(f"Warning: Could not import prediction module: {e}")
+        return None
 
 app = Flask(__name__)
 CORS(app)  # Enable CORS for all routes
@@ -108,13 +118,23 @@ def get_fashion_recommendations():
         print(f"Processing image: {filepath}")
         print(f"Parameters - Height: {height}cm, Weight: {weight}kg, Occasion: {occasion}")
         
-        # Process the image using the existing pipeline
-        recommendations = process_image_for_recommendations(
+        # Process the image using lazy-loaded pipeline
+        process_func = get_prediction_module()
+        if process_func is None:
+            return jsonify({
+                'error': 'Prediction module not available',
+                'success': False
+            }), 500
+            
+        recommendations = process_func(
             image_path=filepath,
             height=height,
             weight=weight,
             occasion=occasion
         )
+        
+        # Force garbage collection to free memory
+        gc.collect()
         
         # Clean up uploaded file
         try:
@@ -407,6 +427,9 @@ def internal_error(e):
     }), 500
 
 if __name__ == '__main__':
+    # Get port from environment variable (for Render deployment) or default to 5000
+    port = int(os.environ.get('PORT', 5000))
+    
     print("Starting Fashion Recommendation API...")
     print(f"Upload folder: {os.path.abspath(UPLOAD_FOLDER)}")
     print("Available endpoints:")
@@ -414,6 +437,7 @@ if __name__ == '__main__':
     print("  POST /api/recommend - Get fashion recommendations")
     print("  POST /api/camera-capture - OpenCV camera capture and processing")
     print("  POST /api/upload-test - Test file upload")
-    print("\nServer starting on http://localhost:5000")
+    print(f"\nServer starting on port {port}")
     
-    app.run(debug=True, host='0.0.0.0', port=5000)
+    # Use environment PORT for deployment compatibility
+    app.run(debug=False, host='0.0.0.0', port=port)

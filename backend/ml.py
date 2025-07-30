@@ -304,7 +304,7 @@ class CelebADataset(Dataset):
             if attr_file.endswith('.csv'):
                 self.attr_data = pd.read_csv(attr_file, index_col=0)
             else:
-                self.attr_data = pd.read_csv(attr_file, sep='\s+', skiprows=1)
+                self.attr_data = pd.read_csv(attr_file, sep=r'\s+', skiprows=1)
                 if not self.attr_data.index.dtype == 'object':
                     self.attr_data.set_index(self.attr_data.columns[0], inplace=True)
         except Exception as e:
