@@ -21,14 +21,7 @@ const HeroSection = () => {
   return (
     <section id="home" className="relative min-h-screen flex items-center justify-center py-8 md:py-10">
 
-      {/* Floating elements */}
-      <div className="absolute inset-0 z-1">
-        <div className="absolute top-40 right-20 w-3 h-3 bg-accent rounded-full animate-float" style={{ animationDelay: '1s' }} />
-        <div className="absolute top-80 right-40 w-3 h-3 bg-accent rounded-full animate-float" style={{ animationDelay: '1s' }} />
-        <div className="absolute bottom-40 left-32 w-3 h-3 bg-primary-glow rounded-full animate-float" style={{ animationDelay: '2s' }} />
-        <div className="absolute bottom-80 left-44 w-2 h-2 bg-primary-glow rounded-full animate-float" style={{ animationDelay: '1s' }} />
-        <div className="absolute bottom-40 right-32 w-2 h-2 bg-primary-glow rounded-full animate-float" style={{ animationDelay: '2s' }} />
-      </div>
+
 
       <div className="relative z-10 container mx-auto px-4 text-center">
         <div className={`transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>

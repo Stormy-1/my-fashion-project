@@ -1,56 +1,19 @@
 [
   {
-    "Product Name": "Slim Fit Cotton Kurta with Churidar",
-    "Fit": "Regular Fit - XL",
-    "Color Palette": "Beige, Navy Blue, White",
+    "Product Name": "Slim Fit Solid Color Suit with Trousers",
+    "Fit": "Regular Fit - 42 (size XL)",
+    "Color Palette": "Navy Blue, Grey",
     "Gender": "Male"
   },
   {
-    "Product Name": "Traditional Bandhgalow with Embroidered Jacket and Trouser",
-    "Fit": "Tailored - M",
-    "Color Palette": "Red, Gold",
+    "Product Name": "Bold Striped Sherwani with Pants",
+    "Fit": "Tailored Fit - 42 (size XL)",
+    "Color Palette": "Maroon, White",
     "Gender": "Male"
   },
   {
-    "Product Name": "Linen Sherwani",
-    "Fit": "Regular Fit - XL",
-    "Color Palette": "Pink, Cream",
-    "Gender": "Male"
-  },
-  {
-    "Product Name": "A-Line Skirt with Off-Shoulder Blouse",
-    "Fit": "Relaxed Fit - XL",
-    "Color Palette": "Blue, Pink, White",
-    "Gender": "Female"
-  },
-  {
-    "Product Name": "Palazzo Set",
-    "Fit": "Regular Fit - XL",
-    "Color Palette": "Peach, Gold",
-    "Gender": "Female"
-  },
-  {
-    "Product Name": "Maxi Dress",
-    "Fit": "Tailored Fit - M",
-    "Color Palette": "Green, Navy Blue",
-    "Gender": "Female"
-  },
-  {
-    "Product Name": "Short-Sleeved Suit with Chinos",
-    "Fit": "Slim Fit - L",
-    "Color Palette": "Olive Green, Beige",
-    "Gender": "Male"
-  },
-  {
-    "Product Name": "Th Kurta with Patiala Salwar",
+    "Product Name": "Crisp Cotton Kurta with Churidar",
     "Fit": "Tailored Fit - XL",
-    "Color Palette": "Red, Maroon",
-    "Gender": "Male"
-  },
-  {
-    "Product Name": "Calf-Length Dress",
-    "Fit": "Regular Fit - M",
-    "Color Palette": "Magenta, Grey",
-    "Gender": "Female"
+    "Color Palette": "Burgundy, Beige"
   }
 ]
