@@ -1,52 +1,105 @@
-# Fashion Recommendation System Backend Requirements
-# Complete dependency list for the entire repository
+# Fashion Recommendation System - Complete Requirements
+# Last Updated: 2025-07-30 (Deployment Ready)
+# Scanned entire repository for all dependencies
 
-# Core web framework and API
+# ===== Core Dependencies =====
+# Note: Removed python version constraint as it's not a pip package
+
+# ===== Web Framework & API =====
 flask==2.3.3
 flask-cors==4.0.0
 werkzeug==2.3.7
 requests==2.31.0
+# Note: uuid is built-in Python module, not a pip package
 
-# Deep Learning and Computer Vision
-torch>=1.9.0
-torchvision>=0.10.0
-torchaudio>=0.9.0
+# ===== Deep Learning & Computer Vision =====
+torch>=1.9.0,<2.2.0  # PyTorch with version constraint for stability
+torchvision>=0.10.0,<0.18.0
+torchaudio>=0.9.0,<2.2.0
 timm==0.9.12
 opencv-python==4.8.1.78
 Pillow==10.0.1
+pytorch-lightning==2.0.9  # Required by celeb_face.py
 
-# Machine Learning and Data Processing
-numpy==1.24.3
+# ===== Machine Learning & Data Processing =====
+numpy<2.0.0  # Fixed for OpenCV compatibility
 pandas==2.0.3
 scikit-learn==1.3.0
 joblib==1.3.2
 imbalanced-learn==0.11.0
-scipy>=1.9.0
+scipy==1.10.1  # Pinned for stability with scikit-learn 1.3.0
 
-# Data Visualization (for training/analysis)
+# ===== Data Visualization =====
 matplotlib==3.7.2
 seaborn==0.12.2
 
-# Progress bars and utilities
-tqdm==4.66.1
+# ===== LLM & NLP =====
+transformers==4.36.2
+sentence-transformers==2.2.2
+langchain==0.1.0
+langchain-huggingface==0.0.3
+langchain-core==0.1.0
+huggingface-hub==0.16.4
+# Note: openai removed as not used in codebase
 
-# Web Scraping
+# ===== Web Scraping =====
 selenium==4.15.2
 webdriver-manager==4.0.1
+beautifulsoup4==4.12.2
+lxml==4.9.3  # HTML/XML parser for BeautifulSoup
 
-# LLM Integration - Hugging Face and LangChain
-openai>=1.0.0
-transformers>=4.21.0
-langchain>=0.1.0
-langchain-huggingface>=0.0.3
-langchain-core>=0.1.0
-huggingface-hub>=0.16.0
-
-# Environment and configuration
+# ===== Utilities =====
 python-dotenv==1.0.0
+tqdm==4.66.1
+psutil==5.9.5
+setuptools>=65.0.0  # Required for distutils compatibility
+# Note: python-magic removed as not used in codebase
 
-# Additional utilities
-psutil>=5.9.0
+# ===== Additional Dependencies Found in Scan =====
+# Standard library modules (no pip install needed):
+# - os, json, re, time, base64, traceback, subprocess, gc, collections
+# - uuid (built-in since Python 3.7)
 
-# Note: The following are built-in Python modules (no installation needed):
-# json, re, os, subprocess, traceback, gc, sys, io, time, collections, contextlib, base64, uuid
+# ===== Development & Testing =====
+pytest==7.4.3
+pytest-cov==4.1.0
+black==23.11.0
+isort==5.12.0
+flake8==6.1.0
+mypy==1.6.1
+
+# ===== Production Server (for deployment) =====
+gunicorn==21.2.0  # WSGI server for production deployment
+
+# ===== System Dependencies =====
+# Note: These may need to be installed via system package manager
+# - libgl1-mesa-glx (for OpenCV)
+# - libglib2.0-0
+# - libsm6
+# - libxrender1
+# - libxext6
+# - google-chrome-stable (for Selenium)
+# - chromedriver (or use webdriver-manager)
+
+# ===== Frontend Dependencies =====
+# Note: Frontend uses Node.js/npm - see package.json in face-insight-studio/
+# Required Node.js version: >=18.0.0
+# Required npm version: >=9.0.0
+
+# ===== Environment Setup =====
+# 1. Create virtual environment:
+#    python -m venv venv
+#    source venv/bin/activate  # On Windows: .\venv\Scripts\activate
+# 2. Install requirements:
+#    pip install -r requirements.txt
+# 3. For frontend:
+#    cd face-insight-studio
+#    npm install
+# 4. Set up environment variables:
+#    Create .env file with HF_TOKEN for Hugging Face API
+
+# ===== Deployment Notes =====
+# - Ensure GPU drivers are installed if using CUDA
+# - Chrome/Chromium required for Selenium web scraping
+# - Model files (.pth) should be present in backend directory
+# - Upload directory will be created automatically
