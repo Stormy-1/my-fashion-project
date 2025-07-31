@@ -98,7 +98,7 @@ const Navbar = () => {
               variant="outline"
               size="sm"
               className="border-primary/20 hover:border-primary hover:bg-primary/10"
-              onClick={() => window.open('https://github.com', '_blank')}
+              onClick={() => window.open('https://github.com/MOHILMANDAPE15/Fashion-Recommendation-system', '_blank')}
             >
               <Github className="w-4 h-4 mr-2" />
               GitHub

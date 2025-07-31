@@ -1,359 +1,374 @@
-[
-  {
-    "rating": "N/A",
-    "number_of_reviews": "N/A",
-    "price": "N/A",
-    "brand": "Generic",
-    "description": "New Trends Women and Girls 'Kurta With Plazo set'| style - 8 apperal",
-    "image_link": "https://m.media-amazon.com/images/I/41YxfhKxkIL._AC_UL320_.jpg",
-    "product_link": "https://www.amazon.in/Trends-Women-Girls-Kurta-Plazo/dp/B0FJY8FJQ9/ref=sr_1_1?dib=eyJ2IjoiMSJ9.1AtYQykUFwOO1bCdGjQ1nSl4g1yTP5BbqPRSuTC-23KIMoEu3AxpLBYGHhMUFzQcqC-w1BsQi1-hTfyysKUC3eaEycU-WDnr_LbhGCAN8cBcxredwSl8ed-6kosYhpVralDMnMfnPhceBpjeeReNR9DO5jwUTvCnvl0hm4MxsDQfuzs2dp_loh70prmMLwo5Ch5iYoqRE0alcNMbc4rQM5zerGeuX-gCh1lEbS3sFkHgeMqw06iA3ZsYM-AKTaSxcZJFLXPGXJ96vHtBuCrGInJYGhpY_bNrVlIxS9igsfA.VxXVlKs1G8iO8kr2ssolRafUxxnmVhWqLM8n8gBLr7k&dib_tag=se&keywords=Unstitched+Straight+Leg+Palazzos+with+Customised+Kurta+women+relaxed+fit+XS+turquoise&nsdOptOutParam=true&qid=1753892019&sr=8-1",
-    "search_parameters": {
-      "product_hint": "Unstitched Straight Leg Palazzos with Customised Kurta",
-      "color": "Turquoise, Peach, White",
-      "fit": "Relaxed Fit - XS",
-      "occasion": "diwali",
-      "gender": "Female"
-    },
-    "product_index": 1
+{
+  "distribution_info": {
+    "total_products": 10,
+    "distribution": "4+3+3",
+    "garment_1_count": 4,
+    "garment_2_count": 3,
+    "garment_3_count": 3,
+    "scraping_time_seconds": 26.57
   },
-  {
-    "rating": "N/A",
-    "number_of_reviews": "N/A",
-    "price": "N/A",
-    "brand": "Generic",
-    "description": "Women Cotton Pleated Printed Long Kurti with Palazzos| Style - 336 Apperal",
-    "image_link": "https://m.media-amazon.com/images/I/319+tWM+N9L._AC_UL320_.jpg",
-    "product_link": "https://www.amazon.in/Women-Cotton-Pleated-Printed-Palazzos/dp/B0FJY44Y19/ref=sr_1_2?dib=eyJ2IjoiMSJ9.1AtYQykUFwOO1bCdGjQ1nSl4g1yTP5BbqPRSuTC-23KIMoEu3AxpLBYGHhMUFzQcqC-w1BsQi1-hTfyysKUC3eaEycU-WDnr_LbhGCAN8cBcxredwSl8ed-6kosYhpVralDMnMfnPhceBpjeeReNR9DO5jwUTvCnvl0hm4MxsDQfuzs2dp_loh70prmMLwo5Ch5iYoqRE0alcNMbc4rQM5zerGeuX-gCh1lEbS3sFkHgeMqw06iA3ZsYM-AKTaSxcZJFLXPGXJ96vHtBuCrGInJYGhpY_bNrVlIxS9igsfA.VxXVlKs1G8iO8kr2ssolRafUxxnmVhWqLM8n8gBLr7k&dib_tag=se&keywords=Unstitched+Straight+Leg+Palazzos+with+Customised+Kurta+women+relaxed+fit+XS+turquoise&nsdOptOutParam=true&qid=1753892019&sr=8-2",
-    "search_parameters": {
-      "product_hint": "Unstitched Straight Leg Palazzos with Customised Kurta",
-      "color": "Turquoise, Peach, White",
-      "fit": "Relaxed Fit - XS",
-      "occasion": "diwali",
-      "gender": "Female"
+  "products": [
+    {
+      "rating": "4.7 out of 5 stars, rating details",
+      "number_of_reviews": "5",
+      "price": "N/A",
+      "brand": "Nike",
+      "description": "Men's Solid Regular Fit T-Shirt",
+      "image_link": "https://m.media-amazon.com/images/I/81NGfSHeedL._AC_UL320_.jpg",
+      "product_link": "https://www.amazon.in/Nike-Regular-T-Shirt-DH0823-662_Mars-Stone/dp/B0F6CY3L2W/ref=sr_1_2?dib=eyJ2IjoiMSJ9.06bY5lUDIPMmGJ3fEm1atsKD7a9u1RSjrSG-r1KLaYg_SoOeoci53H1T1EN5ls4kXjxAWCKmqOjC2jk829FNJc0mYEQcQ4d3Uyj1GrabEebpjMQ6uadnEPY45z9u3U0spNsMV3_ZFsOu1WSOauecaSMbdmROtvLAPDs-oFmmdY9zVkS7zT8SeuDxE8mWn_PKbCi-847-qQfg1Ukn8fc-AOcucYl1m8EAX1Xk1FNQ6G6YpzgMZlvtOCZrYw0W8T1FvVC9gypUNh4ITpnb3OucjiTEqgJibDXy0_NQGKhEvZI.uDdeG6rzWr1ckjYd4gXoCWwOaBxDmztw2lIMljb_Itg&dib_tag=se&keywords=Nike+Dri-FIT+Men%27s+Cyclone+FinishLite+Top+men+regular+fit+XL+lime&nsdOptOutParam=true&qid=1753960559&sr=8-2",
+      "search_parameters": {
+        "product_hint": "Nike Dri-FIT Men's Cyclone FinishLite Top",
+        "color": "Lime Green, Black",
+        "fit": "Regular Fit - XL",
+        "occasion": "sports day",
+        "gender": "MALE"
+      },
+      "product_index": 2,
+      "quality_score": 63.98970004336019
     },
-    "product_index": 2
-  },
-  {
-    "rating": "4.1 out of 5 stars, rating details",
-    "number_of_reviews": "82",
-    "price": "₹689",
-    "brand": "Sttoffa",
-    "description": "Women's Cotton Comfortable Full Length Printed Plazzo | Relaxed Fit, Stylish & Flared Palazzo Pants for Woemens & Girl's",
-    "image_link": "https://m.media-amazon.com/images/I/81LdqaBsyBL._AC_UL320_.jpg",
-    "product_link": "https://www.amazon.in/Sttoffa-Comfortable-Printed-Relaxed-Turquoise/dp/B0CSJYH9RD/ref=sr_1_3?dib=eyJ2IjoiMSJ9.1AtYQykUFwOO1bCdGjQ1nSl4g1yTP5BbqPRSuTC-23KIMoEu3AxpLBYGHhMUFzQcqC-w1BsQi1-hTfyysKUC3eaEycU-WDnr_LbhGCAN8cBcxredwSl8ed-6kosYhpVralDMnMfnPhceBpjeeReNR9DO5jwUTvCnvl0hm4MxsDQfuzs2dp_loh70prmMLwo5Ch5iYoqRE0alcNMbc4rQM5zerGeuX-gCh1lEbS3sFkHgeMqw06iA3ZsYM-AKTaSxcZJFLXPGXJ96vHtBuCrGInJYGhpY_bNrVlIxS9igsfA.VxXVlKs1G8iO8kr2ssolRafUxxnmVhWqLM8n8gBLr7k&dib_tag=se&keywords=Unstitched+Straight+Leg+Palazzos+with+Customised+Kurta+women+relaxed+fit+XS+turquoise&nsdOptOutParam=true&qid=1753892019&sr=8-3",
-    "search_parameters": {
-      "product_hint": "Unstitched Straight Leg Palazzos with Customised Kurta",
-      "color": "Turquoise, Peach, White",
-      "fit": "Relaxed Fit - XS",
-      "occasion": "diwali",
-      "gender": "Female"
+    {
+      "rating": "4.6 out of 5 stars, rating details",
+      "number_of_reviews": "3",
+      "price": "1,189",
+      "brand": "Nike",
+      "description": "Men's Cotton Regular Fit T-Shirt",
+      "image_link": "https://m.media-amazon.com/images/I/61Neo932OTL._AC_UL320_.jpg",
+      "product_link": "https://www.amazon.in/Nike-Regular-T-Shirt-DV9316-010_Black-Reflective/dp/B0CTH9G5L2/ref=sr_1_6?dib=eyJ2IjoiMSJ9.06bY5lUDIPMmGJ3fEm1atsKD7a9u1RSjrSG-r1KLaYg_SoOeoci53H1T1EN5ls4kXjxAWCKmqOjC2jk829FNJc0mYEQcQ4d3Uyj1GrabEebpjMQ6uadnEPY45z9u3U0spNsMV3_ZFsOu1WSOauecaSMbdmROtvLAPDs-oFmmdY9zVkS7zT8SeuDxE8mWn_PKbCi-847-qQfg1Ukn8fc-AOcucYl1m8EAX1Xk1FNQ6G6YpzgMZlvtOCZrYw0W8T1FvVC9gypUNh4ITpnb3OucjiTEqgJibDXy0_NQGKhEvZI.uDdeG6rzWr1ckjYd4gXoCWwOaBxDmztw2lIMljb_Itg&dib_tag=se&keywords=Nike+Dri-FIT+Men%27s+Cyclone+FinishLite+Top+men+regular+fit+XL+lime&nsdOptOutParam=true&qid=1753960559&sr=8-6",
+      "search_parameters": {
+        "product_hint": "Nike Dri-FIT Men's Cyclone FinishLite Top",
+        "color": "Lime Green, Black",
+        "fit": "Regular Fit - XL",
+        "occasion": "sports day",
+        "gender": "MALE"
+      },
+      "product_index": 6,
+      "quality_score": 60.771212547196626
     },
-    "product_index": 3
-  },
-  {
-    "rating": "3.0 out of 5 stars, rating details",
-    "number_of_reviews": "2",
-    "price": "₹500",
-    "brand": "Generic",
-    "description": "Women's Cotton Blend Printed Straight Kurta with Palazzo Set",
-    "image_link": "https://m.media-amazon.com/images/I/31mOv3Rke6L._AC_UL320_.jpg",
-    "product_link": "https://www.amazon.in/Womens-Printed-Straight-Palazzo-Regular/dp/B0F28WMPFP/ref=sr_1_4?dib=eyJ2IjoiMSJ9.1AtYQykUFwOO1bCdGjQ1nSl4g1yTP5BbqPRSuTC-23KIMoEu3AxpLBYGHhMUFzQcqC-w1BsQi1-hTfyysKUC3eaEycU-WDnr_LbhGCAN8cBcxredwSl8ed-6kosYhpVralDMnMfnPhceBpjeeReNR9DO5jwUTvCnvl0hm4MxsDQfuzs2dp_loh70prmMLwo5Ch5iYoqRE0alcNMbc4rQM5zerGeuX-gCh1lEbS3sFkHgeMqw06iA3ZsYM-AKTaSxcZJFLXPGXJ96vHtBuCrGInJYGhpY_bNrVlIxS9igsfA.VxXVlKs1G8iO8kr2ssolRafUxxnmVhWqLM8n8gBLr7k&dib_tag=se&keywords=Unstitched+Straight+Leg+Palazzos+with+Customised+Kurta+women+relaxed+fit+XS+turquoise&nsdOptOutParam=true&qid=1753892019&sr=8-4",
-    "search_parameters": {
-      "product_hint": "Unstitched Straight Leg Palazzos with Customised Kurta",
-      "color": "Turquoise, Peach, White",
-      "fit": "Relaxed Fit - XS",
-      "occasion": "diwali",
-      "gender": "Female"
+    {
+      "rating": "5.0 out of 5 stars, rating details",
+      "number_of_reviews": "1",
+      "price": "2,459",
+      "brand": "Nike",
+      "description": "Men's Regular Fit T-Shirt",
+      "image_link": "https://m.media-amazon.com/images/I/71XHdba8pjL._AC_UL320_.jpg",
+      "product_link": "https://www.amazon.in/Nike-Regular-T-Shirt-FZ7449-379-Mineral/dp/B0F84B9JM6/ref=sr_1_5?dib=eyJ2IjoiMSJ9.06bY5lUDIPMmGJ3fEm1atsKD7a9u1RSjrSG-r1KLaYg_SoOeoci53H1T1EN5ls4kXjxAWCKmqOjC2jk829FNJc0mYEQcQ4d3Uyj1GrabEebpjMQ6uadnEPY45z9u3U0spNsMV3_ZFsOu1WSOauecaSMbdmROtvLAPDs-oFmmdY9zVkS7zT8SeuDxE8mWn_PKbCi-847-qQfg1Ukn8fc-AOcucYl1m8EAX1Xk1FNQ6G6YpzgMZlvtOCZrYw0W8T1FvVC9gypUNh4ITpnb3OucjiTEqgJibDXy0_NQGKhEvZI.uDdeG6rzWr1ckjYd4gXoCWwOaBxDmztw2lIMljb_Itg&dib_tag=se&keywords=Nike+Dri-FIT+Men%27s+Cyclone+FinishLite+Top+men+regular+fit+XL+lime&nsdOptOutParam=true&qid=1753960559&sr=8-5",
+      "search_parameters": {
+        "product_hint": "Nike Dri-FIT Men's Cyclone FinishLite Top",
+        "color": "Lime Green, Black",
+        "fit": "Regular Fit - XL",
+        "occasion": "sports day",
+        "gender": "MALE"
+      },
+      "product_index": 5,
+      "quality_score": 60.0
     },
-    "product_index": 4
-  },
-  {
-    "rating": "2.6 out of 5 stars, rating details",
-    "number_of_reviews": "7",
-    "price": "₹399",
-    "brand": "Generic",
-    "description": "Women's Rayon Kurta Set with Printed Palazzo Pants, Maroon, 3/4 Sleeve",
-    "image_link": "https://m.media-amazon.com/images/I/41buwOGNErL._AC_UL320_.jpg",
-    "product_link": "https://www.amazon.in/Womens-Printed-Palazzo-Maroon-Dark-RED/dp/B0F7XZX3Q2/ref=sr_1_5?dib=eyJ2IjoiMSJ9.1AtYQykUFwOO1bCdGjQ1nSl4g1yTP5BbqPRSuTC-23KIMoEu3AxpLBYGHhMUFzQcqC-w1BsQi1-hTfyysKUC3eaEycU-WDnr_LbhGCAN8cBcxredwSl8ed-6kosYhpVralDMnMfnPhceBpjeeReNR9DO5jwUTvCnvl0hm4MxsDQfuzs2dp_loh70prmMLwo5Ch5iYoqRE0alcNMbc4rQM5zerGeuX-gCh1lEbS3sFkHgeMqw06iA3ZsYM-AKTaSxcZJFLXPGXJ96vHtBuCrGInJYGhpY_bNrVlIxS9igsfA.VxXVlKs1G8iO8kr2ssolRafUxxnmVhWqLM8n8gBLr7k&dib_tag=se&keywords=Unstitched+Straight+Leg+Palazzos+with+Customised+Kurta+women+relaxed+fit+XS+turquoise&nsdOptOutParam=true&qid=1753892019&sr=8-5",
-    "search_parameters": {
-      "product_hint": "Unstitched Straight Leg Palazzos with Customised Kurta",
-      "color": "Turquoise, Peach, White",
-      "fit": "Relaxed Fit - XS",
-      "occasion": "diwali",
-      "gender": "Female"
+    {
+      "rating": "N/A",
+      "number_of_reviews": "N/A",
+      "price": "₹959",
+      "brand": "Nike",
+      "description": "Men's Athletic Fit T-Shirt",
+      "image_link": "https://m.media-amazon.com/images/I/71tNs7DIzlL._AC_UL320_.jpg",
+      "product_link": "https://www.amazon.in/NIKE-Mens-Athletic-T-Shirt-DZ4587-084_Smoke/dp/B0DSG736JB/ref=sr_1_3?dib=eyJ2IjoiMSJ9.06bY5lUDIPMmGJ3fEm1atsKD7a9u1RSjrSG-r1KLaYg_SoOeoci53H1T1EN5ls4kXjxAWCKmqOjC2jk829FNJc0mYEQcQ4d3Uyj1GrabEebpjMQ6uadnEPY45z9u3U0spNsMV3_ZFsOu1WSOauecaSMbdmROtvLAPDs-oFmmdY9zVkS7zT8SeuDxE8mWn_PKbCi-847-qQfg1Ukn8fc-AOcucYl1m8EAX1Xk1FNQ6G6YpzgMZlvtOCZrYw0W8T1FvVC9gypUNh4ITpnb3OucjiTEqgJibDXy0_NQGKhEvZI.uDdeG6rzWr1ckjYd4gXoCWwOaBxDmztw2lIMljb_Itg&dib_tag=se&keywords=Nike+Dri-FIT+Men%27s+Cyclone+FinishLite+Top+men+regular+fit+XL+lime&nsdOptOutParam=true&qid=1753960559&sr=8-3",
+      "search_parameters": {
+        "product_hint": "Nike Dri-FIT Men's Cyclone FinishLite Top",
+        "color": "Lime Green, Black",
+        "fit": "Regular Fit - XL",
+        "occasion": "sports day",
+        "gender": "MALE"
+      },
+      "product_index": 3,
+      "quality_score": 20
     },
-    "product_index": 5
-  },
-  {
-    "rating": "3.9 out of 5 stars, rating details",
-    "number_of_reviews": "875",
-    "price": "1,199",
-    "brand": "Pistaa's",
-    "description": "Women's Loose Fit Cotton Salwar Suit",
-    "image_link": "https://m.media-amazon.com/images/I/51h9hgUP0PL._AC_UL320_.jpg",
-    "product_link": "https://www.amazon.in/Pistaas-Womens-Pocket-Palazzo-Bottom/dp/B07NZ19XB3/ref=sr_1_6?dib=eyJ2IjoiMSJ9.1AtYQykUFwOO1bCdGjQ1nSl4g1yTP5BbqPRSuTC-23KIMoEu3AxpLBYGHhMUFzQcqC-w1BsQi1-hTfyysKUC3eaEycU-WDnr_LbhGCAN8cBcxredwSl8ed-6kosYhpVralDMnMfnPhceBpjeeReNR9DO5jwUTvCnvl0hm4MxsDQfuzs2dp_loh70prmMLwo5Ch5iYoqRE0alcNMbc4rQM5zerGeuX-gCh1lEbS3sFkHgeMqw06iA3ZsYM-AKTaSxcZJFLXPGXJ96vHtBuCrGInJYGhpY_bNrVlIxS9igsfA.VxXVlKs1G8iO8kr2ssolRafUxxnmVhWqLM8n8gBLr7k&dib_tag=se&keywords=Unstitched+Straight+Leg+Palazzos+with+Customised+Kurta+women+relaxed+fit+XS+turquoise&nsdOptOutParam=true&qid=1753892019&sr=8-6",
-    "search_parameters": {
-      "product_hint": "Unstitched Straight Leg Palazzos with Customised Kurta",
-      "color": "Turquoise, Peach, White",
-      "fit": "Relaxed Fit - XS",
-      "occasion": "diwali",
-      "gender": "Female"
+    {
+      "rating": "4.0 out of 5 stars, rating details",
+      "number_of_reviews": "536",
+      "price": "₹529",
+      "brand": "adidas",
+      "description": "Men's 100% Cotton Fitted T-Shirt",
+      "image_link": "https://m.media-amazon.com/images/I/61a4IFMo2gL._AC_UL320_.jpg",
+      "product_link": "https://www.amazon.in/sspa/click?ie=UTF8&spc=MTo3ODAxOTc4NjEzNzg3MDAwOjE3NTM5NjA1NTk6c3BfYXRmOjMwMDQ1ODU5NTk5OTUzMjo6MDo6&url=%2Fadidas-ECQ43-Adidas-Shorts-IC9436_Legink%2Fdp%2FB0BQWXNHZ7%2Fref%3Dsr_1_1_sspa%3Fdib%3DeyJ2IjoiMSJ9.WE1T3S6va55nnT4OQYmFNnmT6n5AH6UvPhhI3-t8K9uKm_jHAZ3fHcrdH2xruQqj7GoES82QQHArWDED747eQWPMEycRkydkc9DEq49lunQLkr6UttuT-NSOk3tgR_6FbZwwjAYdahHCMObm9BSV63pRqq64LrvLX3n3nlwknN01AfYqCBhHqC9qq3mcDFub6rWJVnkCOHkTFa_tBVMG_qrBoTFS5thklComIN3GVwE33SR5gXKvtIITSQeIbq1jSgJH1-uu49kdNvj-66sysddVvMSYOmrYY2NvM7gS7NE.b3kDipTuKlw858rKnXLHIMHKWM4hI5z4ed8ly2F5y9g%26dib_tag%3Dse%26keywords%3DAdidas%2BRunning%2BShorts%2Bmen%2Bloose%2BL%2Bnavy%26nsdOptOutParam%3Dtrue%26qid%3D1753960559%26sr%3D8-1-spons%26sp_csd%3Dd2lkZ2V0TmFtZT1zcF9hdGY%26psc%3D1&sp_cr=DUB",
+      "search_parameters": {
+        "product_hint": "Adidas Running Shorts",
+        "color": "Navy Blue, Black",
+        "fit": "Loose - L",
+        "occasion": "sports day",
+        "gender": "MALE"
+      },
+      "product_index": 1,
+      "quality_score": 87.2916478969277
     },
-    "product_index": 6
-  },
-  {
-    "rating": "3.3 out of 5 stars, rating details",
-    "number_of_reviews": "12",
-    "price": "₹699",
-    "brand": "VEERACOLLECTION",
-    "description": "Women Viscose Rayon Kurti Palazzo Set",
-    "image_link": "https://m.media-amazon.com/images/I/31m2DJt90LL._AC_UL320_.jpg",
-    "product_link": "https://www.amazon.in/VEERACOLLECTION-Women-Viscose-Palazzo-Regular/dp/B0DGDCK25L/ref=sr_1_7?dib=eyJ2IjoiMSJ9.1AtYQykUFwOO1bCdGjQ1nSl4g1yTP5BbqPRSuTC-23KIMoEu3AxpLBYGHhMUFzQcqC-w1BsQi1-hTfyysKUC3eaEycU-WDnr_LbhGCAN8cBcxredwSl8ed-6kosYhpVralDMnMfnPhceBpjeeReNR9DO5jwUTvCnvl0hm4MxsDQfuzs2dp_loh70prmMLwo5Ch5iYoqRE0alcNMbc4rQM5zerGeuX-gCh1lEbS3sFkHgeMqw06iA3ZsYM-AKTaSxcZJFLXPGXJ96vHtBuCrGInJYGhpY_bNrVlIxS9igsfA.VxXVlKs1G8iO8kr2ssolRafUxxnmVhWqLM8n8gBLr7k&dib_tag=se&keywords=Unstitched+Straight+Leg+Palazzos+with+Customised+Kurta+women+relaxed+fit+XS+turquoise&nsdOptOutParam=true&qid=1753892019&sr=8-7",
-    "search_parameters": {
-      "product_hint": "Unstitched Straight Leg Palazzos with Customised Kurta",
-      "color": "Turquoise, Peach, White",
-      "fit": "Relaxed Fit - XS",
-      "occasion": "diwali",
-      "gender": "Female"
+    {
+      "rating": "3.9 out of 5 stars, rating details",
+      "number_of_reviews": "448",
+      "price": "₹719",
+      "brand": "adidas",
+      "description": "Men's Board Shorts",
+      "image_link": "https://m.media-amazon.com/images/I/51MYJTO4+vL._AC_UL320_.jpg",
+      "product_link": "https://www.amazon.in/Adidas-Cotton-Shorts-FL5727_L_Collegiate-Navy_Large/dp/B07YHZXSRG/ref=sr_1_6?dib=eyJ2IjoiMSJ9.WE1T3S6va55nnT4OQYmFNnmT6n5AH6UvPhhI3-t8K9uKm_jHAZ3fHcrdH2xruQqj7GoES82QQHArWDED747eQWPMEycRkydkc9DEq49lunQLkr6UttuT-NSOk3tgR_6FbZwwjAYdahHCMObm9BSV63pRqq64LrvLX3n3nlwknN01AfYqCBhHqC9qq3mcDFub6rWJVnkCOHkTFa_tBVMG_qrBoTFS5thklComIN3GVwE33SR5gXKvtIITSQeIbq1jSgJH1-uu49kdNvj-66sysddVvMSYOmrYY2NvM7gS7NE.b3kDipTuKlw858rKnXLHIMHKWM4hI5z4ed8ly2F5y9g&dib_tag=se&keywords=Adidas+Running+Shorts+men+loose+L+navy&nsdOptOutParam=true&qid=1753960559&sr=8-6",
+      "search_parameters": {
+        "product_hint": "Adidas Running Shorts",
+        "color": "Navy Blue, Black",
+        "fit": "Loose - L",
+        "occasion": "sports day",
+        "gender": "MALE"
+      },
+      "product_index": 6,
+      "quality_score": 85.51278013998144
     },
-    "product_index": 7
-  },
-  {
-    "rating": "3.7 out of 5 stars, rating details",
-    "number_of_reviews": "20",
-    "price": "N/A",
-    "brand": "Jay Varudi Creation",
-    "description": "Lehenga Choli Women's Trending Designeer Tussar Silk Lehenga Choli Print with Foil Work With Unstitched Blouse Patola Print Adorned with Foil Work For Navrati & Wedding",
-    "image_link": "https://m.media-amazon.com/images/I/61v+Cb501IL._AC_UL320_.jpg",
-    "product_link": "https://www.amazon.in/Jay-Varudi-Creation-Designeer-Unstitched/dp/B0DYV2CQFD/ref=sr_1_1?dib=eyJ2IjoiMSJ9.dlpUme0QX68zISulIY45MJTxIPEbyhKlcFl8agdfSKOr9xgD9wjOWj85UZDUFh7Ie895o6JmnXagziz8AXvXG5bsZd2Q8UqLgwqdP6jr0EwCqGZKOxRO2l89ym8glVkZ4bbVHXK8l3RuAto5RCMmD45T2COMPlQ2nIet7rE-0Z2iSnk586GYIJS549CE3YrwfQRJSJSXaawHoivw5-e9YkN6YZxmNVHGhpchqlzEhj-_V0sDrYPqvwst_a2LpxyIyajMrSO-UbRe7vfaiC3w0LsU65TRW8LFaikNfRvMLrw.PdjUaH-aC6qENJR6Ts2j3dHbbHWhpNz6K5it3b99mxg&dib_tag=se&keywords=Lehenga+Choli+with+Harem+Pants+tailored+fit+S+crimson&nsdOptOutParam=true&qid=1753892033&sr=8-1",
-    "search_parameters": {
-      "product_hint": "Lehenga Choli with Harem Pants",
-      "color": "Crimson, Gold",
-      "fit": "Tailored Fit - S",
-      "occasion": "diwali",
-      "gender": ""
+    {
+      "rating": "3.7 out of 5 stars, rating details",
+      "number_of_reviews": "6,292",
+      "price": "₹349",
+      "brand": "CBlue",
+      "description": "Men's Outdoor Quick Dry Lightweight Sports Shorts with 2 Zipper Pockets, Breathable Hiking Running Gym Workout Athletic Shorts",
+      "image_link": "https://m.media-amazon.com/images/I/71ai3r97THL._AC_UL320_.jpg",
+      "product_link": "https://www.amazon.in/CBlue-Outdoor-Lightweight-Sports-Pockets/dp/B08SW9RM3J/ref=sr_1_7?dib=eyJ2IjoiMSJ9.WE1T3S6va55nnT4OQYmFNnmT6n5AH6UvPhhI3-t8K9uKm_jHAZ3fHcrdH2xruQqj7GoES82QQHArWDED747eQWPMEycRkydkc9DEq49lunQLkr6UttuT-NSOk3tgR_6FbZwwjAYdahHCMObm9BSV63pRqq64LrvLX3n3nlwknN01AfYqCBhHqC9qq3mcDFub6rWJVnkCOHkTFa_tBVMG_qrBoTFS5thklComIN3GVwE33SR5gXKvtIITSQeIbq1jSgJH1-uu49kdNvj-66sysddVvMSYOmrYY2NvM7gS7NE.b3kDipTuKlw858rKnXLHIMHKWM4hI5z4ed8ly2F5y9g&dib_tag=se&keywords=Adidas+Running+Shorts+men+loose+L+navy&nsdOptOutParam=true&qid=1753960559&sr=8-7",
+      "search_parameters": {
+        "product_hint": "Adidas Running Shorts",
+        "color": "Navy Blue, Black",
+        "fit": "Loose - L",
+        "occasion": "sports day",
+        "gender": "MALE"
+      },
+      "product_index": 7,
+      "quality_score": 72.0
     },
-    "product_index": 1
-  },
-  {
-    "rating": "3.4 out of 5 stars, rating details",
-    "number_of_reviews": "245",
-    "price": "₹802",
-    "brand": "PATLANI",
-    "description": "Women Net Letest Design Chain Embroderied Work Woman S Flered Semi-Stitched Lehenga Choli.(Semi Stitched)",
-    "image_link": "https://m.media-amazon.com/images/I/81VYiAhWJ9L._AC_UL320_.jpg",
-    "product_link": "https://www.amazon.in/PATLANI-embroderied-Lehenga-choli-Red-Stitched/dp/B0B6431JS8/ref=sr_1_2?dib=eyJ2IjoiMSJ9.dlpUme0QX68zISulIY45MJTxIPEbyhKlcFl8agdfSKOr9xgD9wjOWj85UZDUFh7Ie895o6JmnXagziz8AXvXG5bsZd2Q8UqLgwqdP6jr0EwCqGZKOxRO2l89ym8glVkZ4bbVHXK8l3RuAto5RCMmD45T2COMPlQ2nIet7rE-0Z2iSnk586GYIJS549CE3YrwfQRJSJSXaawHoivw5-e9YkN6YZxmNVHGhpchqlzEhj-_V0sDrYPqvwst_a2LpxyIyajMrSO-UbRe7vfaiC3w0LsU65TRW8LFaikNfRvMLrw.PdjUaH-aC6qENJR6Ts2j3dHbbHWhpNz6K5it3b99mxg&dib_tag=se&keywords=Lehenga+Choli+with+Harem+Pants+tailored+fit+S+crimson&nsdOptOutParam=true&qid=1753892033&sr=8-2",
-    "search_parameters": {
-      "product_hint": "Lehenga Choli with Harem Pants",
-      "color": "Crimson, Gold",
-      "fit": "Tailored Fit - S",
-      "occasion": "diwali",
-      "gender": ""
+    {
+      "rating": "4.6 out of 5 stars, rating details",
+      "number_of_reviews": "934",
+      "price": "₹595",
+      "brand": "Nike",
+      "description": "Men's Cotton Classic Athletic Socks",
+      "image_link": "https://m.media-amazon.com/images/I/61XDT5LEi-L._AC_UL320_.jpg",
+      "product_link": "https://www.amazon.in/Nike-Classic-Football-Fit-Dry-Medium/dp/B009D4B1SO/ref=sr_1_6?dib=eyJ2IjoiMSJ9.1KmJf9fSjJyJuqGFn4AdqL1jJjsVLifO8mMNf5xgGR86WWBhMpybodIys-TN1LNJwr5xz4oMCMeb-LVUEeldiRVkZxJAXNl--rx5wkSjyP0NiKWOl0YwlEkZJ8lcoh4BVkwAeCmp3Fw5275_0xCjAVlAF7wl7qB7CPIWCcPndPq6TyJc-baJcdPcLEcL1TtvHtq4YINsmRAQw29nNZ-b-fdmA_PN9zysqUFUXy3Ir0ijtRSB9WJStL9fe0whRohnb9b0eTUc__0ScxsLSoVKDVUoe3eKKw0HeFvv5p1nvL4.mSw3_WzxVNBzt5g0bgKGSk2JyhnEGpIohGllo8CjJ5w&dib_tag=se&keywords=Nike+Running+Socks+men+medium+M+royal&qid=1753960559&sr=8-6",
+      "search_parameters": {
+        "product_hint": "Nike Running Socks",
+        "color": "Royal Blue, White",
+        "fit": "Medium - M",
+        "occasion": "sports day",
+        "gender": "MALE"
+      },
+      "product_index": 6,
+      "quality_score": 95.70346876230093
     },
-    "product_index": 2
-  },
-  {
-    "rating": "N/A",
-    "number_of_reviews": "N/A",
-    "price": "₹999",
-    "brand": "Generic",
-    "description": "Womens Wear Bandhej Printed Tussarr Silk Lehenga Choli",
-    "image_link": "https://m.media-amazon.com/images/I/41COg-Cc0cL._AC_UL320_.jpg",
-    "product_link": "https://www.amazon.in/Womens-Bandhej-Printed-Tussarr-Lehenga/dp/B0DRK5TBK7/ref=sr_1_3?dib=eyJ2IjoiMSJ9.dlpUme0QX68zISulIY45MJTxIPEbyhKlcFl8agdfSKOr9xgD9wjOWj85UZDUFh7Ie895o6JmnXagziz8AXvXG5bsZd2Q8UqLgwqdP6jr0EwCqGZKOxRO2l89ym8glVkZ4bbVHXK8l3RuAto5RCMmD45T2COMPlQ2nIet7rE-0Z2iSnk586GYIJS549CE3YrwfQRJSJSXaawHoivw5-e9YkN6YZxmNVHGhpchqlzEhj-_V0sDrYPqvwst_a2LpxyIyajMrSO-UbRe7vfaiC3w0LsU65TRW8LFaikNfRvMLrw.PdjUaH-aC6qENJR6Ts2j3dHbbHWhpNz6K5it3b99mxg&dib_tag=se&keywords=Lehenga+Choli+with+Harem+Pants+tailored+fit+S+crimson&nsdOptOutParam=true&qid=1753892033&sr=8-3",
-    "search_parameters": {
-      "product_hint": "Lehenga Choli with Harem Pants",
-      "color": "Crimson, Gold",
-      "fit": "Tailored Fit - S",
-      "occasion": "diwali",
-      "gender": ""
+    {
+      "rating": "4.4 out of 5 stars, rating details",
+      "number_of_reviews": "1,054",
+      "price": "₹427",
+      "brand": "Nike",
+      "description": "Nylon Mens Ankle Length Socks",
+      "image_link": "https://m.media-amazon.com/images/I/71fu7AyTOSL._AC_UL320_.jpg",
+      "product_link": "https://www.amazon.in/Nike-SX7677-010-Nylon-Evryday-Ankle/dp/B07LGNRM9C/ref=sr_1_4?dib=eyJ2IjoiMSJ9.1KmJf9fSjJyJuqGFn4AdqL1jJjsVLifO8mMNf5xgGR86WWBhMpybodIys-TN1LNJwr5xz4oMCMeb-LVUEeldiRVkZxJAXNl--rx5wkSjyP0NiKWOl0YwlEkZJ8lcoh4BVkwAeCmp3Fw5275_0xCjAVlAF7wl7qB7CPIWCcPndPq6TyJc-baJcdPcLEcL1TtvHtq4YINsmRAQw29nNZ-b-fdmA_PN9zysqUFUXy3Ir0ijtRSB9WJStL9fe0whRohnb9b0eTUc__0ScxsLSoVKDVUoe3eKKw0HeFvv5p1nvL4.mSw3_WzxVNBzt5g0bgKGSk2JyhnEGpIohGllo8CjJ5w&dib_tag=se&keywords=Nike+Running+Socks+men+medium+M+royal&qid=1753960559&sr=8-4",
+      "search_parameters": {
+        "product_hint": "Nike Running Socks",
+        "color": "Royal Blue, White",
+        "fit": "Medium - M",
+        "occasion": "sports day",
+        "gender": "MALE"
+      },
+      "product_index": 4,
+      "quality_score": 89.0
     },
-    "product_index": 3
-  },
-  {
-    "rating": "5.0 out of 5 stars, rating details",
-    "number_of_reviews": "9",
-    "price": "₹898",
-    "brand": "SORATH THE THREAD OF FESTIVAL",
-    "description": "SORATH Women's Trending Designeer Tussar Silk Lehenga Choli Print with Foil Work With Unstitched Blouse Patola Print Adorned with Foil Work For Navrati || Wedding (1219-red)",
-    "image_link": "https://m.media-amazon.com/images/I/51I2cNjBaZL._AC_UL320_.jpg",
-    "product_link": "https://www.amazon.in/SORATH-Trending-Designeer-Unstitched-1219-red/dp/B0F9FNSHX4/ref=sr_1_4?dib=eyJ2IjoiMSJ9.dlpUme0QX68zISulIY45MJTxIPEbyhKlcFl8agdfSKOr9xgD9wjOWj85UZDUFh7Ie895o6JmnXagziz8AXvXG5bsZd2Q8UqLgwqdP6jr0EwCqGZKOxRO2l89ym8glVkZ4bbVHXK8l3RuAto5RCMmD45T2COMPlQ2nIet7rE-0Z2iSnk586GYIJS549CE3YrwfQRJSJSXaawHoivw5-e9YkN6YZxmNVHGhpchqlzEhj-_V0sDrYPqvwst_a2LpxyIyajMrSO-UbRe7vfaiC3w0LsU65TRW8LFaikNfRvMLrw.PdjUaH-aC6qENJR6Ts2j3dHbbHWhpNz6K5it3b99mxg&dib_tag=se&keywords=Lehenga+Choli+with+Harem+Pants+tailored+fit+S+crimson&nsdOptOutParam=true&qid=1753892033&sr=8-4",
-    "search_parameters": {
-      "product_hint": "Lehenga Choli with Harem Pants",
-      "color": "Crimson, Gold",
-      "fit": "Tailored Fit - S",
-      "occasion": "diwali",
-      "gender": ""
+    {
+      "rating": "4.4 out of 5 stars, rating details",
+      "number_of_reviews": "270",
+      "price": "₹569",
+      "brand": "Nike",
+      "description": "Women's Cotton Modern Everyday Cushion Ankle Training Socks (3 Pair), & Ankle Socks",
+      "image_link": "https://m.media-amazon.com/images/I/71kZIpNEuoL._AC_UL320_.jpg",
+      "product_link": "https://www.amazon.in/Everyday-Cushioned-Ankle-Socks-3-pack/dp/B09B12QLSM/ref=sr_1_2?dib=eyJ2IjoiMSJ9.1KmJf9fSjJyJuqGFn4AdqL1jJjsVLifO8mMNf5xgGR86WWBhMpybodIys-TN1LNJwr5xz4oMCMeb-LVUEeldiRVkZxJAXNl--rx5wkSjyP0NiKWOl0YwlEkZJ8lcoh4BVkwAeCmp3Fw5275_0xCjAVlAF7wl7qB7CPIWCcPndPq6TyJc-baJcdPcLEcL1TtvHtq4YINsmRAQw29nNZ-b-fdmA_PN9zysqUFUXy3Ir0ijtRSB9WJStL9fe0whRohnb9b0eTUc__0ScxsLSoVKDVUoe3eKKw0HeFvv5p1nvL4.mSw3_WzxVNBzt5g0bgKGSk2JyhnEGpIohGllo8CjJ5w&dib_tag=se&keywords=Nike+Running+Socks+men+medium+M+royal&qid=1753960559&sr=8-2",
+      "search_parameters": {
+        "product_hint": "Nike Running Socks",
+        "color": "Royal Blue, White",
+        "fit": "Medium - M",
+        "occasion": "sports day",
+        "gender": "MALE"
+      },
+      "product_index": 2,
+      "quality_score": 88.31363764158988
+    }
+  ],
+  "scraped_products": [
+    {
+      "rating": "4.7 out of 5 stars, rating details",
+      "number_of_reviews": "5",
+      "price": "N/A",
+      "brand": "Nike",
+      "description": "Men's Solid Regular Fit T-Shirt",
+      "image_link": "https://m.media-amazon.com/images/I/81NGfSHeedL._AC_UL320_.jpg",
+      "product_link": "https://www.amazon.in/Nike-Regular-T-Shirt-DH0823-662_Mars-Stone/dp/B0F6CY3L2W/ref=sr_1_2?dib=eyJ2IjoiMSJ9.06bY5lUDIPMmGJ3fEm1atsKD7a9u1RSjrSG-r1KLaYg_SoOeoci53H1T1EN5ls4kXjxAWCKmqOjC2jk829FNJc0mYEQcQ4d3Uyj1GrabEebpjMQ6uadnEPY45z9u3U0spNsMV3_ZFsOu1WSOauecaSMbdmROtvLAPDs-oFmmdY9zVkS7zT8SeuDxE8mWn_PKbCi-847-qQfg1Ukn8fc-AOcucYl1m8EAX1Xk1FNQ6G6YpzgMZlvtOCZrYw0W8T1FvVC9gypUNh4ITpnb3OucjiTEqgJibDXy0_NQGKhEvZI.uDdeG6rzWr1ckjYd4gXoCWwOaBxDmztw2lIMljb_Itg&dib_tag=se&keywords=Nike+Dri-FIT+Men%27s+Cyclone+FinishLite+Top+men+regular+fit+XL+lime&nsdOptOutParam=true&qid=1753960559&sr=8-2",
+      "search_parameters": {
+        "product_hint": "Nike Dri-FIT Men's Cyclone FinishLite Top",
+        "color": "Lime Green, Black",
+        "fit": "Regular Fit - XL",
+        "occasion": "sports day",
+        "gender": "MALE"
+      },
+      "product_index": 2,
+      "quality_score": 63.98970004336019
     },
-    "product_index": 4
-  },
-  {
-    "rating": "4.0 out of 5 stars, rating details",
-    "number_of_reviews": "731",
-    "price": "₹978",
-    "brand": "PURVAJA",
-    "description": "Women's Jacquard Semi-Stitched Lehenga choli",
-    "image_link": "https://m.media-amazon.com/images/I/81dCX5PK8HL._AC_UL320_.jpg",
-    "product_link": "https://www.amazon.in/PURVAJA-Jacquard-Semi-Stitched-Lehenga-Arambh-Maroon_Maroon_Free/dp/B09PLDSKQ1/ref=sr_1_5?dib=eyJ2IjoiMSJ9.dlpUme0QX68zISulIY45MJTxIPEbyhKlcFl8agdfSKOr9xgD9wjOWj85UZDUFh7Ie895o6JmnXagziz8AXvXG5bsZd2Q8UqLgwqdP6jr0EwCqGZKOxRO2l89ym8glVkZ4bbVHXK8l3RuAto5RCMmD45T2COMPlQ2nIet7rE-0Z2iSnk586GYIJS549CE3YrwfQRJSJSXaawHoivw5-e9YkN6YZxmNVHGhpchqlzEhj-_V0sDrYPqvwst_a2LpxyIyajMrSO-UbRe7vfaiC3w0LsU65TRW8LFaikNfRvMLrw.PdjUaH-aC6qENJR6Ts2j3dHbbHWhpNz6K5it3b99mxg&dib_tag=se&keywords=Lehenga+Choli+with+Harem+Pants+tailored+fit+S+crimson&nsdOptOutParam=true&qid=1753892033&sr=8-5",
-    "search_parameters": {
-      "product_hint": "Lehenga Choli with Harem Pants",
-      "color": "Crimson, Gold",
-      "fit": "Tailored Fit - S",
-      "occasion": "diwali",
-      "gender": ""
+    {
+      "rating": "4.6 out of 5 stars, rating details",
+      "number_of_reviews": "3",
+      "price": "1,189",
+      "brand": "Nike",
+      "description": "Men's Cotton Regular Fit T-Shirt",
+      "image_link": "https://m.media-amazon.com/images/I/61Neo932OTL._AC_UL320_.jpg",
+      "product_link": "https://www.amazon.in/Nike-Regular-T-Shirt-DV9316-010_Black-Reflective/dp/B0CTH9G5L2/ref=sr_1_6?dib=eyJ2IjoiMSJ9.06bY5lUDIPMmGJ3fEm1atsKD7a9u1RSjrSG-r1KLaYg_SoOeoci53H1T1EN5ls4kXjxAWCKmqOjC2jk829FNJc0mYEQcQ4d3Uyj1GrabEebpjMQ6uadnEPY45z9u3U0spNsMV3_ZFsOu1WSOauecaSMbdmROtvLAPDs-oFmmdY9zVkS7zT8SeuDxE8mWn_PKbCi-847-qQfg1Ukn8fc-AOcucYl1m8EAX1Xk1FNQ6G6YpzgMZlvtOCZrYw0W8T1FvVC9gypUNh4ITpnb3OucjiTEqgJibDXy0_NQGKhEvZI.uDdeG6rzWr1ckjYd4gXoCWwOaBxDmztw2lIMljb_Itg&dib_tag=se&keywords=Nike+Dri-FIT+Men%27s+Cyclone+FinishLite+Top+men+regular+fit+XL+lime&nsdOptOutParam=true&qid=1753960559&sr=8-6",
+      "search_parameters": {
+        "product_hint": "Nike Dri-FIT Men's Cyclone FinishLite Top",
+        "color": "Lime Green, Black",
+        "fit": "Regular Fit - XL",
+        "occasion": "sports day",
+        "gender": "MALE"
+      },
+      "product_index": 6,
+      "quality_score": 60.771212547196626
     },
-    "product_index": 5
-  },
-  {
-    "rating": "5.0 out of 5 stars, rating details",
-    "number_of_reviews": "2",
-    "price": "1,299",
-    "brand": "PURVAJA",
-    "description": "Women's Polyester Semi-Stitched Lehenga Choli",
-    "image_link": "https://m.media-amazon.com/images/I/71lzTezE-YL._AC_UL320_.jpg",
-    "product_link": "https://www.amazon.in/PURVAJA-Womens-Semi-Stitched-Lehenga-Emmy-Wine_Wine_Free/dp/B0DGDBHNVL/ref=sr_1_6?dib=eyJ2IjoiMSJ9.dlpUme0QX68zISulIY45MJTxIPEbyhKlcFl8agdfSKOr9xgD9wjOWj85UZDUFh7Ie895o6JmnXagziz8AXvXG5bsZd2Q8UqLgwqdP6jr0EwCqGZKOxRO2l89ym8glVkZ4bbVHXK8l3RuAto5RCMmD45T2COMPlQ2nIet7rE-0Z2iSnk586GYIJS549CE3YrwfQRJSJSXaawHoivw5-e9YkN6YZxmNVHGhpchqlzEhj-_V0sDrYPqvwst_a2LpxyIyajMrSO-UbRe7vfaiC3w0LsU65TRW8LFaikNfRvMLrw.PdjUaH-aC6qENJR6Ts2j3dHbbHWhpNz6K5it3b99mxg&dib_tag=se&keywords=Lehenga+Choli+with+Harem+Pants+tailored+fit+S+crimson&nsdOptOutParam=true&qid=1753892033&sr=8-6",
-    "search_parameters": {
-      "product_hint": "Lehenga Choli with Harem Pants",
-      "color": "Crimson, Gold",
-      "fit": "Tailored Fit - S",
-      "occasion": "diwali",
-      "gender": ""
+    {
+      "rating": "5.0 out of 5 stars, rating details",
+      "number_of_reviews": "1",
+      "price": "2,459",
+      "brand": "Nike",
+      "description": "Men's Regular Fit T-Shirt",
+      "image_link": "https://m.media-amazon.com/images/I/71XHdba8pjL._AC_UL320_.jpg",
+      "product_link": "https://www.amazon.in/Nike-Regular-T-Shirt-FZ7449-379-Mineral/dp/B0F84B9JM6/ref=sr_1_5?dib=eyJ2IjoiMSJ9.06bY5lUDIPMmGJ3fEm1atsKD7a9u1RSjrSG-r1KLaYg_SoOeoci53H1T1EN5ls4kXjxAWCKmqOjC2jk829FNJc0mYEQcQ4d3Uyj1GrabEebpjMQ6uadnEPY45z9u3U0spNsMV3_ZFsOu1WSOauecaSMbdmROtvLAPDs-oFmmdY9zVkS7zT8SeuDxE8mWn_PKbCi-847-qQfg1Ukn8fc-AOcucYl1m8EAX1Xk1FNQ6G6YpzgMZlvtOCZrYw0W8T1FvVC9gypUNh4ITpnb3OucjiTEqgJibDXy0_NQGKhEvZI.uDdeG6rzWr1ckjYd4gXoCWwOaBxDmztw2lIMljb_Itg&dib_tag=se&keywords=Nike+Dri-FIT+Men%27s+Cyclone+FinishLite+Top+men+regular+fit+XL+lime&nsdOptOutParam=true&qid=1753960559&sr=8-5",
+      "search_parameters": {
+        "product_hint": "Nike Dri-FIT Men's Cyclone FinishLite Top",
+        "color": "Lime Green, Black",
+        "fit": "Regular Fit - XL",
+        "occasion": "sports day",
+        "gender": "MALE"
+      },
+      "product_index": 5,
+      "quality_score": 60.0
     },
-    "product_index": 6
-  },
-  {
-    "rating": "2.6 out of 5 stars, rating details",
-    "number_of_reviews": "5",
-    "price": "₹699",
-    "brand": "Febstica",
-    "description": "Women's Net Embroidered Work Semi-Stitched Lehenga Choli With Dupatta Ready to Bridal Wedding Lehenga Choli for Womens",
-    "image_link": "https://m.media-amazon.com/images/I/41rBlz7hCLL._AC_UL320_.jpg",
-    "product_link": "https://www.amazon.in/Febstica-Embroidered-Semi-Stitched-Lehenga-Dupatta/dp/B0DSPQCPGX/ref=sr_1_7?dib=eyJ2IjoiMSJ9.dlpUme0QX68zISulIY45MJTxIPEbyhKlcFl8agdfSKOr9xgD9wjOWj85UZDUFh7Ie895o6JmnXagziz8AXvXG5bsZd2Q8UqLgwqdP6jr0EwCqGZKOxRO2l89ym8glVkZ4bbVHXK8l3RuAto5RCMmD45T2COMPlQ2nIet7rE-0Z2iSnk586GYIJS549CE3YrwfQRJSJSXaawHoivw5-e9YkN6YZxmNVHGhpchqlzEhj-_V0sDrYPqvwst_a2LpxyIyajMrSO-UbRe7vfaiC3w0LsU65TRW8LFaikNfRvMLrw.PdjUaH-aC6qENJR6Ts2j3dHbbHWhpNz6K5it3b99mxg&dib_tag=se&keywords=Lehenga+Choli+with+Harem+Pants+tailored+fit+S+crimson&nsdOptOutParam=true&qid=1753892033&sr=8-7",
-    "search_parameters": {
-      "product_hint": "Lehenga Choli with Harem Pants",
-      "color": "Crimson, Gold",
-      "fit": "Tailored Fit - S",
-      "occasion": "diwali",
-      "gender": ""
+    {
+      "rating": "N/A",
+      "number_of_reviews": "N/A",
+      "price": "₹959",
+      "brand": "Nike",
+      "description": "Men's Athletic Fit T-Shirt",
+      "image_link": "https://m.media-amazon.com/images/I/71tNs7DIzlL._AC_UL320_.jpg",
+      "product_link": "https://www.amazon.in/NIKE-Mens-Athletic-T-Shirt-DZ4587-084_Smoke/dp/B0DSG736JB/ref=sr_1_3?dib=eyJ2IjoiMSJ9.06bY5lUDIPMmGJ3fEm1atsKD7a9u1RSjrSG-r1KLaYg_SoOeoci53H1T1EN5ls4kXjxAWCKmqOjC2jk829FNJc0mYEQcQ4d3Uyj1GrabEebpjMQ6uadnEPY45z9u3U0spNsMV3_ZFsOu1WSOauecaSMbdmROtvLAPDs-oFmmdY9zVkS7zT8SeuDxE8mWn_PKbCi-847-qQfg1Ukn8fc-AOcucYl1m8EAX1Xk1FNQ6G6YpzgMZlvtOCZrYw0W8T1FvVC9gypUNh4ITpnb3OucjiTEqgJibDXy0_NQGKhEvZI.uDdeG6rzWr1ckjYd4gXoCWwOaBxDmztw2lIMljb_Itg&dib_tag=se&keywords=Nike+Dri-FIT+Men%27s+Cyclone+FinishLite+Top+men+regular+fit+XL+lime&nsdOptOutParam=true&qid=1753960559&sr=8-3",
+      "search_parameters": {
+        "product_hint": "Nike Dri-FIT Men's Cyclone FinishLite Top",
+        "color": "Lime Green, Black",
+        "fit": "Regular Fit - XL",
+        "occasion": "sports day",
+        "gender": "MALE"
+      },
+      "product_index": 3,
+      "quality_score": 20
     },
-    "product_index": 7
-  },
-  {
-    "rating": "3.9 out of 5 stars, rating details",
-    "number_of_reviews": "30",
-    "price": "1,484",
-    "brand": "Juniper",
-    "description": "Women's Georgette Printed Flared Dress with Hair-Band",
-    "image_link": "https://m.media-amazon.com/images/I/71v+nwgn-aL._AC_UL320_.jpg",
-    "product_link": "https://www.amazon.in/Juniper-Women-Flared-Dress-9966HBIVORY-L_Ivory_L/dp/B08TRBY7R4/ref=sr_1_1?dib=eyJ2IjoiMSJ9.ylwhlpwhyG4KvjuCjm-SzL660Apzd3uiaN2SY23-C0eq4yojq3LE-vfb2qcl0jeCDjZujnlyQvjwEyjV8sewuvu1zPml_ZYNM5RGxoPu9mJJAJbwda4wZoRoA5cmVDSzCa6L5-EH23JOT3sN5C2fIaRHR9Mgxm-uZRq2mNaOV8cajTXr1rtd4Mqli01yJ4cZtKzcTg8a8uTlNfHTXPr3RmYBREeIhif2nGMIdLA0fXFOq2coVRCnaxaQZGmpconxepLTQCe66vq1Sx-EYeIoOlmZ0v0NPqsjf-Cah8PybR8.DqTaK-ennpSA8z-IVkZDo1p4_32PN2ijwG0FNmxQQjw&dib_tag=se&keywords=FlaredMaxi+Dress+comfort+fit+L+ivory&qid=1753892051&sr=8-1",
-    "search_parameters": {
-      "product_hint": "FlaredMaxi Dress",
-      "color": "Ivory, Maroon",
-      "fit": "Comfort Fit - L",
-      "occasion": "diwali",
-      "gender": ""
+    {
+      "rating": "4.0 out of 5 stars, rating details",
+      "number_of_reviews": "536",
+      "price": "₹529",
+      "brand": "adidas",
+      "description": "Men's 100% Cotton Fitted T-Shirt",
+      "image_link": "https://m.media-amazon.com/images/I/61a4IFMo2gL._AC_UL320_.jpg",
+      "product_link": "https://www.amazon.in/sspa/click?ie=UTF8&spc=MTo3ODAxOTc4NjEzNzg3MDAwOjE3NTM5NjA1NTk6c3BfYXRmOjMwMDQ1ODU5NTk5OTUzMjo6MDo6&url=%2Fadidas-ECQ43-Adidas-Shorts-IC9436_Legink%2Fdp%2FB0BQWXNHZ7%2Fref%3Dsr_1_1_sspa%3Fdib%3DeyJ2IjoiMSJ9.WE1T3S6va55nnT4OQYmFNnmT6n5AH6UvPhhI3-t8K9uKm_jHAZ3fHcrdH2xruQqj7GoES82QQHArWDED747eQWPMEycRkydkc9DEq49lunQLkr6UttuT-NSOk3tgR_6FbZwwjAYdahHCMObm9BSV63pRqq64LrvLX3n3nlwknN01AfYqCBhHqC9qq3mcDFub6rWJVnkCOHkTFa_tBVMG_qrBoTFS5thklComIN3GVwE33SR5gXKvtIITSQeIbq1jSgJH1-uu49kdNvj-66sysddVvMSYOmrYY2NvM7gS7NE.b3kDipTuKlw858rKnXLHIMHKWM4hI5z4ed8ly2F5y9g%26dib_tag%3Dse%26keywords%3DAdidas%2BRunning%2BShorts%2Bmen%2Bloose%2BL%2Bnavy%26nsdOptOutParam%3Dtrue%26qid%3D1753960559%26sr%3D8-1-spons%26sp_csd%3Dd2lkZ2V0TmFtZT1zcF9hdGY%26psc%3D1&sp_cr=DUB",
+      "search_parameters": {
+        "product_hint": "Adidas Running Shorts",
+        "color": "Navy Blue, Black",
+        "fit": "Loose - L",
+        "occasion": "sports day",
+        "gender": "MALE"
+      },
+      "product_index": 1,
+      "quality_score": 87.2916478969277
     },
-    "product_index": 1
-  },
-  {
-    "rating": "3.7 out of 5 stars, rating details",
-    "number_of_reviews": "404",
-    "price": "₹729",
-    "brand": "Preneum",
-    "description": "Women's Georgette Fit and Flare Maxi Dress",
-    "image_link": "https://m.media-amazon.com/images/I/61SsZ7E-lFL._AC_UL320_.jpg",
-    "product_link": "https://www.amazon.in/Preneum-Georgette-Regular-Festival-Occasion/dp/B0B9MZKP1F/ref=sr_1_2?dib=eyJ2IjoiMSJ9.ylwhlpwhyG4KvjuCjm-SzL660Apzd3uiaN2SY23-C0eq4yojq3LE-vfb2qcl0jeCDjZujnlyQvjwEyjV8sewuvu1zPml_ZYNM5RGxoPu9mJJAJbwda4wZoRoA5cmVDSzCa6L5-EH23JOT3sN5C2fIaRHR9Mgxm-uZRq2mNaOV8cajTXr1rtd4Mqli01yJ4cZtKzcTg8a8uTlNfHTXPr3RmYBREeIhif2nGMIdLA0fXFOq2coVRCnaxaQZGmpconxepLTQCe66vq1Sx-EYeIoOlmZ0v0NPqsjf-Cah8PybR8.DqTaK-ennpSA8z-IVkZDo1p4_32PN2ijwG0FNmxQQjw&dib_tag=se&keywords=FlaredMaxi+Dress+comfort+fit+L+ivory&qid=1753892051&sr=8-2",
-    "search_parameters": {
-      "product_hint": "FlaredMaxi Dress",
-      "color": "Ivory, Maroon",
-      "fit": "Comfort Fit - L",
-      "occasion": "diwali",
-      "gender": ""
+    {
+      "rating": "3.9 out of 5 stars, rating details",
+      "number_of_reviews": "448",
+      "price": "₹719",
+      "brand": "adidas",
+      "description": "Men's Board Shorts",
+      "image_link": "https://m.media-amazon.com/images/I/51MYJTO4+vL._AC_UL320_.jpg",
+      "product_link": "https://www.amazon.in/Adidas-Cotton-Shorts-FL5727_L_Collegiate-Navy_Large/dp/B07YHZXSRG/ref=sr_1_6?dib=eyJ2IjoiMSJ9.WE1T3S6va55nnT4OQYmFNnmT6n5AH6UvPhhI3-t8K9uKm_jHAZ3fHcrdH2xruQqj7GoES82QQHArWDED747eQWPMEycRkydkc9DEq49lunQLkr6UttuT-NSOk3tgR_6FbZwwjAYdahHCMObm9BSV63pRqq64LrvLX3n3nlwknN01AfYqCBhHqC9qq3mcDFub6rWJVnkCOHkTFa_tBVMG_qrBoTFS5thklComIN3GVwE33SR5gXKvtIITSQeIbq1jSgJH1-uu49kdNvj-66sysddVvMSYOmrYY2NvM7gS7NE.b3kDipTuKlw858rKnXLHIMHKWM4hI5z4ed8ly2F5y9g&dib_tag=se&keywords=Adidas+Running+Shorts+men+loose+L+navy&nsdOptOutParam=true&qid=1753960559&sr=8-6",
+      "search_parameters": {
+        "product_hint": "Adidas Running Shorts",
+        "color": "Navy Blue, Black",
+        "fit": "Loose - L",
+        "occasion": "sports day",
+        "gender": "MALE"
+      },
+      "product_index": 6,
+      "quality_score": 85.51278013998144
     },
-    "product_index": 2
-  },
-  {
-    "rating": "N/A",
-    "number_of_reviews": "N/A",
-    "price": "₹699",
-    "brand": "Generic",
-    "description": "KESHAR KAALVI Women Cotton Long Maxi Dress",
-    "image_link": "https://m.media-amazon.com/images/I/71XAiNYl0sL._AC_UL320_.jpg",
-    "product_link": "https://www.amazon.in/Womens-Flare-Cotton-Dress-Regular/dp/B0F7HL277K/ref=sr_1_3?dib=eyJ2IjoiMSJ9.ylwhlpwhyG4KvjuCjm-SzL660Apzd3uiaN2SY23-C0eq4yojq3LE-vfb2qcl0jeCDjZujnlyQvjwEyjV8sewuvu1zPml_ZYNM5RGxoPu9mJJAJbwda4wZoRoA5cmVDSzCa6L5-EH23JOT3sN5C2fIaRHR9Mgxm-uZRq2mNaOV8cajTXr1rtd4Mqli01yJ4cZtKzcTg8a8uTlNfHTXPr3RmYBREeIhif2nGMIdLA0fXFOq2coVRCnaxaQZGmpconxepLTQCe66vq1Sx-EYeIoOlmZ0v0NPqsjf-Cah8PybR8.DqTaK-ennpSA8z-IVkZDo1p4_32PN2ijwG0FNmxQQjw&dib_tag=se&keywords=FlaredMaxi+Dress+comfort+fit+L+ivory&qid=1753892051&sr=8-3",
-    "search_parameters": {
-      "product_hint": "FlaredMaxi Dress",
-      "color": "Ivory, Maroon",
-      "fit": "Comfort Fit - L",
-      "occasion": "diwali",
-      "gender": ""
+    {
+      "rating": "3.7 out of 5 stars, rating details",
+      "number_of_reviews": "6,292",
+      "price": "₹349",
+      "brand": "CBlue",
+      "description": "Men's Outdoor Quick Dry Lightweight Sports Shorts with 2 Zipper Pockets, Breathable Hiking Running Gym Workout Athletic Shorts",
+      "image_link": "https://m.media-amazon.com/images/I/71ai3r97THL._AC_UL320_.jpg",
+      "product_link": "https://www.amazon.in/CBlue-Outdoor-Lightweight-Sports-Pockets/dp/B08SW9RM3J/ref=sr_1_7?dib=eyJ2IjoiMSJ9.WE1T3S6va55nnT4OQYmFNnmT6n5AH6UvPhhI3-t8K9uKm_jHAZ3fHcrdH2xruQqj7GoES82QQHArWDED747eQWPMEycRkydkc9DEq49lunQLkr6UttuT-NSOk3tgR_6FbZwwjAYdahHCMObm9BSV63pRqq64LrvLX3n3nlwknN01AfYqCBhHqC9qq3mcDFub6rWJVnkCOHkTFa_tBVMG_qrBoTFS5thklComIN3GVwE33SR5gXKvtIITSQeIbq1jSgJH1-uu49kdNvj-66sysddVvMSYOmrYY2NvM7gS7NE.b3kDipTuKlw858rKnXLHIMHKWM4hI5z4ed8ly2F5y9g&dib_tag=se&keywords=Adidas+Running+Shorts+men+loose+L+navy&nsdOptOutParam=true&qid=1753960559&sr=8-7",
+      "search_parameters": {
+        "product_hint": "Adidas Running Shorts",
+        "color": "Navy Blue, Black",
+        "fit": "Loose - L",
+        "occasion": "sports day",
+        "gender": "MALE"
+      },
+      "product_index": 7,
+      "quality_score": 72.0
     },
-    "product_index": 3
-  },
-  {
-    "rating": "N/A",
-    "number_of_reviews": "N/A",
-    "price": "₹699",
-    "brand": "Generic",
-    "description": "Women's Heart Embroidered Cotton Flared Maxi Dress",
-    "image_link": "https://m.media-amazon.com/images/I/41dShcQDrEL._AC_UL320_.jpg",
-    "product_link": "https://www.amazon.in/Womens-Heart-Embroidered-Cotton-Flared/dp/B0FHCMPV2Y/ref=sr_1_4?dib=eyJ2IjoiMSJ9.ylwhlpwhyG4KvjuCjm-SzL660Apzd3uiaN2SY23-C0eq4yojq3LE-vfb2qcl0jeCDjZujnlyQvjwEyjV8sewuvu1zPml_ZYNM5RGxoPu9mJJAJbwda4wZoRoA5cmVDSzCa6L5-EH23JOT3sN5C2fIaRHR9Mgxm-uZRq2mNaOV8cajTXr1rtd4Mqli01yJ4cZtKzcTg8a8uTlNfHTXPr3RmYBREeIhif2nGMIdLA0fXFOq2coVRCnaxaQZGmpconxepLTQCe66vq1Sx-EYeIoOlmZ0v0NPqsjf-Cah8PybR8.DqTaK-ennpSA8z-IVkZDo1p4_32PN2ijwG0FNmxQQjw&dib_tag=se&keywords=FlaredMaxi+Dress+comfort+fit+L+ivory&qid=1753892051&sr=8-4",
-    "search_parameters": {
-      "product_hint": "FlaredMaxi Dress",
-      "color": "Ivory, Maroon",
-      "fit": "Comfort Fit - L",
-      "occasion": "diwali",
-      "gender": ""
+    {
+      "rating": "4.6 out of 5 stars, rating details",
+      "number_of_reviews": "934",
+      "price": "₹595",
+      "brand": "Nike",
+      "description": "Men's Cotton Classic Athletic Socks",
+      "image_link": "https://m.media-amazon.com/images/I/61XDT5LEi-L._AC_UL320_.jpg",
+      "product_link": "https://www.amazon.in/Nike-Classic-Football-Fit-Dry-Medium/dp/B009D4B1SO/ref=sr_1_6?dib=eyJ2IjoiMSJ9.1KmJf9fSjJyJuqGFn4AdqL1jJjsVLifO8mMNf5xgGR86WWBhMpybodIys-TN1LNJwr5xz4oMCMeb-LVUEeldiRVkZxJAXNl--rx5wkSjyP0NiKWOl0YwlEkZJ8lcoh4BVkwAeCmp3Fw5275_0xCjAVlAF7wl7qB7CPIWCcPndPq6TyJc-baJcdPcLEcL1TtvHtq4YINsmRAQw29nNZ-b-fdmA_PN9zysqUFUXy3Ir0ijtRSB9WJStL9fe0whRohnb9b0eTUc__0ScxsLSoVKDVUoe3eKKw0HeFvv5p1nvL4.mSw3_WzxVNBzt5g0bgKGSk2JyhnEGpIohGllo8CjJ5w&dib_tag=se&keywords=Nike+Running+Socks+men+medium+M+royal&qid=1753960559&sr=8-6",
+      "search_parameters": {
+        "product_hint": "Nike Running Socks",
+        "color": "Royal Blue, White",
+        "fit": "Medium - M",
+        "occasion": "sports day",
+        "gender": "MALE"
+      },
+      "product_index": 6,
+      "quality_score": 95.70346876230093
     },
-    "product_index": 4
-  },
-  {
-    "rating": "4.1 out of 5 stars, rating details",
-    "number_of_reviews": "4",
-    "price": "₹869",
-    "brand": "Freehand",
-    "description": "by The Indian Garage Co Women Fit and Flared Casual Solid Long Dress",
-    "image_link": "https://m.media-amazon.com/images/I/71RMeF9gQML._AC_UL320_.jpg",
-    "product_link": "https://www.amazon.in/Freehand-Womens-Polyester-Casual-0323-FHDRS-01-D_White/dp/B0CR1NQR43/ref=sr_1_5?dib=eyJ2IjoiMSJ9.ylwhlpwhyG4KvjuCjm-SzL660Apzd3uiaN2SY23-C0eq4yojq3LE-vfb2qcl0jeCDjZujnlyQvjwEyjV8sewuvu1zPml_ZYNM5RGxoPu9mJJAJbwda4wZoRoA5cmVDSzCa6L5-EH23JOT3sN5C2fIaRHR9Mgxm-uZRq2mNaOV8cajTXr1rtd4Mqli01yJ4cZtKzcTg8a8uTlNfHTXPr3RmYBREeIhif2nGMIdLA0fXFOq2coVRCnaxaQZGmpconxepLTQCe66vq1Sx-EYeIoOlmZ0v0NPqsjf-Cah8PybR8.DqTaK-ennpSA8z-IVkZDo1p4_32PN2ijwG0FNmxQQjw&dib_tag=se&keywords=FlaredMaxi+Dress+comfort+fit+L+ivory&qid=1753892051&sr=8-5",
-    "search_parameters": {
-      "product_hint": "FlaredMaxi Dress",
-      "color": "Ivory, Maroon",
-      "fit": "Comfort Fit - L",
-      "occasion": "diwali",
-      "gender": ""
+    {
+      "rating": "4.4 out of 5 stars, rating details",
+      "number_of_reviews": "1,054",
+      "price": "₹427",
+      "brand": "Nike",
+      "description": "Nylon Mens Ankle Length Socks",
+      "image_link": "https://m.media-amazon.com/images/I/71fu7AyTOSL._AC_UL320_.jpg",
+      "product_link": "https://www.amazon.in/Nike-SX7677-010-Nylon-Evryday-Ankle/dp/B07LGNRM9C/ref=sr_1_4?dib=eyJ2IjoiMSJ9.1KmJf9fSjJyJuqGFn4AdqL1jJjsVLifO8mMNf5xgGR86WWBhMpybodIys-TN1LNJwr5xz4oMCMeb-LVUEeldiRVkZxJAXNl--rx5wkSjyP0NiKWOl0YwlEkZJ8lcoh4BVkwAeCmp3Fw5275_0xCjAVlAF7wl7qB7CPIWCcPndPq6TyJc-baJcdPcLEcL1TtvHtq4YINsmRAQw29nNZ-b-fdmA_PN9zysqUFUXy3Ir0ijtRSB9WJStL9fe0whRohnb9b0eTUc__0ScxsLSoVKDVUoe3eKKw0HeFvv5p1nvL4.mSw3_WzxVNBzt5g0bgKGSk2JyhnEGpIohGllo8CjJ5w&dib_tag=se&keywords=Nike+Running+Socks+men+medium+M+royal&qid=1753960559&sr=8-4",
+      "search_parameters": {
+        "product_hint": "Nike Running Socks",
+        "color": "Royal Blue, White",
+        "fit": "Medium - M",
+        "occasion": "sports day",
+        "gender": "MALE"
+      },
+      "product_index": 4,
+      "quality_score": 89.0
     },
-    "product_index": 5
-  },
-  {
-    "rating": "N/A",
-    "number_of_reviews": "N/A",
-    "price": "₹420",
-    "brand": "Generic",
-    "description": "Women's Poly Rayon Woven Floral Printed Flared Maxi Dress with Long Sleeve",
-    "image_link": "https://m.media-amazon.com/images/I/41jlq5SyLDL._AC_UL320_.jpg",
-    "product_link": "https://www.amazon.in/Womens-Floral-Printed-Flared-Regular/dp/B0F9TLVDPP/ref=sr_1_6?dib=eyJ2IjoiMSJ9.ylwhlpwhyG4KvjuCjm-SzL660Apzd3uiaN2SY23-C0eq4yojq3LE-vfb2qcl0jeCDjZujnlyQvjwEyjV8sewuvu1zPml_ZYNM5RGxoPu9mJJAJbwda4wZoRoA5cmVDSzCa6L5-EH23JOT3sN5C2fIaRHR9Mgxm-uZRq2mNaOV8cajTXr1rtd4Mqli01yJ4cZtKzcTg8a8uTlNfHTXPr3RmYBREeIhif2nGMIdLA0fXFOq2coVRCnaxaQZGmpconxepLTQCe66vq1Sx-EYeIoOlmZ0v0NPqsjf-Cah8PybR8.DqTaK-ennpSA8z-IVkZDo1p4_32PN2ijwG0FNmxQQjw&dib_tag=se&keywords=FlaredMaxi+Dress+comfort+fit+L+ivory&qid=1753892051&sr=8-6",
-    "search_parameters": {
-      "product_hint": "FlaredMaxi Dress",
-      "color": "Ivory, Maroon",
-      "fit": "Comfort Fit - L",
-      "occasion": "diwali",
-      "gender": ""
-    },
-    "product_index": 6
-  },
-  {
-    "rating": "5.0 out of 5 stars, rating details",
-    "number_of_reviews": "1",
-    "price": "1,259",
-    "brand": "Juniper",
-    "description": "Women`s Ivory Rayon Embroidered & Printed Flared Dress",
-    "image_link": "https://m.media-amazon.com/images/I/71xZNW1IgVL._AC_UL320_.jpg",
-    "product_link": "https://www.amazon.in/Juniper-Women%60s-Embroidered-Printed-Flared/dp/B09XF7YNLQ/ref=sr_1_7?dib=eyJ2IjoiMSJ9.ylwhlpwhyG4KvjuCjm-SzL660Apzd3uiaN2SY23-C0eq4yojq3LE-vfb2qcl0jeCDjZujnlyQvjwEyjV8sewuvu1zPml_ZYNM5RGxoPu9mJJAJbwda4wZoRoA5cmVDSzCa6L5-EH23JOT3sN5C2fIaRHR9Mgxm-uZRq2mNaOV8cajTXr1rtd4Mqli01yJ4cZtKzcTg8a8uTlNfHTXPr3RmYBREeIhif2nGMIdLA0fXFOq2coVRCnaxaQZGmpconxepLTQCe66vq1Sx-EYeIoOlmZ0v0NPqsjf-Cah8PybR8.DqTaK-ennpSA8z-IVkZDo1p4_32PN2ijwG0FNmxQQjw&dib_tag=se&keywords=FlaredMaxi+Dress+comfort+fit+L+ivory&qid=1753892051&sr=8-7",
-    "search_parameters": {
-      "product_hint": "FlaredMaxi Dress",
-      "color": "Ivory, Maroon",
-      "fit": "Comfort Fit - L",
-      "occasion": "diwali",
-      "gender": ""
-    },
-    "product_index": 7
-  }
-]
+    {
+      "rating": "4.4 out of 5 stars, rating details",
+      "number_of_reviews": "270",
+      "price": "₹569",
+      "brand": "Nike",
+      "description": "Women's Cotton Modern Everyday Cushion Ankle Training Socks (3 Pair), & Ankle Socks",
+      "image_link": "https://m.media-amazon.com/images/I/71kZIpNEuoL._AC_UL320_.jpg",
+      "product_link": "https://www.amazon.in/Everyday-Cushioned-Ankle-Socks-3-pack/dp/B09B12QLSM/ref=sr_1_2?dib=eyJ2IjoiMSJ9.1KmJf9fSjJyJuqGFn4AdqL1jJjsVLifO8mMNf5xgGR86WWBhMpybodIys-TN1LNJwr5xz4oMCMeb-LVUEeldiRVkZxJAXNl--rx5wkSjyP0NiKWOl0YwlEkZJ8lcoh4BVkwAeCmp3Fw5275_0xCjAVlAF7wl7qB7CPIWCcPndPq6TyJc-baJcdPcLEcL1TtvHtq4YINsmRAQw29nNZ-b-fdmA_PN9zysqUFUXy3Ir0ijtRSB9WJStL9fe0whRohnb9b0eTUc__0ScxsLSoVKDVUoe3eKKw0HeFvv5p1nvL4.mSw3_WzxVNBzt5g0bgKGSk2JyhnEGpIohGllo8CjJ5w&dib_tag=se&keywords=Nike+Running+Socks+men+medium+M+royal&qid=1753960559&sr=8-2",
+      "search_parameters": {
+        "product_hint": "Nike Running Socks",
+        "color": "Royal Blue, White",
+        "fit": "Medium - M",
+        "occasion": "sports day",
+        "gender": "MALE"
+      },
+      "product_index": 2,
+      "quality_score": 88.31363764158988
+    }
+  ]
+}

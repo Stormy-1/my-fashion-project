@@ -115,6 +115,79 @@ def process_image_for_recommendations(image_path, height, weight, occasion):
         print(f"Sending to LLM: Age={age}, Gender={gender}, Height={height}, Weight={weight}, BMI={bmi:.2f}, Occasion={occasion}")
         print(f"Facial features: {facial_features_str}")
         
+        # Calculate simple size recommendation for debugging
+        if gender.lower() in ['male', 'men']:
+            if height < 165:
+                base_size = "S"
+            elif height < 175:
+                base_size = "M"
+            elif height < 185:
+                base_size = "L"
+            else:
+                base_size = "XL"
+            
+            if bmi < 22:
+                fit = "Slim Fit"
+            elif bmi < 28:
+                fit = "Regular Fit"
+            else:
+                fit = "Relaxed Fit"
+                
+            if bmi > 30:
+                if base_size == "S":
+                    size = "L"
+                elif base_size == "M":
+                    size = "XL"
+                else:
+                    size = "XXL"
+            elif bmi > 25:
+                if base_size == "S":
+                    size = "M"
+                elif base_size == "M":
+                    size = "L"
+                else:
+                    size = "XL"
+            else:
+                size = base_size
+        else:
+            if height < 155:
+                base_size = "XS"
+            elif height < 165:
+                base_size = "S"
+            elif height < 175:
+                base_size = "M"
+            else:
+                base_size = "L"
+            
+            if bmi < 21:
+                fit = "Slim Fit"
+            elif bmi < 26:
+                fit = "Regular Fit"
+            else:
+                fit = "Relaxed Fit"
+                
+            if bmi > 29:
+                if base_size == "XS":
+                    size = "M"
+                elif base_size == "S":
+                    size = "L"
+                else:
+                    size = "XL"
+            elif bmi > 24:
+                if base_size == "XS":
+                    size = "S"
+                elif base_size == "S":
+                    size = "M"
+                else:
+                    size = "L"
+            else:
+                size = base_size
+        
+        size_rec = f"{fit} - {size}"
+        print(f"\n=== SIZE ANALYSIS ===")
+        print(f"Recommended Size: {size_rec}")
+        print(f"Based on: Height {height}cm, BMI {bmi:.1f}, Age {age}, Gender {gender}")
+        
         llm_response_text = run_fashion_llm(
             age=age,
             gender=gender,
@@ -146,27 +219,56 @@ def process_image_for_recommendations(image_path, height, weight, occasion):
                 save_recommendations_to_json(parsed_recommendations, 'llm_recommendations.json')
                 print("\nRecommendations saved to llm_recommendations.json.")
                 
-                # Call web_scrapping.py
+                # Call web_scrapping.py with the correct occasion
                 print("\n=== STARTING WEB SCRAPING ===")
                 try:
-                    result = subprocess.run(["python", "web_scrapping.py"], capture_output=True, text=True)
-                    print("Web scraping stdout:", result.stdout)
-                    if result.stderr:
-                        print("Web scraping stderr:", result.stderr)
+                    # Import and call the function directly instead of subprocess for better control
+                    from web_scrapping import scrape_from_llm_recommendations
+                    scrape_from_llm_recommendations('llm_recommendations.json', 'multi_scraped_output.json', max_products=7, occasion=occasion)
+                    print("Web scraping completed successfully")
                     
                     # Check if scraping output exists
                     if os.path.exists('multi_scraped_output.json'):
                         with open('multi_scraped_output.json', 'r') as f:
-                            scraped_data = json.load(f)
+                            scraped_file_data = json.load(f)
+                        
+                        # Handle both old format (flat array) and new format (with distribution_info)
+                        if isinstance(scraped_file_data, list):
+                            # Old format: flat array
+                            scraped_data = scraped_file_data
+                        elif isinstance(scraped_file_data, dict):
+                            # New format: check for scraped_products or products key
+                            if 'scraped_products' in scraped_file_data:
+                                scraped_data = scraped_file_data['scraped_products']
+                            elif 'products' in scraped_file_data:
+                                scraped_data = scraped_file_data['products']
+                            else:
+                                print("[WARNING] Unknown scraped data format")
+                                scraped_data = []
+                            
+                            # Print distribution info if available
+                            if 'distribution_info' in scraped_file_data:
+                                dist_info = scraped_file_data['distribution_info']
+                                print(f"\n=== DISTRIBUTION INFO ===")
+                                print(f"Total products: {dist_info.get('total_products', 'N/A')}")
+                                print(f"Distribution: {dist_info.get('distribution', 'N/A')}")
+                                print(f"Scraping time: {dist_info.get('scraping_time_seconds', 'N/A')}s")
+                        else:
+                            print("[ERROR] Invalid scraped data format")
+                            scraped_data = []
+                        
                         print(f"\n=== SCRAPING RESULTS ===")
                         print(f"Found {len(scraped_data)} scraped products")
                         
-                        for i, product in enumerate(scraped_data[:3]):  # Show first 3 products
+                        # Show all products (up to 8 for the new format)
+                        for i, product in enumerate(scraped_data[:8]):
                             print(f"\n--- Scraped Product {i+1} ---")
                             print(f"Brand: {product.get('brand', 'N/A')}")
                             print(f"Description: {product.get('description', 'N/A')}")
                             print(f"Price: {product.get('price', 'N/A')}")
                             print(f"Rating: {product.get('rating', 'N/A')}")
+                            print(f"Quality Score: {product.get('quality_score', 'N/A')}")
+                            print(f"Image: {product.get('image_link', 'N/A')[:50]}...")
                             print(f"Link: {product.get('product_link', 'N/A')[:80]}...")
                         
                         return scraped_data

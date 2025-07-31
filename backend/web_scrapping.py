@@ -8,6 +8,12 @@ import json
 import time
 import re
 import os
+from concurrent.futures import ThreadPoolExecutor, as_completed
+from threading import Lock
+import threading
+
+# Global lock for thread-safe operations
+results_lock = Lock()
 
 def setup_driver():
     chrome_options = Options() # Enable headless mode
@@ -235,7 +241,528 @@ def scrape_for_each_garment(driver, garment_data, max_products=7):
         print(f"[ERROR] Failed to scrape '{product_hint}': {e}")
         return []
 
+def scrape_single_garment_parallel(garment_data, max_products=7, thread_id=None):
+    """
+    Scrape a single garment in a separate thread with its own driver instance.
+    This function is designed to be thread-safe and run in parallel.
+    """
+    thread_name = thread_id or threading.current_thread().name
+    driver = None
+    
+    try:
+        print(f"[THREAD-{thread_name}] Starting scraping for: {garment_data.get('product_hint', 'Unknown product')}")
+        driver = setup_driver()
+        
+        garment_results = scrape_for_each_garment(driver, garment_data, max_products=max_products)
+        
+        if garment_results:
+            print(f"[THREAD-{thread_name}] SUCCESS: Found {len(garment_results)} products")
+            return {
+                'success': True,
+                'results': garment_results,
+                'garment': garment_data.get('product_hint', 'Unknown'),
+                'thread_id': thread_name
+            }
+        else:
+            print(f"[THREAD-{thread_name}] WARNING: No products found")
+            return {
+                'success': False,
+                'results': [],
+                'garment': garment_data.get('product_hint', 'Unknown'),
+                'thread_id': thread_name,
+                'error': 'No products found'
+            }
+            
+    except Exception as e:
+        print(f"[THREAD-{thread_name}] ERROR: {str(e)}")
+        return {
+            'success': False,
+            'results': [],
+            'garment': garment_data.get('product_hint', 'Unknown'),
+            'thread_id': thread_name,
+            'error': str(e)
+        }
+    finally:
+        if driver:
+            try:
+                driver.quit()
+                print(f"[THREAD-{thread_name}] Browser closed")
+            except Exception as e:
+                print(f"[THREAD-{thread_name}] Error closing browser: {e}")
+
+def rank_products_by_quality(products):
+    """
+    Rank products by quality based on rating, reviews, and other factors.
+    Returns products sorted by quality score (highest first).
+    """
+    def calculate_quality_score(product):
+        score = 0
+        
+        # Rating score (0-50 points)
+        rating_text = product.get('rating', '0')
+        try:
+            # Extract numeric rating from text like "4.5 out of 5 stars"
+            rating_match = re.search(r'(\d+\.?\d*)', rating_text)
+            if rating_match:
+                rating = float(rating_match.group(1))
+                score += rating * 10  # 5-star rating = 50 points
+        except:
+            pass
+        
+        # Review count score (0-30 points)
+        reviews_text = product.get('number_of_reviews', '0')
+        try:
+            # Extract number from text like "1,234" or "1234"
+            reviews_clean = re.sub(r'[^\d]', '', reviews_text)
+            if reviews_clean:
+                review_count = int(reviews_clean)
+                # Logarithmic scale for review count (more reviews = better)
+                if review_count > 0:
+                    import math
+                    score += min(30, math.log10(review_count) * 10)
+        except:
+            pass
+        
+        # Brand recognition bonus (0-10 points)
+        brand = product.get('brand', '').lower()
+        popular_brands = ['nike', 'adidas', 'puma', 'reebok', 'h&m', 'zara', 'uniqlo', 'levis', 'tommy']
+        if any(popular_brand in brand for popular_brand in popular_brands):
+            score += 10
+        
+        # Price reasonableness (0-10 points)
+        price_text = product.get('price', '₹0')
+        try:
+            price_match = re.search(r'₹([\d,]+)', price_text)
+            if price_match:
+                price = int(price_match.group(1).replace(',', ''))
+                # Reasonable price range gets bonus (₹500-₹3000)
+                if 500 <= price <= 3000:
+                    score += 10
+                elif 300 <= price <= 5000:
+                    score += 5
+        except:
+            pass
+        
+        return score
+    
+    # Calculate scores and sort
+    for product in products:
+        product['quality_score'] = calculate_quality_score(product)
+    
+    # Sort by quality score (highest first)
+    ranked_products = sorted(products, key=lambda x: x.get('quality_score', 0), reverse=True)
+    
+    return ranked_products
+
+def scrape_multi_garment_distributed_8(garments, output_file, max_workers=3):
+    """
+    Scrape multiple garments in parallel and return exactly 8 results distributed as:
+    - Top 3 products from garment 1
+    - Top 3 products from garment 2  
+    - Top 2 products from garment 3
+    This minimizes scraping time while ensuring quality distribution.
+    """
+    # If garments is a filename, load it; if it's a list, use as is
+    if isinstance(garments, str):
+        garments = read_multi_input(garments)
+    if not garments:
+        print("[WARNING] No garments to scrape")
+        return
+
+    # Ensure we have exactly 3 garments
+    if len(garments) < 3:
+        print(f"[WARNING] Expected 3 garments, got {len(garments)}. Padding with duplicates.")
+        while len(garments) < 3:
+            garments.append(garments[-1])  # Duplicate last garment
+    elif len(garments) > 3:
+        print(f"[INFO] Got {len(garments)} garments, using first 3 only.")
+        garments = garments[:3]
+
+    print(f"\n[PARALLEL-3+3+2] Starting efficient parallel scraping for 3 garments...")
+    print(f"[CONFIG] Distribution: 3+3+2 = 8 total results, Max workers: {max_workers}")
+    
+    # Define how many products to scrape per garment (minimal for speed)
+    products_needed = [3, 3, 2]  # Garment 1: 3, Garment 2: 3, Garment 3: 2
+    products_to_scrape = [4, 4, 3]  # Scrape slightly more to have selection
+    
+    garment_results = [[] for _ in range(3)]  # Store results per garment
+    successful_scrapes = 0
+    failed_scrapes = 0
+    start_time = time.time()
+    
+    # Use ThreadPoolExecutor for parallel processing
+    with ThreadPoolExecutor(max_workers=max_workers) as executor:
+        # Submit scraping tasks for each garment with specific product counts
+        future_to_garment = {
+            executor.submit(scrape_single_garment_parallel, garments[i], products_to_scrape[i], f"G{i+1}"): i
+            for i in range(3)
+        }
+        
+        # Process completed tasks as they finish
+        for future in as_completed(future_to_garment):
+            garment_index = future_to_garment[future]
+            
+            try:
+                result = future.result(timeout=90)  # 1.5 minute timeout per garment
+                
+                if result['success'] and result['results']:
+                    # Rank products for this garment and take only what we need
+                    ranked_products = rank_products_by_quality(result['results'])
+                    needed_count = products_needed[garment_index]
+                    selected_products = ranked_products[:needed_count]
+                    
+                    garment_results[garment_index] = selected_products
+                    successful_scrapes += 1
+                    
+                    garment_name = garments[garment_index].get('product_hint', 'Unknown')
+                    print(f"[COMPLETED] Garment {garment_index+1}: {garment_name} - Selected {len(selected_products)}/{needed_count} products")
+                    
+                    # Show selected products
+                    for j, product in enumerate(selected_products, 1):
+                        score = product.get('quality_score', 0)
+                        brand = product.get('brand', 'Unknown')
+                        rating = product.get('rating', 'N/A')
+                        print(f"    {j}. {brand} - {rating} (Score: {score:.1f})")
+                else:
+                    failed_scrapes += 1
+                    garment_name = garments[garment_index].get('product_hint', 'Unknown')
+                    error_msg = result.get('error', 'No products found')
+                    print(f"[FAILED] Garment {garment_index+1}: {garment_name} - {error_msg}")
+                    
+            except Exception as e:
+                failed_scrapes += 1
+                garment_name = garments[garment_index].get('product_hint', 'Unknown')
+                print(f"[ERROR] Garment {garment_index+1}: {garment_name} - {str(e)}")
+    
+    # Calculate timing
+    end_time = time.time()
+    total_time = end_time - start_time
+    
+    # Combine all results in order: G1(3) + G2(3) + G3(2)
+    final_results = []
+    for i, results in enumerate(garment_results):
+        final_results.extend(results)
+        if results:
+            print(f"[ADDED] {len(results)} products from garment {i+1}")
+    
+    # Add metadata to track distribution
+    distribution_info = {
+        "total_products": len(final_results),
+        "distribution": f"{len(garment_results[0])}+{len(garment_results[1])}+{len(garment_results[2])}",
+        "garment_1_count": len(garment_results[0]),
+        "garment_2_count": len(garment_results[1]),
+        "garment_3_count": len(garment_results[2]),
+        "scraping_time_seconds": round(total_time, 2)
+    }
+    
+    # Save results in frontend-compatible format
+    # Frontend expects 'scraped_products' key, so we'll provide both formats
+    output_data = {
+        "distribution_info": distribution_info,
+        "products": final_results,
+        "scraped_products": final_results  # Frontend compatibility
+    }
+    
+    try:
+        with open(output_file, 'w', encoding='utf-8') as f:
+            json.dump(output_data, f, indent=2, ensure_ascii=False)
+        print(f"\n[SAVED] {len(final_results)} distributed results saved to: {output_file}")
+    except Exception as e:
+        print(f"[ERROR] Failed to save results: {e}")
+        return
+    
+    # Print summary
+    print(f"\n[DISTRIBUTED SUMMARY] Scraping completed in {total_time:.2f} seconds:")
+    print(f"[SUCCESS] {successful_scrapes}/3 garments scraped successfully")
+    print(f"[FAILED] {failed_scrapes}/3 garments failed")
+    print(f"[DISTRIBUTION] {len(garment_results[0])}+{len(garment_results[1])}+{len(garment_results[2])} = {len(final_results)} total products")
+    print(f"[PERFORMANCE] Average time per garment: {total_time/3:.2f} seconds")
+    print(f"[EFFICIENCY] Only scraped ~{sum(products_to_scrape)} products total vs previous ~21 products")
+    
+    return final_results
+
+def scrape_multi_garment_distributed_10(garments, output_file, max_workers=3):
+    """
+    Scrape multiple garments in parallel and return exactly 10 results distributed as:
+    - Top 4 products from garment 1
+    - Top 3 products from garment 2
+    - Top 3 products from garment 3
+    This minimizes scraping time while ensuring quality distribution.
+    """
+    # If garments is a filename, load it; if it's a list, use as is
+    if isinstance(garments, str):
+        garments = read_multi_input(garments)
+    if not garments:
+        print("[WARNING] No garments to scrape")
+        return
+
+    # Ensure we have exactly 3 garments
+    if len(garments) < 3:
+        print(f"[WARNING] Expected 3 garments, got {len(garments)}. Padding with duplicates.")
+        while len(garments) < 3:
+            garments.append(garments[-1])  # Duplicate last garment
+    elif len(garments) > 3:
+        print(f"[INFO] Got {len(garments)} garments, using first 3 only.")
+        garments = garments[:3]
+
+    print(f"\n[PARALLEL-4+3+3] Starting efficient parallel scraping for 3 garments...")
+    print(f"[CONFIG] Distribution: 4+3+3 = 10 total results, Max workers: {max_workers}")
+    
+    # Define how many products to scrape per garment (scrape more for better selection)
+    products_needed = [4, 3, 3]  # Garment 1: 4, Garment 2: 3, Garment 3: 3
+    products_to_scrape = [7, 7, 7]  # Scrape 7 per garment
+    
+    garment_results = [[] for _ in range(3)]  # Store results per garment
+    successful_scrapes = 0
+    failed_scrapes = 0
+    start_time = time.time()
+    
+    # Use ThreadPoolExecutor for parallel processing
+    with ThreadPoolExecutor(max_workers=max_workers) as executor:
+        # Submit scraping tasks for each garment with specific product counts
+        future_to_garment = {
+            executor.submit(scrape_single_garment_parallel, garments[i], products_to_scrape[i], f"G{i+1}"): i
+            for i in range(3)
+        }
+        
+        # Process completed tasks as they finish
+        for future in as_completed(future_to_garment):
+            garment_index = future_to_garment[future]
+            try:
+                result = future.result(timeout=120)  # 2 minute timeout per garment
+                if result['success'] and result['results']:
+                    # Rank products for this garment and take only what we need
+                    ranked_products = rank_products_by_quality(result['results'])
+                    needed_count = products_needed[garment_index]
+                    selected_products = ranked_products[:needed_count]
+                    garment_results[garment_index] = selected_products
+                    successful_scrapes += 1
+                    garment_name = garments[garment_index].get('product_hint', 'Unknown')
+                    print(f"[COMPLETED] Garment {garment_index+1}: {garment_name} - Selected {len(selected_products)}/{needed_count} products")
+                    for j, product in enumerate(selected_products, 1):
+                        score = product.get('quality_score', 0)
+                        brand = product.get('brand', 'Unknown')
+                        rating = product.get('rating', 'N/A')
+                        print(f"    {j}. {brand} - {rating} (Score: {score:.1f})")
+                else:
+                    failed_scrapes += 1
+                    garment_name = garments[garment_index].get('product_hint', 'Unknown')
+                    error_msg = result.get('error', 'No products found')
+                    print(f"[FAILED] Garment {garment_index+1}: {garment_name} - {error_msg}")
+            except Exception as e:
+                failed_scrapes += 1
+                garment_name = garments[garment_index].get('product_hint', 'Unknown')
+                print(f"[ERROR] Garment {garment_index+1}: {garment_name} - {str(e)}")
+    # Calculate timing
+    end_time = time.time()
+    total_time = end_time - start_time
+    # Combine all results in order: G1(4) + G2(3) + G3(3)
+    final_results = []
+    for i, results in enumerate(garment_results):
+        final_results.extend(results)
+        if results:
+            print(f"[ADDED] {len(results)} products from garment {i+1}")
+    # Add metadata to track distribution
+    distribution_info = {
+        "total_products": len(final_results),
+        "distribution": f"{len(garment_results[0])}+{len(garment_results[1])}+{len(garment_results[2])}",
+        "garment_1_count": len(garment_results[0]),
+        "garment_2_count": len(garment_results[1]),
+        "garment_3_count": len(garment_results[2]),
+        "scraping_time_seconds": round(total_time, 2)
+    }
+    # Save results in frontend-compatible format
+    output_data = {
+        "distribution_info": distribution_info,
+        "products": final_results,
+        "scraped_products": final_results  # Frontend compatibility
+    }
+    try:
+        with open(output_file, 'w', encoding='utf-8') as f:
+            json.dump(output_data, f, indent=2, ensure_ascii=False)
+        print(f"\n[SAVED] {len(final_results)} distributed results saved to: {output_file}")
+    except Exception as e:
+        print(f"[ERROR] Failed to save results: {e}")
+        return
+    # Print summary
+    print(f"\n[DISTRIBUTED SUMMARY] Scraping completed in {total_time:.2f} seconds:")
+    print(f"[SUCCESS] {successful_scrapes}/3 garments scraped successfully")
+    print(f"[FAILED] {failed_scrapes}/3 garments failed")
+    print(f"[DISTRIBUTION] {len(garment_results[0])}+{len(garment_results[1])}+{len(garment_results[2])} = {len(final_results)} total products")
+    print(f"[PERFORMANCE] Average time per garment: {total_time/3:.2f} seconds")
+    print(f"[EFFICIENCY] Only scraped ~{sum(products_to_scrape)} products total vs previous ~21 products")
+    return final_results
+
+def scrape_multi_garment_parallel_top7(garments, output_file, max_workers=3, target_results=7):
+    """
+    Legacy function - kept for compatibility.
+    For efficient 3+3+2 distribution, use scrape_multi_garment_distributed_8() instead.
+    """
+    print("[INFO] Using legacy top-7 function. For better efficiency, use distributed 3+3+2 function.")
+    
+    # If garments is a filename, load it; if it's a list, use as is
+    if isinstance(garments, str):
+        garments = read_multi_input(garments)
+    if not garments:
+        print("[WARNING] No garments to scrape")
+        return
+
+    print(f"\n[PARALLEL-TOP7] Starting parallel scraping for {len(garments)} recommendations...")
+    print(f"[CONFIG] Max workers: {max_workers}, Target top results: {target_results}")
+    
+    all_results = []
+    successful_scrapes = 0
+    failed_scrapes = 0
+    start_time = time.time()
+    
+    # Scrape more products per garment to have better selection for top 7
+    products_per_garment = max(5, target_results // len(garments) + 2)  # At least 5 per garment
+    
+    # Use ThreadPoolExecutor for parallel processing
+    with ThreadPoolExecutor(max_workers=max_workers) as executor:
+        # Submit all scraping tasks
+        future_to_garment = {
+            executor.submit(scrape_single_garment_parallel, garment_data, products_per_garment, f"T{i+1}"): (i+1, garment_data)
+            for i, garment_data in enumerate(garments)
+        }
+        
+        # Process completed tasks as they finish
+        for future in as_completed(future_to_garment):
+            garment_index, garment_data = future_to_garment[future]
+            
+            try:
+                result = future.result(timeout=120)  # 2 minute timeout per garment
+                
+                if result['success']:
+                    with results_lock:  # Thread-safe result collection
+                        all_results.extend(result['results'])
+                        successful_scrapes += 1
+                    print(f"[COMPLETED] Garment {garment_index}/{len(garments)}: {result['garment']} - {len(result['results'])} products")
+                else:
+                    failed_scrapes += 1
+                    print(f"[FAILED] Garment {garment_index}/{len(garments)}: {result['garment']} - {result.get('error', 'Unknown error')}")
+                    
+            except Exception as e:
+                failed_scrapes += 1
+                print(f"[ERROR] Garment {garment_index}/{len(garments)}: {garment_data.get('product_hint', 'Unknown')} - {str(e)}")
+    
+    # Calculate timing
+    end_time = time.time()
+    total_time = end_time - start_time
+    
+    # Rank products and get top results
+    if all_results:
+        print(f"\n[RANKING] Ranking {len(all_results)} products by quality...")
+        ranked_products = rank_products_by_quality(all_results)
+        top_results = ranked_products[:target_results]
+        
+        print(f"[SELECTED] Top {len(top_results)} products selected:")
+        for i, product in enumerate(top_results, 1):
+            score = product.get('quality_score', 0)
+            brand = product.get('brand', 'Unknown')
+            rating = product.get('rating', 'N/A')
+            price = product.get('price', 'N/A')
+            print(f"  {i}. {brand} - {rating} - {price} (Score: {score:.1f})")
+    else:
+        print("[WARNING] No products found to rank")
+        top_results = []
+    
+    # Save top results
+    try:
+        with open(output_file, 'w', encoding='utf-8') as f:
+            json.dump(top_results, f, indent=2, ensure_ascii=False)
+        print(f"\n[SAVED] Top {len(top_results)} results saved to: {output_file}")
+    except Exception as e:
+        print(f"[ERROR] Failed to save results: {e}")
+        return
+    
+    # Print summary
+    print(f"\n[PARALLEL-TOP7 SUMMARY] Scraping completed in {total_time:.2f} seconds:")
+    print(f"[SUCCESS] {successful_scrapes}/{len(garments)} recommendations scraped successfully")
+    print(f"[FAILED] {failed_scrapes}/{len(garments)} recommendations failed")
+    print(f"[COLLECTED] {len(all_results)} total products found across all recommendations")
+    print(f"[FINAL] {len(top_results)} top-quality products selected and saved")
+    print(f"[PERFORMANCE] Average time per garment: {total_time/len(garments):.2f} seconds")
+    print(f"[SPEEDUP] Estimated sequential time would be ~{len(garments) * 15:.0f}s, parallel time: {total_time:.2f}s")
+    
+    return top_results
+
+def scrape_multi_garment_parallel(garments, output_file, max_products=7, max_workers=3):
+    """
+    Legacy parallel scraping function - returns all products.
+    For top-N results, use scrape_multi_garment_parallel_top7() instead.
+    """
+    # If garments is a filename, load it; if it's a list, use as is
+    if isinstance(garments, str):
+        garments = read_multi_input(garments)
+    if not garments:
+        print("[WARNING] No garments to scrape")
+        return
+
+    print(f"\n[PARALLEL] Starting parallel scraping for {len(garments)} recommendations...")
+    print(f"[CONFIG] Max workers: {max_workers}, Max products per garment: {max_products}")
+    
+    all_results = []
+    successful_scrapes = 0
+    failed_scrapes = 0
+    start_time = time.time()
+    
+    # Use ThreadPoolExecutor for parallel processing
+    with ThreadPoolExecutor(max_workers=max_workers) as executor:
+        # Submit all scraping tasks
+        future_to_garment = {
+            executor.submit(scrape_single_garment_parallel, garment_data, max_products, f"T{i+1}"): (i+1, garment_data)
+            for i, garment_data in enumerate(garments)
+        }
+        
+        # Process completed tasks as they finish
+        for future in as_completed(future_to_garment):
+            garment_index, garment_data = future_to_garment[future]
+            
+            try:
+                result = future.result(timeout=120)  # 2 minute timeout per garment
+                
+                if result['success']:
+                    with results_lock:  # Thread-safe result collection
+                        all_results.extend(result['results'])
+                        successful_scrapes += 1
+                    print(f"[COMPLETED] Garment {garment_index}/{len(garments)}: {result['garment']} - {len(result['results'])} products")
+                else:
+                    failed_scrapes += 1
+                    print(f"[FAILED] Garment {garment_index}/{len(garments)}: {result['garment']} - {result.get('error', 'Unknown error')}")
+                    
+            except Exception as e:
+                failed_scrapes += 1
+                print(f"[ERROR] Garment {garment_index}/{len(garments)}: {garment_data.get('product_hint', 'Unknown')} - {str(e)}")
+    
+    # Calculate timing
+    end_time = time.time()
+    total_time = end_time - start_time
+    
+    # Save results
+    try:
+        with open(output_file, 'w', encoding='utf-8') as f:
+            json.dump(all_results, f, indent=2, ensure_ascii=False)
+        print(f"\n[SAVED] Results saved to: {output_file}")
+    except Exception as e:
+        print(f"[ERROR] Failed to save results: {e}")
+        return
+    
+    # Print summary
+    print(f"\n[PARALLEL SUMMARY] Scraping completed in {total_time:.2f} seconds:")
+    print(f"[SUCCESS] {successful_scrapes}/{len(garments)} recommendations scraped successfully")
+    print(f"[FAILED] {failed_scrapes}/{len(garments)} recommendations failed")
+    print(f"[TOTAL] {len(all_results)} products found across all recommendations")
+    print(f"[PERFORMANCE] Average time per garment: {total_time/len(garments):.2f} seconds")
+    print(f"[SPEEDUP] Estimated sequential time would be ~{len(garments) * 15:.0f}s, parallel time: {total_time:.2f}s")
+
 def scrape_multi_garment(garments, output_file, max_products=7):
+    """
+    Legacy sequential scraping function - kept for compatibility.
+    For better performance, use scrape_multi_garment_parallel() instead.
+    """
+    print("[INFO] Using legacy sequential scraping. For better performance, use parallel scraping.")
+    
     # If garments is a filename, load it; if it's a list, use as is
     if isinstance(garments, str):
         garments = read_multi_input(garments)
@@ -349,7 +876,6 @@ def scrape_from_llm_recommendations(llm_json_file, output_file, max_products=7, 
     print(f"[INPUT] LLM file: {llm_json_file}")
     print(f"[OUTPUT] Output file: {output_file}")
     print(f"[CONFIG] Max products per recommendation: {max_products}, Occasion: {occasion}")
-    
     # Read LLM recommendations
     try:
         with open(llm_json_file, 'r', encoding='utf-8') as f:
@@ -364,25 +890,21 @@ def scrape_from_llm_recommendations(llm_json_file, output_file, max_products=7, 
     except Exception as e:
         print(f"[ERROR] Error reading {llm_json_file}: {e}")
         return
-
     # Validate LLM recommendations
     if not llm_recs:
         print("[ERROR] No LLM recommendations found in file")
         return
-    
     if not isinstance(llm_recs, list):
         print("[ERROR] LLM recommendations should be a list")
         return
-
     # Convert to garment inputs with the provided occasion
     garment_inputs = llm_recs_to_garment_inputs(llm_recs, occasion)
-    
     if not garment_inputs:
         print("[ERROR] No valid garments to scrape after conversion")
         return
-        
-    print(f"\n[READY] Starting scraping for {len(garment_inputs)} valid recommendations...")
-    scrape_multi_garment(garment_inputs, output_file, max_products=max_products)
+    print(f"\n[READY] Starting efficient distributed parallel scraping for {len(garment_inputs)} valid recommendations...")
+    # Use the new efficient 4+3+3 distributed function for minimal scraping time and 10 quality results
+    scrape_multi_garment_distributed_10(garment_inputs, output_file, max_workers=3)
 
 def create_sample_scraped_data():
     """Create sample scraped data for testing when real scraping fails"""
@@ -393,7 +915,7 @@ def create_sample_scraped_data():
             "price": "₹899",
             "rating": "4.2 out of 5 stars",
             "number_of_reviews": "1,234",
-            "image_link": "https://m.media-amazon.com/images/I/71HblAhdXxL._UX679_.jpg",
+            "image_link": "https://m.media-amazon.com/images/I/71HblAhdXxL.UX679.jpg",
             "product_link": "https://www.amazon.in/dp/B08N5WRWNW",
             "search_parameters": {"garment": "t-shirt", "color": "navy", "occasion": "casual"},
             "product_index": 1
@@ -404,7 +926,7 @@ def create_sample_scraped_data():
             "price": "₹1,299",
             "rating": "4.5 out of 5 stars", 
             "number_of_reviews": "856",
-            "image_link": "https://m.media-amazon.com/images/I/61vFO3ijCeL._UX679_.jpg",
+            "image_link": "https://m.media-amazon.com/images/I/61vFO3ijCeL.UX679.jpg",
             "product_link": "https://www.amazon.in/dp/B07QXZQZQZ",
             "search_parameters": {"garment": "shirt", "color": "white", "occasion": "casual"},
             "product_index": 2
@@ -415,7 +937,7 @@ def create_sample_scraped_data():
             "price": "₹1,599",
             "rating": "4.1 out of 5 stars",
             "number_of_reviews": "2,103",
-            "image_link": "https://m.media-amazon.com/images/I/71YGQ5X8NFL._UX679_.jpg",
+            "image_link": "https://m.media-amazon.com/images/I/71YGQ5X8NFL.UX679.jpg",
             "product_link": "https://www.amazon.in/dp/B08XXXX123",
             "search_parameters": {"garment": "jeans", "color": "blue", "occasion": "casual"},
             "product_index": 3
@@ -427,5 +949,9 @@ def create_sample_scraped_data():
 if __name__ == "__main__":
     input_file = "llm_recommendations.json"
     output_file = "multi_scraped_output.json"
-    occasion = "diwali"  # You can get this from user input or command line args
+    occasion = "casual"  # Default occasion, will be overridden by API
+    
+    print("[MAIN] Starting Fashion Recommendation Web Scraping (Parallel 4+3+3 Mode)")
+    print(f"[MAIN] Input: {input_file}, Output: {output_file}, Occasion: {occasion}")
+    
     scrape_from_llm_recommendations(input_file, output_file, max_products=7, occasion=occasion)
