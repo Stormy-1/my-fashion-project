@@ -83,7 +83,6 @@ my-fashion-project/
 │
 ├── .gitignore                        # Specifies intentionally untracked files
 └── README.md                         # This file
-
 ---
 
 ### 🚀 Getting Started
