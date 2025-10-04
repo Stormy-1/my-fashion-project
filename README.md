@@ -4,54 +4,54 @@
 
 A comprehensive AI-powered fashion recommendation system that analyzes facial features, age, and gender to provide personalized fashion suggestions. The system combines deep learning, computer vision, and web scraping to deliver tailored fashion recommendations.
 
------
+---
 
 ### 📋 Table of Contents
 
-  * [🌟 Features](https://www.google.com/search?q=%23-features)
-  * [🏗️ Architecture](https://www.google.com/search?q=%23%EF%B8%8F-architecture)
-  * [📁 Project Structure](https://www.google.com/search?q=%23-project-structure)
-  * [🚀 Getting Started](https://www.google.com/search?q=%23-getting-started)
-  * [🎯 How It Works](https://www.google.com/search?q=%23-how-it-works)
-  * [🛠️ API Endpoints](https://www.google.com/search?q=%23%EF%B8%8F-api-endpoints)
-  * [🧪 Testing](https://www.google.com/search?q=%23-testing)
-  * [🔧 Configuration](https://www.google.com/search?q=%23-configuration)
-  * [📊 Technical Details](https://www.google.com/search?q=%23-technical-details)
-  * [🙏 Acknowledgments](https://www.google.com/search?q=%23-acknowledgments)
+* [🌟 Features](#-features)
+* [🏗️ Architecture](#️-architecture)
+* [📁 Project Structure](#-project-structure)
+* [🚀 Getting Started](#-getting-started)
+* [🎯 How It Works](#-how-it-works)
+* [🛠️ API Endpoints](#️-api-endpoints)
+* [🧪 Testing](#-testing)
+* [🔧 Configuration](#-configuration)
+* [📊 Technical Details](#-technical-details)
+* [🙏 Acknowledgments](#-acknowledgments)
 
------
+---
 
 ### 🌟 Features
 
-  * **AI-Powered Analysis**: Deep learning models for age and gender detection using PyTorch and EfficientNet-B4.
-  * **Facial Feature Extraction**: Analyzes 16+ facial attributes for personalized recommendations.
-  * **Real-time Camera Capture**: OpenCV integration for live photo capture.
-  * **LLM Fashion Intelligence**: Advanced language models generate creative, themed fashion recommendations.
-  * **Web Scraping**: Automatically finds real fashion products from e-commerce platforms.
-  * **Modern UI**: Beautiful React frontend with Tailwind CSS and shadcn/ui components.
-  * **Personalized Recommendations**: Tailored fashion suggestions based on facial features, body type, and occasion.
-  * **Theme-Aware Styling**: Supports themed occasions (anime, sports, cultural events, etc.).
+* **AI-Powered Analysis**: Deep learning models for age and gender detection using PyTorch and EfficientNet-B4.
+* **Facial Feature Extraction**: Analyzes 16+ facial attributes for personalized recommendations.
+* **Real-time Camera Capture**: OpenCV integration for live photo capture.
+* **LLM Fashion Intelligence**: Advanced language models generate creative, themed fashion recommendations.
+* **Web Scraping**: Automatically finds real fashion products from e-commerce platforms.
+* **Modern UI**: Beautiful React frontend with Tailwind CSS and shadcn/ui components.
+* **Personalized Recommendations**: Tailored fashion suggestions based on facial features, body type, and occasion.
+* **Theme-Aware Styling**: Supports themed occasions (anime, sports, cultural events, etc.).
 
------
+---
 
 ### 🏗️ Architecture
 
-  * **Backend (Flask API)**
-      * Flask REST API with CORS support
-      * PyTorch Models for age/gender classification and facial feature extraction
-      * LLM Integration for generating fashion recommendations using Hugging Face
-      * Web Scraping Engine for finding real fashion products
-      * OpenCV for image processing and camera integration
-  * **Frontend (React + Vite)**
-      * React 18 with TypeScript
-      * Vite for fast development and building
-      * Tailwind CSS for styling
-      * shadcn/ui component library
-      * React Router for navigation
+* **Backend (Flask API)**
+    * Flask REST API with CORS support
+    * PyTorch Models for age/gender classification and facial feature extraction
+    * LLM Integration for generating fashion recommendations using Hugging Face
+    * Web Scraping Engine for finding real fashion products
+    * OpenCV for image processing and camera integration
+* **Frontend (React + Vite)**
+    * React 18 with TypeScript
+    * Vite for fast development and building
+    * Tailwind CSS for styling
+    * shadcn/ui component library
+    * React Router for navigation
 
------
+---
 
-📁 Project Structure
+### 📁 Project Structure
 
 my-fashion-project/
 ├── backend/                          # Flask API server
@@ -84,22 +84,22 @@ my-fashion-project/
 ├── .gitignore                        # Specifies intentionally untracked files
 └── README.md                         # This file
 
------
+---
 
 ### 🚀 Getting Started
 
 #### Prerequisites
 
-  * Python 3.8+ with pip
-  * Node.js 18+ with npm
-  * Git
-  * Webcam (optional, for camera capture feature)
+* Python 3.8+ with pip
+* Node.js 18+ with npm
+* Git
+* Webcam (optional, for camera capture feature)
 
 #### Backend Setup
 
 1.  **Clone the repository**
     ```sh
-    git clone https://github.com/Stormy-1/my-fashion-project.git
+    git clone [https://github.com/Stormy-1/my-fashion-project.git](https://github.com/Stormy-1/my-fashion-project.git)
     cd my-fashion-project
     ```
 2.  **Set up Python environment**
@@ -137,7 +137,7 @@ my-fashion-project/
     ```
     The frontend will be available at `http://localhost:5173`.
 
------
+---
 
 ### 🎯 How It Works
 
@@ -147,16 +147,15 @@ my-fashion-project/
 4.  **Product Discovery**: The system automatically scrapes e-commerce sites for real products that match the generated recommendations, enriching them with prices, ratings, and images.
 5.  **Results Display**: A clean, modern UI displays the product recommendations with details and purchase links.
 
------
+---
 
 ### 🛠️ API Endpoints
 
-  * `POST /api/upload`: Upload an image and get fashion recommendations.
-  * `POST /api/camera_capture`: Process a camera-captured image.
-  * `GET /api/health`: Health check endpoint.
+* `POST /api/upload`: Upload an image and get fashion recommendations.
+* `POST /api/camera_capture`: Process a camera-captured image.
+* `GET /api/health`: Health check endpoint.
 
 #### Request Format
-
 ```json
 {
   "image": "base64_encoded_image_data",
@@ -164,7 +163,7 @@ my-fashion-project/
   "weight": "65",
   "occasion": "casual"
 }
-```
+````
 
 #### Response Format
 
@@ -230,3 +229,4 @@ my-fashion-project/
   * **OpenCV Community** for computer vision tools.
   * **React & Vite Teams** for excellent frontend tooling.
   * **shadcn/ui** for beautiful, accessible components.
+
