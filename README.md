@@ -53,6 +53,9 @@ A comprehensive AI-powered fashion recommendation system that analyzes facial fe
 
 ### 📁 Project Structure
 
+Of course. Here is that project structure formatted properly into a readable tree.
+
+```
 my-fashion-project/
 ├── backend/                          # Flask API server
 │   ├── api.py                       # Main Flask application entry point
@@ -83,6 +86,7 @@ my-fashion-project/
 │
 ├── .gitignore                        # Specifies intentionally untracked files
 └── README.md                         # This file
+```
 ---
 
 ### 🚀 Getting Started
