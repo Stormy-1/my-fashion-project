@@ -1,4 +1,4 @@
-# Fashion Recommendation System
+# My Fashion Project
 
 **AI-Powered Personalized Fashion Intelligence Platform**
 
